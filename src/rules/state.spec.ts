@@ -1,7 +1,7 @@
 import { assert, expect, test } from "vitest";
+import { initial, serialize } from "./state";
 
-test("Math.sqrt()", () => {
-  expect(Math.sqrt(4)).toBe(2);
-  expect(Math.sqrt(144)).toBe(12);
-  expect(Math.sqrt(2)).toBe(Math.SQRT2);
+test("Serializing state", () => {
+  const is = serialize(initial);
+  expect(is).toEqual("1|6/2/g|6/2/g| /1/g|4/2/g|N|N|belgium");
 });
