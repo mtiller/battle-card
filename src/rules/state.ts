@@ -76,12 +76,19 @@ export function serialize(s: State): string {
   }|${s.lost ? "Y" : "N"}|${s.corp}`;
 }
 
-export interface RoundDecisions {
+export interface Battles {
   zone1: "attack" | "defend" | "na";
   zone2: "attack" | "defend" | "na";
   zone3: "attack" | "defend" | "na";
   zone4: "attack" | "defend" | "na";
-  advance: "unit" | "corp" | "nothing";
 }
 
-export type DecisionHistory = RoundDecisions[];
+export interface Advance {
+  advance: "unit" | "corp" | "nothing";
+}
+export interface RoundDecisions extends Battles, Advance {}
+
+export interface Outcome {
+  history: RoundDecisions[];
+  final: State;
+}
