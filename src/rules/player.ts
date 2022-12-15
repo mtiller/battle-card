@@ -1,4 +1,5 @@
-import { Advance, Battles, State } from "./state";
+import { Advance, Battles } from "./moves";
+import { State } from "./state";
 
 export interface Player {
   pickBattles(s: State): Battles;

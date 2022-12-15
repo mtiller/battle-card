@@ -7,7 +7,7 @@ export interface State {
   zone3: Zone;
   zone4: Zone;
   dropped: boolean;
-  lost: boolean; // true if Allied unit is ever defeated
+  outcome: "won" | "lost" | "undecided";
   corp: CorpLocation;
 }
 
@@ -61,7 +61,7 @@ export const initial: State = {
     control: "german",
   },
   dropped: false,
-  lost: false,
+  outcome: "undecided",
   corp: "belgium",
 };
 
@@ -73,22 +73,5 @@ export function serialize(s: State): string {
     s.zone2
   )}|${serializeZone(s.zone3)}|${serializeZone(s.zone4)}|${
     s.dropped ? "Y" : "N"
-  }|${s.lost ? "Y" : "N"}|${s.corp}`;
-}
-
-export interface Battles {
-  zone1: "attack" | "defend" | "na";
-  zone2: "attack" | "defend" | "na";
-  zone3: "attack" | "defend" | "na";
-  zone4: "attack" | "defend" | "na";
-}
-
-export interface Advance {
-  advance: "unit" | "corp" | "nothing";
-}
-export interface RoundDecisions extends Battles, Advance {}
-
-export interface Outcome {
-  history: RoundDecisions[];
-  final: State;
+  }|${s.outcome[0].toUpperCase()}|${s.corp}`;
 }
