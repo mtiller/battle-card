@@ -1,18 +1,17 @@
 import Prando from "prando";
 import { expect, test } from "vitest";
-import { Advance, AllBattleDecisions, AllBattleOptions } from "./moves";
+import { Advance, AllBattleDecisions, BattlePossibilities } from "./moves";
 import { Player } from "./player";
 import { simulate } from "./simulate";
 import { initial, State } from "./state";
 
 class PacifistPlayer implements Player {
-  pickBattles(s: State, options: AllBattleOptions): AllBattleDecisions {
-    return [
-      options[0].includes("defend") ? "defend" : "na",
-      options[1].includes("defend") ? "defend" : "na",
-      options[2].includes("defend") ? "defend" : "na",
-      options[3].includes("defend") ? "defend" : "na",
-    ];
+  pickBattles(s: State, legal: BattlePossibilities): AllBattleDecisions {
+    const choice = legal.find((x) =>
+      x.every((y) => y === "na" || y === "defend")
+    );
+    if (choice === undefined) throw new Error("No non-attaack option");
+    return choice;
   }
   chooseToAdvance(s: State): Advance {
     return "nothing";

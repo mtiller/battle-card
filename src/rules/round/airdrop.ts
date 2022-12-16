@@ -9,9 +9,9 @@ export function performAirdrop(s: State, chance: Prando): State {
     chance.nextArrayItem(table),
     chance.nextArrayItem(table),
   ];
-  let allied1 = ret.zone1.allied;
-  let allied2 = ret.zone2.allied;
-  let allied4 = ret.zone4.allied;
+  let allied1 = ret.zones[0].allied;
+  let allied2 = ret.zones[1].allied;
+  let allied4 = ret.zones[3].allied;
 
   if (allied1 === 0)
     throw new Error("Invalid initial allied strength in zone 1");

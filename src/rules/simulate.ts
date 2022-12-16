@@ -27,10 +27,7 @@ export function simulate(
     const roundStart = state;
     // Part 1 - Pick attack or defend in all applicable zones
     const battles = player.pickBattles(state, [
-      state.zone1.allied ? ["attack", "defend"] : ["na"],
-      state.zone2.allied ? ["attack", "defend"] : ["na"],
-      state.zone3.allied ? ["attack", "defend"] : ["na"],
-      state.zone4.allied ? ["attack", "defend"] : ["na"],
+      // TODO: Calculate legal moves for player to consider
     ]);
     state = performBattles(state, battles, chance);
     const decision: RoundDecisions = {

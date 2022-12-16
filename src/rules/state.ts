@@ -2,10 +2,7 @@ export type CorpLocation = "belgium" | "zone1" | "zone2" | "zone3" | "zone4";
 
 export interface State {
   day: number;
-  zone1: Zone;
-  zone2: Zone;
-  zone3: Zone;
-  zone4: Zone;
+  zones: [Zone, Zone, Zone, Zone];
   dropped: boolean;
   outcome: "won" | "lost" | "undecided";
   corp: CorpLocation;
@@ -42,26 +39,28 @@ export interface Zone {
 
 export const initial: State = {
   day: 1,
-  zone1: {
-    allied: 6,
-    german: 2,
-    control: "german",
-  },
-  zone2: {
-    allied: 6,
-    german: 2,
-    control: "german",
-  },
-  zone3: {
-    allied: 0,
-    german: 1,
-    control: "german",
-  },
-  zone4: {
-    allied: 4,
-    german: 2,
-    control: "german",
-  },
+  zones: [
+    {
+      allied: 6,
+      german: 2,
+      control: "german",
+    },
+    {
+      allied: 6,
+      german: 2,
+      control: "german",
+    },
+    {
+      allied: 0,
+      german: 1,
+      control: "german",
+    },
+    {
+      allied: 4,
+      german: 2,
+      control: "german",
+    },
+  ],
   dropped: false,
   outcome: "undecided",
   corp: "belgium",
@@ -71,26 +70,12 @@ export const initial: State = {
 export function clone(s: State): State {
   return {
     day: s.day,
-    zone1: {
-      allied: s.zone1.allied,
-      german: s.zone1.german,
-      control: s.zone1.control,
-    },
-    zone2: {
-      allied: s.zone2.allied,
-      german: s.zone2.german,
-      control: s.zone2.control,
-    },
-    zone3: {
-      allied: s.zone3.allied,
-      german: s.zone3.german,
-      control: s.zone3.control,
-    },
-    zone4: {
-      allied: s.zone4.allied,
-      german: s.zone4.german,
-      control: s.zone4.control,
-    },
+    zones: [
+      { ...s.zones[0] },
+      { ...s.zones[1] },
+      { ...s.zones[2] },
+      { ...s.zones[3] },
+    ],
     dropped: s.dropped,
     outcome: s.outcome,
     corp: s.corp,
@@ -102,9 +87,9 @@ function serializeZone(z: Zone): string {
   return `${z.allied ?? " "}/${z.german ?? " "}/${z.control[0]}`;
 }
 export function serialize(s: State): string {
-  return `${s.day}|${serializeZone(s.zone1)}|${serializeZone(
-    s.zone2
-  )}|${serializeZone(s.zone3)}|${serializeZone(s.zone4)}|${
+  return `${s.day}|${serializeZone(s.zones[0])}|${serializeZone(
+    s.zones[1]
+  )}|${serializeZone(s.zones[2])}|${serializeZone(s.zones[3])}|${
     s.dropped ? "Y" : "N"
   }|${s.outcome[0].toUpperCase()}|${s.corp}`;
 }

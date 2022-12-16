@@ -1,18 +1,13 @@
 import { State } from "./state";
 
 export type BattleOptions = "attack" | "defend" | "na";
-export type AllBattleOptions = [
-  BattleOptions[],
-  BattleOptions[],
-  BattleOptions[],
-  BattleOptions[]
-];
 export type AllBattleDecisions = [
   BattleOptions,
   BattleOptions,
   BattleOptions,
   BattleOptions
 ];
+export type BattlePossibilities = Array<AllBattleDecisions>;
 
 export type Advance = "unit" | "corp" | "nothing";
 
