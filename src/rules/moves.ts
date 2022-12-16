@@ -1,15 +1,23 @@
 import { State } from "./state";
 
-export interface Battles {
-  zone1: "attack" | "defend" | "na";
-  zone2: "attack" | "defend" | "na";
-  zone3: "attack" | "defend" | "na";
-  zone4: "attack" | "defend" | "na";
-}
+export type BattleOptions = "attack" | "defend" | "na";
+export type AllBattleOptions = [
+  BattleOptions[],
+  BattleOptions[],
+  BattleOptions[],
+  BattleOptions[]
+];
+export type AllBattleDecisions = [
+  BattleOptions,
+  BattleOptions,
+  BattleOptions,
+  BattleOptions
+];
 
 export type Advance = "unit" | "corp" | "nothing";
 
-export interface RoundDecisions extends Battles {
+export interface RoundDecisions {
+  battles: AllBattleDecisions;
   roundStart: State;
   afterBattle: State;
   advance?: Advance;

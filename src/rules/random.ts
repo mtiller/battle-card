@@ -1,5 +1,5 @@
 import Prando from "prando";
-import { Advance, Battles } from "./moves";
+import { Advance, AllBattleDecisions, AllBattleOptions } from "./moves";
 import { Player } from "./player";
 import { State } from "./state";
 
@@ -9,9 +9,10 @@ export class RandomPlayer implements Player {
     this.rng = new Prando(123);
   }
 
-  pickBattles(s: State): Battles {
+  pickBattles(s: State, options: AllBattleOptions): AllBattleDecisions {
     throw new Error("unimplemented");
   }
+
   chooseToAdvance(s: State): Advance {
     throw new Error("unimplemented");
   }

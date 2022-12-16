@@ -9,6 +9,7 @@ export interface State {
   dropped: boolean;
   outcome: "won" | "lost" | "undecided";
   corp: CorpLocation;
+  log: string[];
 }
 
 export type Distribution<T extends string | number | symbol> = Record<
@@ -34,8 +35,8 @@ export interface StochasticZone {
 }
 
 export interface Zone {
-  allied?: number;
-  german: number;
+  allied: number; // 0 represents die removed
+  german: number; // 0 represents die removed
   control: "allies" | "german";
 }
 
@@ -52,6 +53,7 @@ export const initial: State = {
     control: "german",
   },
   zone3: {
+    allied: 0,
     german: 1,
     control: "german",
   },
@@ -63,7 +65,38 @@ export const initial: State = {
   dropped: false,
   outcome: "undecided",
   corp: "belgium",
+  log: [],
 };
+
+export function clone(s: State): State {
+  return {
+    day: s.day,
+    zone1: {
+      allied: s.zone1.allied,
+      german: s.zone1.german,
+      control: s.zone1.control,
+    },
+    zone2: {
+      allied: s.zone2.allied,
+      german: s.zone2.german,
+      control: s.zone2.control,
+    },
+    zone3: {
+      allied: s.zone3.allied,
+      german: s.zone3.german,
+      control: s.zone3.control,
+    },
+    zone4: {
+      allied: s.zone4.allied,
+      german: s.zone4.german,
+      control: s.zone4.control,
+    },
+    dropped: s.dropped,
+    outcome: s.outcome,
+    corp: s.corp,
+    log: [...s.log],
+  };
+}
 
 function serializeZone(z: Zone): string {
   return `${z.allied ?? " "}/${z.german ?? " "}/${z.control[0]}`;

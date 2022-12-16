@@ -1,7 +1,7 @@
-import { Advance, Battles } from "./moves";
+import { Advance, AllBattleDecisions, AllBattleOptions } from "./moves";
 import { State } from "./state";
 
 export interface Player {
-  pickBattles(s: State): Battles;
+  pickBattles(s: State, options: AllBattleOptions): AllBattleDecisions;
   chooseToAdvance(s: State): Advance;
 }

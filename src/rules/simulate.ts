@@ -1,4 +1,5 @@
-import { Advance, Battles, Outcome, RoundDecisions } from "./moves";
+import Prando from "prando";
+import { Outcome, RoundDecisions } from "./moves";
 import { Player } from "./player";
 import {
   advanceTurn,
@@ -11,9 +12,13 @@ import {
 import { State } from "./state";
 
 // TODO: Pass in parameterized rules
-export function simulate(initial: State, player: Player): Outcome {
+export function simulate(
+  initial: State,
+  player: Player,
+  chance: Prando
+): Outcome {
   // First, perform the airdrop (before any rounds)
-  let state = performAirdrop(initial);
+  let state = performAirdrop(initial, chance);
   const history: RoundDecisions[] = [];
 
   // Now perform each round until either more than 6 days have elapsed or the
@@ -21,12 +26,17 @@ export function simulate(initial: State, player: Player): Outcome {
   while (state.day <= 6 && state.outcome == "undecided") {
     const roundStart = state;
     // Part 1 - Pick attack or defend in all applicable zones
-    const battles = player.pickBattles(state);
-    state = performBattles(state, battles);
+    const battles = player.pickBattles(state, [
+      state.zone1.allied ? ["attack", "defend"] : ["na"],
+      state.zone2.allied ? ["attack", "defend"] : ["na"],
+      state.zone3.allied ? ["attack", "defend"] : ["na"],
+      state.zone4.allied ? ["attack", "defend"] : ["na"],
+    ]);
+    state = performBattles(state, battles, chance);
     const decision: RoundDecisions = {
       roundStart,
       afterBattle: state,
-      ...battles,
+      battles: battles,
     };
     history.push(decision);
     if (state.outcome != "undecided") break;
