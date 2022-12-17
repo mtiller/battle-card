@@ -56,7 +56,7 @@ export const initial: State = {
       control: "german",
     },
     {
-      allied: 4,
+      allied: 5,
       german: 2,
       control: "german",
     },
