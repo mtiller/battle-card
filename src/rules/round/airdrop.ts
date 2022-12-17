@@ -31,6 +31,9 @@ export function performAirdrop(
   if (allied1 < 1 || allied2 < 1 || allied4 < 1)
     throw new Error("Invalid initial allied strength after airdrop");
 
+  ret.zones[0].allied = allied1;
+  ret.zones[1].allied = allied2;
+  ret.zones[3].allied = allied4;
   ret.log = [
     ...ret.log,
     `Initial allied airdrop results: ${losses.join(", ")}`,

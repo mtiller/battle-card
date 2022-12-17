@@ -24,4 +24,6 @@ export class RandomPlayer implements Player {
   async chooseToAdvance(s: State, legal: Advance[]): Promise<Advance> {
     return this.rng.nextArrayItem(legal);
   }
+
+  done() {}
 }

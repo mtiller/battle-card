@@ -19,6 +19,7 @@ class PacifistPlayer implements Player {
   async chooseToAdvance(s: State): Promise<Advance> {
     return "nothing";
   }
+  done() {}
 }
 
 test("should lose as a dummy player", async () => {

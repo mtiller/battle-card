@@ -5,5 +5,5 @@ export function useGameState() {
   const [state, setState] = React.useState<State>(initial);
 
   const reset = () => setState(initial);
-  return { state, reset };
+  return { state, reset, setState };
 }
