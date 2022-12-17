@@ -3,5 +3,5 @@ import { State } from "./state";
 
 export interface Player {
   pickBattles(s: State, legal: LegalZoneDecisions): AllBattleDecisions;
-  chooseToAdvance(s: State): Advance;
+  chooseToAdvance(s: State, legal: Advance[]): Advance;
 }

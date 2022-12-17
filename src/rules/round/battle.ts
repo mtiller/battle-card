@@ -10,13 +10,21 @@ export function resolveBattles(
   chance: Prando
 ): State {
   const ret = clone(s);
-  for (let i = 0; i < ret.zones.length; i++) {
+  for (let i = 0; i < ret.zones.length && ret.outcome === "undecided"; i++) {
     const zone = ret.zones[i];
     const cmd = battles[i];
     switch (cmd) {
       case "na":
+        if (zone.allied > 0)
+          throw new Error(`Allied unit in zone ${i} must attack or defend`);
+        ret.log.push(`No battle in zone ${i}, no Allied units`);
         continue;
       default:
+        if (zone.allied === 0)
+          throw new Error(
+            "Attempted to attack or defend in a zone with no allied unit"
+          );
+        ret.log.push(`Allied unit in zone ${i} chooses to ${cmd}`);
         // Determine whether to use attack or defend table
         const table =
           cmd === "attack" ? params.attackTable : params.defendTable;
@@ -31,7 +39,7 @@ export function resolveBattles(
         const result = chance.nextArrayItem(column);
         // Adjust the stats in that zone
         zone.allied = Math.max(0, zone.allied + result.alliedLosses);
-        zone.german = Math.max(0, zone.german + result.germanLosses);
+        zone.german = Math.max(1, zone.german + result.germanLosses);
         if (zone.control === "german" && result.alliesControl) {
           zone.control = "allies";
           ret.log.push(
@@ -48,6 +56,9 @@ export function resolveBattles(
         }
         if (zone.allied == 0) {
           ret.outcome = "lost";
+          ret.log.push(
+            `Allies lost a unit in zone ${i} so therefore lose the battle!`
+          );
         }
     }
   }

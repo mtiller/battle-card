@@ -1,5 +1,5 @@
 import Prando from "prando";
-import { legalBattles } from "./kegal";
+import { legalAdvance, legalBattles } from "./kegal";
 import { Outcome, RoundDecisions } from "./moves";
 import { Player } from "./player";
 import {
@@ -43,7 +43,7 @@ export function simulate(
     state = germanReinforcements(state);
 
     // Part 3 - (potential) Allied advance
-    const advance = player.chooseToAdvance(state);
+    const advance = player.chooseToAdvance(state, legalAdvance(state));
     decision.advance = advance;
     decision.postAdvance = state = performAdvance(state, advance);
 
