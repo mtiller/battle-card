@@ -16,15 +16,15 @@ export function resolveBattles(
     switch (cmd) {
       case "na":
         if (zone.allied > 0)
-          throw new Error(`Allied unit in zone ${i} must attack or defend`);
-        ret.log.push(`No battle in zone ${i}, no Allied units`);
+          throw new Error(`Allied unit in zone ${i + 1} must attack or defend`);
+        ret.log.push(`No battle in zone ${i + 1}, no Allied units`);
         continue;
       default:
         if (zone.allied === 0)
           throw new Error(
             "Attempted to attack or defend in a zone with no allied unit"
           );
-        ret.log.push(`Allied unit in zone ${i} chooses to ${cmd}`);
+        ret.log.push(`Allied unit in zone ${i + 1} chooses to ${cmd}`);
         // Determine whether to use attack or defend table
         const table =
           cmd === "attack" ? params.attackTable : params.defendTable;
@@ -57,7 +57,7 @@ export function resolveBattles(
         if (zone.allied == 0) {
           ret.outcome = "lost";
           ret.log.push(
-            `Allies lost a unit in zone ${i} so therefore lose the battle!`
+            `Allies lost a unit in zone ${i + 1} so therefore lose the battle!`
           );
         }
     }

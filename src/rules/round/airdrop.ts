@@ -48,6 +48,7 @@ export function attemptDrop(
   const weather = params.weatherTrack[s.day - 1];
   if (roll >= weather) {
     ret.zones[3].allied = Math.min(6, ret.zones[3].allied + 1);
+    ret.dropped = true;
     ret.log.push(
       `Allies rolled a ${roll} on day ${ret.day}.  Needed a ${weather} so airdrop of 1st Airborne reinforcements succeeded.`
     );
