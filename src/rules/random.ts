@@ -10,10 +10,15 @@ export class RandomPlayer implements Player {
   }
 
   pickBattles(s: State, legal: LegalZoneDecisions): AllBattleDecisions {
-    throw new Error("unimplemented");
+    return [
+      this.rng.nextArrayItem(legal[0]),
+      this.rng.nextArrayItem(legal[1]),
+      this.rng.nextArrayItem(legal[2]),
+      this.rng.nextArrayItem(legal[3]),
+    ];
   }
 
-  chooseToAdvance(s: State): Advance {
-    throw new Error("unimplemented");
+  chooseToAdvance(s: State, legal: Advance[]): Advance {
+    return this.rng.nextArrayItem(legal);
   }
 }

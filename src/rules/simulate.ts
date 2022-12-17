@@ -46,10 +46,11 @@ export function simulate(
     const advance = player.chooseToAdvance(state, legalAdvance(state));
     decision.advance = advance;
     decision.postAdvance = state = performAdvance(state, advance);
+    if (state.outcome != "undecided") break;
 
     // Part 4 - Weather and 1st Airborne reinforcements
     if (!state.dropped) {
-      decision.postWeather = state = attemptDrop(state);
+      decision.postWeather = state = attemptDrop(state, params, chance);
     }
 
     // Part 5 - Advance turn

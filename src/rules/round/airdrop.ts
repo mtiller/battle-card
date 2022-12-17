@@ -38,6 +38,23 @@ export function performAirdrop(
   return ret;
 }
 
-export function attemptDrop(s: State): State {
-  throw new Error("Unimplemented");
+export function attemptDrop(
+  s: State,
+  params: GameParameters,
+  chance: Prando
+): State {
+  const ret = clone(s);
+  const roll = chance.nextInt(1, 6);
+  const weather = params.weatherTrack[s.day - 1];
+  if (roll >= weather) {
+    ret.zones[3].allied = Math.min(6, ret.zones[3].allied + 1);
+    ret.log.push(
+      `Allies rolled a ${roll} on day ${ret.day}.  Needed a ${weather} so airdrop of 1st Airborne reinforcements succeeded.`
+    );
+  } else {
+    ret.log.push(
+      `Allies rolled a ${roll} on day ${ret.day}.  Needed a ${weather}, no airdrop.`
+    );
+  }
+  return ret;
 }
