@@ -8,18 +8,20 @@ import {
   germanReinforcements,
   performAdvance,
   performAirdrop,
-  performBattles,
+  resolveBattles,
 } from "./round";
+import { GameParameters } from "./parameters";
 import { State } from "./state";
 
 // TODO: Pass in parameterized rules
 export function simulate(
   initial: State,
   player: Player,
+  params: GameParameters,
   chance: Prando
 ): Outcome {
   // First, perform the airdrop (before any rounds)
-  let state = performAirdrop(initial, chance);
+  let state = performAirdrop(initial, params, chance);
   const history: RoundDecisions[] = [];
 
   // Now perform each round until either more than 6 days have elapsed or the
@@ -28,7 +30,7 @@ export function simulate(
     const roundStart = state;
     // Part 1 - Pick attack or defend in all applicable zones
     const battles = player.pickBattles(state, legalBattles(state));
-    state = performBattles(state, battles, chance);
+    state = resolveBattles(state, battles, params, chance);
     const decision: RoundDecisions = {
       roundStart,
       afterBattle: state,

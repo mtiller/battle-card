@@ -1,13 +1,17 @@
 import Prando from "prando";
 import { clone, State } from "../state";
+import { GameParameters } from "../parameters";
 
-export function performAirdrop(s: State, chance: Prando): State {
-  const table = [-2, -2, -1, -1, 0, 0];
+export function performAirdrop(
+  s: State,
+  params: GameParameters,
+  chance: Prando
+): State {
   const ret = clone(s);
   const losses = [
-    chance.nextArrayItem(table),
-    chance.nextArrayItem(table),
-    chance.nextArrayItem(table),
+    chance.nextArrayItem(params.airdropLosses),
+    chance.nextArrayItem(params.airdropLosses),
+    chance.nextArrayItem(params.airdropLosses),
   ];
   let allied1 = ret.zones[0].allied;
   let allied2 = ret.zones[1].allied;

@@ -2,6 +2,7 @@ import Prando from "prando";
 import { expect, test } from "vitest";
 import { Advance, AllBattleDecisions, LegalZoneDecisions } from "./moves";
 import { Player } from "./player";
+import { gameParameters } from "./parameters";
 import { simulate } from "./simulate";
 import { initial, State } from "./state";
 
@@ -19,6 +20,11 @@ class PacifistPlayer implements Player {
 
 test("should lose as a dummy player", () => {
   const chance = new Prando(1234);
-  const result = simulate(initial, new PacifistPlayer(), chance);
+  const result = simulate(
+    initial,
+    new PacifistPlayer(),
+    gameParameters,
+    chance
+  );
   expect(result).not.toBeNull();
 });
