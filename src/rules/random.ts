@@ -9,7 +9,10 @@ export class RandomPlayer implements Player {
     this.rng = new Prando(123);
   }
 
-  pickBattles(s: State, legal: LegalZoneDecisions): AllBattleDecisions {
+  async pickBattles(
+    s: State,
+    legal: LegalZoneDecisions
+  ): Promise<AllBattleDecisions> {
     return [
       this.rng.nextArrayItem(legal[0]),
       this.rng.nextArrayItem(legal[1]),
@@ -18,7 +21,7 @@ export class RandomPlayer implements Player {
     ];
   }
 
-  chooseToAdvance(s: State, legal: Advance[]): Advance {
+  async chooseToAdvance(s: State, legal: Advance[]): Promise<Advance> {
     return this.rng.nextArrayItem(legal);
   }
 }

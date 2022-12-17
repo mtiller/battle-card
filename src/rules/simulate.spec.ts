@@ -7,20 +7,23 @@ import { simulate } from "./simulate";
 import { initial, State } from "./state";
 
 class PacifistPlayer implements Player {
-  pickBattles(s: State, legal: LegalZoneDecisions): AllBattleDecisions {
+  async pickBattles(
+    s: State,
+    legal: LegalZoneDecisions
+  ): Promise<AllBattleDecisions> {
     const decisions = legal.map((x) =>
       x.includes("defend") ? "defend" : x[0]
     );
     return [decisions[0], decisions[1], decisions[2], decisions[3]];
   }
-  chooseToAdvance(s: State): Advance {
+  async chooseToAdvance(s: State): Promise<Advance> {
     return "nothing";
   }
 }
 
-test("should lose as a dummy player", () => {
+test("should lose as a dummy player", async () => {
   const chance = new Prando(1234);
-  const result = simulate(
+  const result = await simulate(
     initial,
     new PacifistPlayer(),
     gameParameters,

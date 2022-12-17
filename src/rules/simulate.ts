@@ -14,12 +14,12 @@ import { GameParameters } from "./parameters";
 import { State } from "./state";
 
 // TODO: Pass in parameterized rules
-export function simulate(
+export async function simulate(
   initial: State,
   player: Player,
   params: GameParameters,
   chance: Prando
-): Outcome {
+): Promise<Outcome> {
   // First, perform the airdrop (before any rounds)
   let state = performAirdrop(initial, params, chance);
   const history: RoundDecisions[] = [];
@@ -29,7 +29,7 @@ export function simulate(
   while (state.day <= 6 && state.outcome == "undecided") {
     const roundStart = state;
     // Part 1 - Pick attack or defend in all applicable zones
-    const battles = player.pickBattles(state, legalBattles(state));
+    const battles = await player.pickBattles(state, legalBattles(state));
     state = resolveBattles(state, battles, params, chance);
     const decision: RoundDecisions = {
       roundStart,
@@ -43,7 +43,7 @@ export function simulate(
     state = germanReinforcements(state);
 
     // Part 3 - (potential) Allied advance
-    const advance = player.chooseToAdvance(state, legalAdvance(state));
+    const advance = await player.chooseToAdvance(state, legalAdvance(state));
     decision.advance = advance;
     decision.postAdvance = state = performAdvance(state, advance);
     if (state.outcome != "undecided") break;
