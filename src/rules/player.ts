@@ -1,7 +1,7 @@
-import { Advance, AllBattleDecisions, BattlePossibilities } from "./moves";
+import { Advance, AllBattleDecisions, LegalZoneDecisions } from "./moves";
 import { State } from "./state";
 
 export interface Player {
-  pickBattles(s: State, legal: BattlePossibilities): AllBattleDecisions;
+  pickBattles(s: State, legal: LegalZoneDecisions): AllBattleDecisions;
   chooseToAdvance(s: State): Advance;
 }

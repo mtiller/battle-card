@@ -7,7 +7,13 @@ export type AllBattleDecisions = [
   BattleOptions,
   BattleOptions
 ];
-export type BattlePossibilities = Array<AllBattleDecisions>;
+
+export type LegalZoneDecisions = [
+  BattleOptions[],
+  BattleOptions[],
+  BattleOptions[],
+  BattleOptions[]
+];
 
 export type Advance = "unit" | "corp" | "nothing";
 

@@ -1,4 +1,5 @@
 import Prando from "prando";
+import { legalBattles } from "./kegal";
 import { Outcome, RoundDecisions } from "./moves";
 import { Player } from "./player";
 import {
@@ -26,9 +27,7 @@ export function simulate(
   while (state.day <= 6 && state.outcome == "undecided") {
     const roundStart = state;
     // Part 1 - Pick attack or defend in all applicable zones
-    const battles = player.pickBattles(state, [
-      // TODO: Calculate legal moves for player to consider
-    ]);
+    const battles = player.pickBattles(state, legalBattles(state));
     state = performBattles(state, battles, chance);
     const decision: RoundDecisions = {
       roundStart,
