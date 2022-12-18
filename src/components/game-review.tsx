@@ -1,6 +1,7 @@
 import { Button, Group, Modal, Slider } from "@mantine/core";
 import React from "react";
 import { Outcome } from "../rules";
+import { GameTimeline } from "./game-timeline";
 
 export interface GameReviewProps {
   seed: number;
@@ -37,23 +38,7 @@ export const GameReview = (props: GameReviewProps) => {
         </div>
       </div>
 
-      <Modal
-        opened={opened}
-        size="auto"
-        onClose={() => setOpened(false)}
-        title={`Game Report for Game ${current + 1} of Seed ${seed}`}
-      >
-        <Group position="center">
-          {results[current] && (
-            <pre>{results[current].final.log.join("\n")}</pre>
-          )}
-        </Group>
-      </Modal>
-      <Group position="center">
-        <Button onClick={() => setOpened(true)}>
-          Show Game Report for Game {current + 1} of Seed {seed}
-        </Button>
-      </Group>
+      {results[current] && <GameTimeline final={results[current].final} />}
     </div>
   );
 };

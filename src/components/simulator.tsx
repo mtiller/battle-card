@@ -37,7 +37,7 @@ export const Simulator = (props: SimulatorProps) => {
         <div style={{ flexGrow: 1, margin: 20 }}>
           <Stats stats={stats} />
         </div>
-        <div style={{ flexGrow: 1, margin: 20 }}>
+        <div style={{ flexGrow: 1, margin: 20, maxWidth: "60%" }}>
           <h3>Game Specific Details</h3>
           <GameReview seed={seed} results={results} />
         </div>
