@@ -1,17 +1,21 @@
-import { NumberInput } from "@mantine/core";
+import { NumberInput, RingProgress, Text } from "@mantine/core";
 import React from "react";
+import { useStats } from "../hooks/stats";
 import { monteCarlo } from "../monte/analysis";
 import { Outcome } from "../rules";
 import { GameReview } from "./game-review";
+import { Stats } from "./stats";
 
 export interface SimulatorProps {}
 
 export const Simulator = (props: SimulatorProps) => {
   const [results, setResults] = React.useState<Outcome[]>([]);
   const [seed, setSeed] = React.useState<number>(0);
+  const stats = useStats(results);
 
   React.useEffect(() => {
-    runSimulation(seed * 10000, setResults);
+    console.log("Rerunning with seed", seed * 10000);
+    runSimulation(seed, setResults);
   }, [seed, setResults]);
   return (
     <div>
@@ -31,7 +35,7 @@ export const Simulator = (props: SimulatorProps) => {
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ flexGrow: 1, margin: 20 }}>
-          <h3>Stats</h3>
+          <Stats stats={stats} />
         </div>
         <div style={{ flexGrow: 1, margin: 20 }}>
           <h3>Game Specific Details</h3>
@@ -47,6 +51,6 @@ async function runSimulation(
   setResults: (results: Outcome[]) => void
 ) {
   const n = 10000;
-  const results = await monteCarlo(n, seed);
+  const results = await monteCarlo(n, seed * n);
   setResults(results);
 }
