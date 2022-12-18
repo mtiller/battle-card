@@ -1,7 +1,7 @@
 import Prando from "prando";
-import { Advance, AllBattleDecisions, LegalZoneDecisions } from "./moves";
-import { Player } from "./player";
-import { State } from "./state";
+import { Advance, AllBattleDecisions, LegalZoneDecisions } from "../moves";
+import { Player } from "../player";
+import { State } from "../state";
 
 export class RandomPlayer implements Player {
   private rng: Prando;

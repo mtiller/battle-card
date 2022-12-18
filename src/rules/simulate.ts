@@ -1,5 +1,5 @@
 import Prando from "prando";
-import { legalAdvance, legalBattles } from "./kegal";
+import { legalAdvance, legalBattles } from "./legal";
 import { Outcome, RoundDecisions } from "./moves";
 import { Player } from "./player";
 import {

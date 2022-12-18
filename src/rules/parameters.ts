@@ -1,13 +1,13 @@
-export interface Outcome {
+export interface CombatOutcome {
   alliedLosses: number;
   germanLosses: number;
   alliesControl: boolean;
 }
 
 export interface CombatResolutionTable {
-  alliedAdvantage: Outcome[];
-  noAdvantage: Outcome[];
-  germanAdvantage: Outcome[];
+  alliedAdvantage: CombatOutcome[];
+  noAdvantage: CombatOutcome[];
+  germanAdvantage: CombatOutcome[];
 }
 
 export const weatherTrack = [6, 5, 4, 3, 2, 1];

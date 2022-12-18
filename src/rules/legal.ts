@@ -1,5 +1,5 @@
 import { Advance, BattleOptions, LegalZoneDecisions } from "./moves";
-import { clone, State } from "./state";
+import { State } from "./state";
 
 export function legalBattles(s: State): LegalZoneDecisions {
   const decisions = s.zones.map((z): BattleOptions[] =>
