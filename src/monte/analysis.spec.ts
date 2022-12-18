@@ -17,6 +17,13 @@ test("Run Monte-Carlo analysis", async () => {
     (r) => r.final.outcome === "won" && r.final.day === 6
   ).length;
   console.log(`win = ${(won * 100) / n}%, loss = ${(loss * 100) / n}`);
+
+  const failControl = results.filter(
+    (r) => r.history[0].afterBattle.zones[0].control === "german"
+  );
+  const stillWin = failControl.filter((r) => r.final.outcome === "won").length;
+  expect(failControl.length).toEqual(1666);
+  expect(stillWin).toEqual(326);
   expect(won + loss).toEqual(n);
   expect(won).toEqual(4936);
   expect(loss).toEqual(5064);
