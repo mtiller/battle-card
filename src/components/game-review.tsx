@@ -69,7 +69,9 @@ export const GameReview = (props: GameReviewProps) => {
       {results.length === 0 ? (
         <p>No simulation results to show yet or all were filtered out.</p>
       ) : (
-        results[current] && <GameTimeline final={results[current].final} />
+        results[current - 1] && (
+          <GameTimeline final={results[current - 1].final} />
+        )
       )}
     </div>
   );
