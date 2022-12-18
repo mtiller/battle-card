@@ -15,7 +15,7 @@ export function resolveBattles(
     const cmd = battles[i];
     switch (cmd) {
       case "na":
-        if (zone.allied > 0)
+        if (zone.allied > 0 && zone.german > 0)
           throw new Error(`Allied unit in zone ${i + 1} must attack or defend`);
         ret.log.push({ type: "no_battle", day: ret.day, zone: i + 1 });
         continue;

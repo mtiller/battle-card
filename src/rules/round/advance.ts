@@ -53,6 +53,15 @@ function advanceCorp(ret: State, to: [number, CorpLocation]): State {
       "Attempted to advance into territory not controlled by the Allies"
     );
   ret.corp = to[1];
+  if (ret.corp === "zone1") {
+    ret.zones[0].german = 0;
+  } else if (ret.corp === "zone2") {
+    ret.zones[1].german = 0;
+  } else if (ret.corp === "zone3") {
+    ret.zones[2].german = 0;
+  } else if (ret.corp === "zone4") {
+    ret.zones[3].german = 0;
+  }
   ret.log.push({ type: "corp_movement", day: ret.day, to: to[0] + 1 });
   if (to[1] === "zone4") {
     ret.outcome = "won";
