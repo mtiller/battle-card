@@ -91,3 +91,14 @@ test("Run Monte-Carlo analysis", async () => {
     "After day 5 advance (corp): C:zone4 W:true Z1:A:5* G:6 Z2: A:0* G:6 Z3: A:4* G:1 Z4: A:4* G:5 -> won",
   ]);
 });
+
+test("Run large Monte-Carlo analysis", async () => {
+  const n = 1000000;
+  const results = await monteCarlo(n, false);
+  expect(results.length).toEqual(n);
+  const won = results.filter((r) => r.final.outcome === "won").length;
+  const loss = results.filter((r) => r.final.outcome === "lost").length;
+  console.log(`win = ${(won * 100) / n}%, loss = ${(loss * 100) / n}`);
+  expect(won / n).toBeGreaterThan(0.47);
+  expect(won / n).toBeLessThan(0.5);
+});
