@@ -4,16 +4,19 @@ import { CoreState, summary } from "./state";
 
 export interface InitialAirDropEvent {
   type: "initial_airdrop";
+  day: number;
   losses: [number, number, number];
 }
 
 export interface NoBattleEvent {
   type: "no_battle";
+  day: number;
   zone: number;
 }
 
 export interface BattleEvent {
   type: "battle";
+  day: number;
   cmd: "attack" | "defend";
   zone: number;
 }
@@ -30,6 +33,7 @@ export interface BattleOutcomeEvent {
 
 export interface FinalResultEvent {
   type: "result";
+  day: number;
   why: string;
   result: "won" | "lost";
 }
@@ -43,27 +47,32 @@ export interface WeatherCheckEvent {
 
 export interface GermanReinforcementEvent {
   type: "german_reinforcement";
+  day: number;
   all: boolean;
 }
 
 export interface PostAirdropReportEvent {
   type: "post_airdrop";
+  day: number;
   state: CoreState;
 }
 
 export interface PostBattleReportEvent {
   type: "post_battle";
+  day: number;
   state: CoreState;
 }
 
 export interface PostAdvanceReportEvent {
   type: "post_advance";
+  day: number;
   advance: Advance;
   state: CoreState;
 }
 
 export interface CorpMovementEvent {
   type: "corp_movement";
+  day: number;
   to: number;
 }
 

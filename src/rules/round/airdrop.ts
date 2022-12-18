@@ -34,7 +34,7 @@ export function performAirdrop(
   ret.zones[0].allied = allied1;
   ret.zones[1].allied = allied2;
   ret.zones[3].allied = allied4;
-  ret.log.push({ type: "initial_airdrop", losses });
+  ret.log.push({ type: "initial_airdrop", day: ret.day, losses });
   return ret;
 }
 
