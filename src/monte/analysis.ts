@@ -2,7 +2,11 @@ import Prando from "prando";
 import { gameParameters, initial, Outcome, simulate } from "../rules";
 import { StrategicPlayer } from "../rules/players";
 
-export async function monteCarlo(n: number, history: boolean = true) {
+export async function monteCarlo(
+  n: number,
+  seed: number,
+  history: boolean = true
+) {
   const results: Outcome[] = [];
   const player = new StrategicPlayer();
 
