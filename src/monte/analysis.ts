@@ -7,7 +7,7 @@ export async function monteCarlo(n: number) {
   const player = new StrategicPlayer();
 
   for (let i = 0; i < n; i++) {
-    const chance = new Prando(1234);
+    const chance = new Prando(1234 + i);
     const result = await simulate(initial, player, gameParameters, chance);
     results.push(result);
   }

@@ -37,19 +37,20 @@ export function resolveBattles(
             : table.germanAdvantage;
         // Pick a result based on the die rolle
         const result = chance.nextArrayItem(column);
+        const roll = column.indexOf(result) + 1;
         // Adjust the stats in that zone
         zone.allied = Math.max(0, zone.allied + result.alliedLosses);
         zone.german = Math.max(1, zone.german + result.germanLosses);
         if (zone.control === "german" && result.alliesControl) {
           zone.control = "allies";
           ret.log.push(
-            `day ${ret.day}, zone ${i + 1}, Allied losses: ${
+            `day ${ret.day}, zone ${i + 1}, roll: ${roll}, Allied losses: ${
               result.alliedLosses
             }, German losses: ${result.germanLosses}, Allies seize control`
           );
         } else {
           ret.log.push(
-            `day ${ret.day}, zone ${i + 1}, Allied losses: ${
+            `day ${ret.day}, zone ${i + 1}, roll: ${roll}, Allied losses: ${
               result.alliedLosses
             }, German losses: ${result.germanLosses}, Control: ${zone.control}`
           );
