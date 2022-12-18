@@ -32,7 +32,14 @@ function choose(zone: Zone, legal: BattleOptions[]): BattleOptions {
   if (legal.length == 1) return legal[0];
   // If we have two options (we assume they are attack and defend), base the decision
   // on who controls the zone.
-  if (zone.control === "allies" && legal.includes("defend")) return "defend";
-  if (zone.control === "german" && legal.includes("attack")) return "attack";
-  throw new Error("Unable to determine player choice");
+  if (zone.control === "german") {
+    if (legal.includes("attack")) {
+      return "attack";
+    }
+    throw new Error("Expected to be able to attack");
+  }
+  if (legal.includes("defend")) {
+    return "defend";
+  }
+  throw new Error("Expected to be able to defend");
 }
