@@ -15,11 +15,11 @@ export const GameTimeline = (props: GameTimelineProps) => {
   }
   return (
     <div>
-      <Timeline active={1} bulletSize={24} lineWidth={2}>
+      <Timeline bulletSize={24} lineWidth={2}>
         {days.map((day, i) => (
           <Timeline.Item
             key={i}
-            bullet={<IconCalendarEvent size={12} />}
+            bullet={<IconCalendarEvent color="blue" size={24} />}
             title={`Day ${i + 1}`}
           >
             <DayTimeline events={day} />

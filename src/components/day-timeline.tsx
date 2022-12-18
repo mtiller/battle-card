@@ -10,6 +10,7 @@ import {
   IconDice6,
   IconDirectionSign,
   IconHandStop,
+  IconInfoCircle,
   IconParachute,
   IconPeace,
   IconSunHigh,
@@ -27,7 +28,7 @@ export interface DayTimelineProps {
 
 export const DayTimeline = (props: DayTimelineProps) => {
   return (
-    <Timeline active={1} bulletSize={24} lineWidth={2}>
+    <Timeline bulletSize={24} lineWidth={2}>
       {props.events.map((ev, i) => (
         <Timeline.Item key={i} bullet={getIcon(ev)} title={getTitle(ev)}>
           {getContent(ev)}
@@ -130,11 +131,12 @@ function getIcon(ev: LogEvent): JSX.Element {
   const size = 24;
   switch (ev.type) {
     case "initial_airdrop":
-    case "post_airdrop":
       return <IconParachute size={size} />;
+    case "post_airdrop":
+      return <IconInfoCircle color="purple" size={size} />;
     case "weather":
       return ev.roll >= ev.needed ? (
-        <IconSunHigh size={size} />
+        <IconSunHigh color="orange" size={size} />
       ) : (
         <IconCloud size={size} />
       );
@@ -142,26 +144,27 @@ function getIcon(ev: LogEvent): JSX.Element {
       return <IconPeace size={size} />;
     case "battle":
       return ev.cmd === "attack" ? (
-        <IconTank size={size} />
+        <IconTank color="red" size={size} />
       ) : (
-        <IconBuildingFortress size={size} />
+        <IconBuildingFortress color="green" size={size} />
       );
     case "result":
       return ev.result === "won" ? (
         <IconTrophy size={size} />
       ) : (
-        <IconTrophyOff size={size} />
+        <IconTrophyOff color={"red"} size={size} />
       );
     case "german_reinforcement":
       return <IconTank size={size} />;
     case "battle_result":
     case "post_battle":
-      return <IconTank size={size} />;
+      return <IconInfoCircle color="purple" size={size} />;
     case "corp_movement":
-      return <IconDirectionSign size={size} />;
+      return <IconDirectionSign color="green" size={size} />;
     case "post_advance":
-      if (ev.advance === "nothing") return <IconHandStop size={size} />;
-      return <IconDirectionSign size={size} />;
+      if (ev.advance === "nothing")
+        return <IconHandStop color="red" size={size} />;
+      return <IconDirectionSign color="green" size={size} />;
     default:
       return <IconUfo size={size} />;
   }
