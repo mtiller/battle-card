@@ -24,13 +24,13 @@ test("Run Monte-Carlo analysis", async () => {
   );
   const stillWin = failControl.filter((r) => r.final.outcome === "won").length;
   expect(failControl.length).toEqual(1666);
-  expect(stillWin).toEqual(326);
+  expect(stillWin).toEqual(2);
   expect(won + loss).toEqual(n);
-  expect(won).toEqual(4936);
-  expect(loss).toEqual(5064);
+  expect(won).toEqual(1242);
+  expect(loss).toEqual(8758);
   expect(day4).toEqual(0);
-  expect(day5).toEqual(3974);
-  expect(day6).toEqual(962);
+  expect(day5).toEqual(491);
+  expect(day6).toEqual(751);
   expect(results[0].final.log.map(stringifyEvent)).toEqual([
     "Initial allied airdrop results: -1, 0, -1",
     "After initial airdrop: C:belgium W:false Z1:A:5 G:2* Z2: A:6 G:2* Z3: A:0 G:1* Z4: A:4 G:2* -> undecided",
@@ -75,7 +75,7 @@ test("Run Monte-Carlo analysis", async () => {
     "day 4, zone 3, roll: 3, Allied losses: -1, German losses: -1, Allies seize control",
     "Allied unit in zone 4 chooses to defend",
     "day 4, zone 4, roll: 2, Allied losses: 0, German losses: 0, Control: allies",
-    "After day 4 battles: C:zone2 W:true Z1:A:5* G:4 Z2: A:0* G:4 Z3: A:4* G:1 Z4: A:4* G:3 -> undecided",
+    "After day 4 advance (corp): C:zone3 W:true Z1:A:5* G:5 Z2: A:0 G:5* Z3: A:4* G:1 Z4: A:4* G:4 -> undecided",
     "Germans could not reinforce in Nijmegen",
     "30th Corp successfully advances to zone 3",
     "After day 4 advance (corp): C:zone3 W:true Z1:A:5* G:5 Z2: A:0* G:5 Z3: A:4* G:1 Z4: A:4* G:4 -> undecided",
@@ -86,10 +86,20 @@ test("Run Monte-Carlo analysis", async () => {
     "day 5, zone 3, roll: 2, Allied losses: 0, German losses: 0, Control: allies",
     "Allied unit in zone 4 chooses to defend",
     "day 5, zone 4, roll: 5, Allied losses: 0, German losses: 0, Control: allies",
-    "After day 5 battles: C:zone3 W:true Z1:A:5* G:5 Z2: A:0* G:5 Z3: A:4* G:1 Z4: A:4* G:4 -> undecided",
+    "After day 5 battles: C:zone3 W:true Z1:A:5* G:5 Z2: A:0 G:5* Z3: A:4* G:1 Z4: A:4* G:4 -> undecided",
+    "Germans reinforced in all zones",
+    "After day 5 advance (unit): C:zone3 W:true Z1:A:5 G:6* Z2: A:0 G:6* Z3: A:0* G:2 Z4: A:6 G:5* -> undecided",
+    "Allied unit in zone 1 chooses to attack",
+    "day 6, zone 1, roll: 2, Allied losses: -2, German losses: -1, Control: german",
+    "No battle in zone 2, no Allied units",
+    "No battle in zone 3, no Allied units",
+    "Allied unit in zone 4 chooses to attack",
+    "day 6, zone 4, roll: 4, Allied losses: -1, German losses: -1, Allies seize control",
+    "After day 6 battles: C:zone3 W:true Z1:A:3 G:5* Z2: A:0 G:6* Z3: A:0* G:2 Z4: A:5* G:4 -> undecided",
     "Germans could not reinforce in Nijmegen",
     "30th Corp successfully advances to zone 4",
-    "After day 5 advance (corp): C:zone4 W:true Z1:A:5* G:6 Z2: A:0* G:6 Z3: A:4* G:1 Z4: A:4* G:5 -> won",
+    "30th Corp moves into Arnhem",
+    "After day 6 advance (corp): C:zone4 W:true Z1:A:3 G:6* Z2: A:0 G:6* Z3: A:0 G:2* Z4: A:5* G:5 -> won",
   ]);
 });
 
@@ -100,6 +110,6 @@ test("Run large Monte-Carlo analysis", async () => {
   const won = results.filter((r) => r.final.outcome === "won").length;
   const loss = results.filter((r) => r.final.outcome === "lost").length;
   console.log(`win = ${(won * 100) / n}%, loss = ${(loss * 100) / n}`);
-  expect(won / n).toBeGreaterThan(0.47);
-  expect(won / n).toBeLessThan(0.5);
+  expect(won / n).toBeGreaterThan(0.1);
+  expect(won / n).toBeLessThan(0.11);
 });

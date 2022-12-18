@@ -12,9 +12,9 @@ export const StatePeek = (props: StatePeekProps) => {
     <Text size="sm">
       <p>30th Corp Location: {props.state.corp}</p>
       {props.state.dropped ? (
-        <p>101st Airborne already reinforced.</p>
+        <p>1st Airborne already reinforced.</p>
       ) : (
-        <p>101st Airborne waiting for reinforcements.</p>
+        <p>1st Airborne waiting for reinforcements.</p>
       )}
       <ZonePeek num={4} zone={props.state.zones[3]} />
       <ZonePeek num={3} zone={props.state.zones[2]} />

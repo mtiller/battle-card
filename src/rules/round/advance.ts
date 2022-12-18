@@ -56,6 +56,12 @@ function advanceCorp(ret: State, to: [number, CorpLocation]): State {
   ret.log.push({ type: "corp_movement", day: ret.day, to: to[0] + 1 });
   if (to[1] === "zone4") {
     ret.outcome = "won";
+    ret.log.push({
+      type: "result",
+      day: ret.day,
+      why: "30th Corp moves into Arnhem",
+      result: "won",
+    });
   }
   return ret;
 }

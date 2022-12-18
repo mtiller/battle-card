@@ -75,7 +75,7 @@ function getTitle(ev: LogEvent): JSX.Element | string {
         return (
           <span>
             Allies rolled a {dice[ev.roll - 1]} and needed a{" "}
-            {dice[ev.needed - 1]} so 101st Airborne successfully reinforced
+            {dice[ev.needed - 1]} so 1st Airborne successfully reinforced
           </span>
         );
       } else {
@@ -150,7 +150,7 @@ function getIcon(ev: LogEvent): JSX.Element {
       );
     case "result":
       return ev.result === "won" ? (
-        <IconTrophy size={size} />
+        <IconTrophy color={"green"} size={size} />
       ) : (
         <IconTrophyOff color={"red"} size={size} />
       );
