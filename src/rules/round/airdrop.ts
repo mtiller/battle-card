@@ -8,7 +8,7 @@ export function performAirdrop(
   chance: Prando
 ): State {
   const ret = clone(s);
-  const losses = [
+  const losses: [number, number, number] = [
     chance.nextArrayItem(params.airdropLosses),
     chance.nextArrayItem(params.airdropLosses),
     chance.nextArrayItem(params.airdropLosses),
@@ -34,10 +34,7 @@ export function performAirdrop(
   ret.zones[0].allied = allied1;
   ret.zones[1].allied = allied2;
   ret.zones[3].allied = allied4;
-  ret.log = [
-    ...ret.log,
-    `Initial allied airdrop results: ${losses.join(", ")}`,
-  ];
+  ret.log.push({ type: "initial_airdrop", losses });
   return ret;
 }
 
@@ -49,16 +46,10 @@ export function attemptDrop(
   const ret = clone(s);
   const roll = chance.nextInt(1, 6);
   const weather = params.weatherTrack[s.day - 1];
+  ret.log.push({ type: "weather", roll, day: ret.day, needed: weather });
   if (roll >= weather) {
     ret.zones[3].allied = Math.min(6, ret.zones[3].allied + 1);
     ret.dropped = true;
-    ret.log.push(
-      `Allies rolled a ${roll} on day ${ret.day}.  Needed a ${weather} so airdrop of 1st Airborne reinforcements succeeded.`
-    );
-  } else {
-    ret.log.push(
-      `Allies rolled a ${roll} on day ${ret.day}.  Needed a ${weather}, no airdrop.`
-    );
   }
   return ret;
 }

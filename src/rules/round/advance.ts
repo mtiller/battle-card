@@ -53,7 +53,7 @@ function advanceCorp(ret: State, to: [number, CorpLocation]): State {
       "Attempted to advance into territory not controlled by the Allies"
     );
   ret.corp = to[1];
-  ret.log.push(`30th Corp successfully advances to zone ${to[0] + 1}`);
+  ret.log.push({ type: "corp_movement", to: to[0] + 1 });
   if (to[1] === "zone4") {
     ret.outcome = "won";
   }

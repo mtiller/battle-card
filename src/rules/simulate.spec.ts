@@ -3,7 +3,7 @@ import { expect, test } from "vitest";
 import { gameParameters } from "./parameters";
 import { PacifistPlayer } from "./players";
 import { simulate } from "./simulate";
-import { initial } from "./state";
+import { initial, stringifyEvent } from "./state";
 
 test("should lose as a dummy player", async () => {
   const chance = new Prando(1234);
@@ -13,7 +13,7 @@ test("should lose as a dummy player", async () => {
     gameParameters,
     chance
   );
-  expect(result.final.log).toEqual([
+  expect(result.final.log.map(stringifyEvent)).toEqual([
     "Initial allied airdrop results: -1, 0, -1",
     "After initial airdrop: C:belgium W:false Z1:A:5 G:2* Z2: A:6 G:2* Z3: A:0 G:1* Z4: A:4 G:2* -> undecided",
     "Allied unit in zone 1 chooses to defend",

@@ -11,9 +11,8 @@ import {
   resolveBattles,
 } from "./round";
 import { GameParameters } from "./parameters";
-import { State, summary } from "./state";
+import { cloneCore, State, summary } from "./state";
 
-// TODO: Pass in parameterized rules
 export async function simulate(
   initial: State,
   player: Player,
@@ -26,7 +25,7 @@ export async function simulate(
 
   // Now perform each round until either more than 6 days have elapsed or the
   // Allies lose.
-  state.log.push("After initial airdrop: " + summary(state));
+  state.log.push({ type: "post_airdrop", state: cloneCore(state) });
   while (state.day <= 6 && state.outcome == "undecided") {
     const roundStart = state;
     // Part 1 - Pick attack or defend in all applicable zones
@@ -38,7 +37,7 @@ export async function simulate(
       battles: battles,
     };
     history.push(decision);
-    state.log.push(`After day ${state.day} battles: ` + summary(state));
+    state.log.push({ type: "post_battle", state: cloneCore(state) });
 
     if (state.outcome != "undecided") break;
 
@@ -49,9 +48,7 @@ export async function simulate(
     const advance = await player.chooseToAdvance(state, legalAdvance(state));
     decision.advance = advance;
     decision.postAdvance = state = performAdvance(state, advance);
-    state.log.push(
-      `After day ${state.day} advance (${advance}): ` + summary(state)
-    );
+    state.log.push({ type: "post_advance", advance, state: cloneCore(state) });
     if (state.outcome != "undecided") break;
 
     // Part 4 - Weather and 1st Airborne reinforcements

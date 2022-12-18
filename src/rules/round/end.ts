@@ -5,7 +5,11 @@ export function advanceTurn(s: State): State {
   ret.day++;
   if (ret.day > 6 && ret.outcome == "undecided") {
     ret.outcome = "lost";
-    ret.log.push("Allies were unable to advance to Arnhem in 6 days");
+    ret.log.push({
+      type: "result",
+      why: "Allies were unable to advance to Arnhem in 6 days",
+      result: "lost",
+    });
   }
   return ret;
 }
