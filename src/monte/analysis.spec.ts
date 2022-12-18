@@ -1,4 +1,5 @@
 import { expect, test } from "vitest";
+import { stringifyEvent } from "../rules/events";
 import { monteCarlo } from "./analysis";
 
 test("Run Monte-Carlo analysis", async () => {
@@ -30,7 +31,7 @@ test("Run Monte-Carlo analysis", async () => {
   expect(day4).toEqual(0);
   expect(day5).toEqual(3974);
   expect(day6).toEqual(962);
-  expect(results[0].final.log).toEqual([
+  expect(results[0].final.log.map(stringifyEvent)).toEqual([
     "Initial allied airdrop results: -1, 0, -1",
     "After initial airdrop: C:belgium W:false Z1:A:5 G:2* Z2: A:6 G:2* Z3: A:0 G:1* Z4: A:4 G:2* -> undecided",
     "Allied unit in zone 1 chooses to attack",

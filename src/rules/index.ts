@@ -1,6 +1,7 @@
 export * from "./round";
 export * from "./legal";
 export * from "./moves";
+export * from "./events";
 export * from "./parameters";
 export * from "./player";
 export * from "./players/random";

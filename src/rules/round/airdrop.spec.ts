@@ -1,8 +1,9 @@
 import Prando from "prando";
 import { expect, test } from "vitest";
-import { clone, initial, stringifyEvent } from "../state";
+import { clone, initial } from "../state";
 import { performAirdrop } from "./airdrop";
 import { gameParameters } from "../parameters";
+import { stringifyEvent } from "../events";
 
 test("Test initial airdrop", () => {
   const chance = new Prando(1);

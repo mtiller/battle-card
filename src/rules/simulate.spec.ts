@@ -1,9 +1,10 @@
 import Prando from "prando";
 import { expect, test } from "vitest";
+import { stringifyEvent } from "./events";
 import { gameParameters } from "./parameters";
 import { PacifistPlayer } from "./players";
 import { simulate } from "./simulate";
-import { initial, stringifyEvent } from "./state";
+import { initial } from "./state";
 
 test("should lose as a dummy player", async () => {
   const chance = new Prando(1234);
