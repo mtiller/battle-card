@@ -47,6 +47,7 @@ export const Inputs = (props: InputsProps) => {
         ]}
       />
       <Button disabled={true}>Edit CRTs</Button>
+      <Button disabled={true}>Edit Initial Strength</Button>
     </div>
   );
 };

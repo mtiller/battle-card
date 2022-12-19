@@ -31,10 +31,10 @@ export const Simulator = (props: SimulatorProps) => {
         />
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ flexGrow: 1, margin: 20 }}>
+        <div style={{ flexGrow: 1, margin: 20, width: "50%" }}>
           <Stats stats={stats} />
         </div>
-        <div style={{ flexGrow: 1, margin: 20, maxWidth: "60%" }}>
+        <div style={{ flexGrow: 1, margin: 20, width: "50%" }}>
           <h3>Game Specific Details</h3>
           <GameReview seed={seed} results={results} />
         </div>

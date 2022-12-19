@@ -39,12 +39,12 @@ export const DayTimeline = (props: DayTimelineProps) => {
 };
 
 export const dice = [
-  <IconDice1 />,
-  <IconDice2 />,
-  <IconDice3 />,
-  <IconDice4 />,
-  <IconDice5 />,
-  <IconDice6 />,
+  <IconDice1 style={{ verticalAlign: "sub" }} />,
+  <IconDice2 style={{ verticalAlign: "sub" }} />,
+  <IconDice3 style={{ verticalAlign: "sub" }} />,
+  <IconDice4 style={{ verticalAlign: "sub" }} />,
+  <IconDice5 style={{ verticalAlign: "sub" }} />,
+  <IconDice6 style={{ verticalAlign: "sub" }} />,
 ];
 function getTitle(ev: LogEvent): JSX.Element | string {
   switch (ev.type) {
@@ -57,7 +57,11 @@ function getTitle(ev: LogEvent): JSX.Element | string {
     case "battle":
       return `Allies in zone ${ev.zone} choose to ${ev.cmd}`;
     case "battle_result":
-      return <span>Allies roll {dice[ev.roll - 1]}</span>;
+      return (
+        <span style={{ verticalAlign: "bottom" }}>
+          Allies roll {dice[ev.roll - 1]}
+        </span>
+      );
     case "post_battle":
       return "All battles resolved";
     case "post_advance":
@@ -73,14 +77,14 @@ function getTitle(ev: LogEvent): JSX.Element | string {
     case "weather":
       if (ev.roll >= ev.needed) {
         return (
-          <span>
+          <span style={{ verticalAlign: "bottom" }}>
             Allies rolled a {dice[ev.roll - 1]} and needed a{" "}
             {dice[ev.needed - 1]} so 1st Airborne successfully reinforced
           </span>
         );
       } else {
         return (
-          <span>
+          <span style={{ verticalAlign: "bottom" }}>
             Allies needed a {dice[ev.needed - 1]} but only rolled a{" "}
             {dice[ev.roll - 1]}, airdrop unsuccessful.
           </span>
@@ -100,16 +104,7 @@ function getContent(ev: LogEvent): JSX.Element | string | null {
     case "post_advance":
     case "post_battle":
     case "post_airdrop":
-      return (
-        <HoverCard width={280} shadow="md">
-          <HoverCard.Target>
-            <span>Hover for details</span>
-          </HoverCard.Target>
-          <HoverCard.Dropdown>
-            <StatePeek state={ev.state} />
-          </HoverCard.Dropdown>
-        </HoverCard>
-      );
+      return <StatePeek state={ev.state} />;
     case "battle":
     case "no_battle":
       return null;
