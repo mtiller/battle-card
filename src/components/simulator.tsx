@@ -23,7 +23,7 @@ export const Simulator = (props: SimulatorProps) => {
   return (
     <div>
       <h1>Simulator</h1>
-      <div style={{ display: "flex", flexDirection: "column", width: "30vw" }}>
+      <div style={{ display: "flex", flexDirection: "column", width: "60vw" }}>
         <Inputs
           seed={seed}
           setSeed={setSeed}

@@ -1,4 +1,4 @@
-import { NumberInput, Select } from "@mantine/core";
+import { Button, NumberInput, Select } from "@mantine/core";
 import Prando from "prando";
 import { Player, RandomPlayer } from "../rules";
 import { StrategicPlayer } from "../rules/players";
@@ -13,7 +13,15 @@ export interface InputsProps {
 
 export const Inputs = (props: InputsProps) => {
   return (
-    <div style={{ display: "flex", flexDirection: "row", flexGrow: 0 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        flexGrow: 0,
+        alignItems: "end",
+        justifyContent: "space-between",
+      }}
+    >
       <NumberInput
         placeholder="Random number generator seed"
         label="Seed"
@@ -38,6 +46,7 @@ export const Inputs = (props: InputsProps) => {
           { value: "random", label: "Random" },
         ]}
       />
+      <Button disabled={true}>Edit CRTs</Button>
     </div>
   );
 };

@@ -45,6 +45,9 @@ export const Stats = (props: StatsProps) => {
                 <Text align="center" size="md">
                   Timing
                 </Text>
+                <Text align="center" size="xs">
+                  (hover)
+                </Text>
               </div>
             }
             sections={sections}
