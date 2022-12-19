@@ -24,7 +24,6 @@ export function useStats(results: Outcome[]) {
   const stillWon = alliedSetback.filter((r) => r.final.outcome === "won");
 
   const davidPer = ((100 * stillWon.length) / alliedSetback.length).toFixed(2);
-  console.log("Stats recomputed");
   return {
     results,
     wins,

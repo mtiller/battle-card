@@ -17,7 +17,6 @@ export const Simulator = (props: SimulatorProps) => {
   const stats = useStats(results);
 
   React.useEffect(() => {
-    console.log("Rerunning with seed", seed * 10000);
     runSimulation(seed, player, setResults);
   }, [seed, player, setResults]);
   return (
