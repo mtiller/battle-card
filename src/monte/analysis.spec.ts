@@ -1,10 +1,13 @@
 import { expect, test } from "vitest";
 import { stringifyEvent } from "../rules/events";
+import { StrategicPlayer } from "../rules/players";
 import { monteCarlo } from "./analysis";
 
 test("Run Monte-Carlo analysis", async () => {
   const n = 10000;
-  const results = await monteCarlo(n, 1234);
+  const player = new StrategicPlayer();
+
+  const results = await monteCarlo(n, 1234, player);
   expect(results.length).toEqual(n);
   const won = results.filter((r) => r.final.outcome === "won").length;
   const loss = results.filter((r) => r.final.outcome === "lost").length;
@@ -102,7 +105,9 @@ test("Run Monte-Carlo analysis", async () => {
 
 test("Run large Monte-Carlo analysis", async () => {
   const n = 1000000;
-  const results = await monteCarlo(n, 1234, false);
+  const player = new StrategicPlayer();
+
+  const results = await monteCarlo(n, 1234, player, false);
   expect(results.length).toEqual(n);
   const won = results.filter((r) => r.final.outcome === "won").length;
   const loss = results.filter((r) => r.final.outcome === "lost").length;

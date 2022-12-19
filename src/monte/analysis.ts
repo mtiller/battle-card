@@ -1,14 +1,14 @@
 import Prando from "prando";
-import { gameParameters, initial, Outcome, simulate } from "../rules";
+import { gameParameters, initial, Outcome, Player, simulate } from "../rules";
 import { StrategicPlayer } from "../rules/players";
 
 export async function monteCarlo(
   n: number,
   seed: number,
+  player: Player,
   history: boolean = true
 ) {
   const results: Outcome[] = [];
-  const player = new StrategicPlayer();
 
   for (let i = 0; i < n; i++) {
     const chance = new Prando(seed + i);

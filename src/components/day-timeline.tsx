@@ -86,8 +86,10 @@ function getTitle(ev: LogEvent): JSX.Element | string {
           </span>
         );
       }
+    case "corp_movement":
+      return `${stringifyEvent(ev)}`;
     default:
-      return stringifyEvent(ev);
+      return `${ev.type}: ${stringifyEvent(ev)}`;
   }
 }
 
@@ -119,6 +121,7 @@ function getContent(ev: LogEvent): JSX.Element | string | null {
           ? "Allies seize control"
           : `Remains under ${ev.control} control`
       }.`;
+    case "corp_movement":
     case "weather":
     case "german_reinforcement":
       return null;
