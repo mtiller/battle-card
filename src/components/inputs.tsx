@@ -32,12 +32,7 @@ export const Inputs = (props: InputsProps) => {
         justifyContent: "space-between",
       }}
     >
-      <Modal
-        size="auto"
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title="Combat Resolution Tables"
-      >
+      <Modal size="auto" opened={opened} onClose={() => setOpened(false)}>
         <div
           style={{
             display: "flex",
@@ -69,7 +64,7 @@ export const Inputs = (props: InputsProps) => {
       />
       <Select
         label="Player"
-        defaultValue="strategic"
+        defaultValue="savvy"
         onChange={(ev) => {
           if (ev == "strategic") props.setPlayer(new StrategicPlayer());
           else if (ev == "savvy") props.setPlayer(new SavvyPlayer());

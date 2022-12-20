@@ -36,7 +36,7 @@ export const CRTEditor = (props: CRTEditorProps) => {
   }) => {
     const { row } = rprops;
     return (
-      <td>
+      <td style={{ padding: 3 }}>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <Select
             style={{ width: "4.25em" }}

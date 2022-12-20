@@ -12,13 +12,14 @@ import {
   gameParameters,
   GameParameters,
 } from "../rules/parameters";
+import { SavvyPlayer } from "../rules/players/savvy";
 
 export interface SimulatorProps {}
 
 export const Simulator = (props: SimulatorProps) => {
   const [results, setResults] = React.useState<Outcome[]>([]);
   const [seed, setSeed] = React.useState<number>(0);
-  const [player, setPlayer] = React.useState<Player>(new StrategicPlayer());
+  const [player, setPlayer] = React.useState<Player>(new SavvyPlayer());
   const [strength, setStrength] = React.useState<[number, number, number]>([
     6, 6, 5,
   ]);
@@ -39,9 +40,7 @@ export const Simulator = (props: SimulatorProps) => {
       defendTable: defendTable,
     };
 
-    setTimeout(() => {
-      runSimulation(seed, player, init, params, setResults);
-    }, 200);
+    runSimulation(seed, player, init, params, setResults);
   }, [seed, player, setResults, strength, attackTable, defendTable]);
   return (
     <div>
