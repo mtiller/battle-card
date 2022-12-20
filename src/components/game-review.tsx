@@ -17,7 +17,7 @@ export interface GameReviewProps {
 }
 
 export const GameReview = (props: GameReviewProps) => {
-  const [current, setCurrent] = React.useState(0);
+  const [current, setCurrent] = React.useState(1);
   const [filtering, setFiltering] = React.useState("all");
   const [lost, setLost] = React.useState(false);
   const results = ofInterest(props.results, filtering, lost);
@@ -53,9 +53,9 @@ export const GameReview = (props: GameReviewProps) => {
             <Slider
               title="Select Game"
               min={1}
+              max={results.length}
               value={current}
               onChange={setCurrent}
-              max={results.length}
               style={{ marginTop: 10, marginBottom: 5 }}
               marks={[
                 { value: 0, label: "1" },
