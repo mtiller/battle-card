@@ -85,7 +85,11 @@ export const Stats = (props: StatsProps) => {
                 <td>{per("lost on day 6")}%</td>
               </tr>
               <tr>
-                <td>Lose Zone 1 on Day 1 but Win</td>
+                <td>Allies ran out of time</td>
+                <td>{per("lost on day 7")}%</td>
+              </tr>
+              <tr>
+                <td>Lost Zone 1 on Day 1 but Win</td>
                 <td>{props.stats.davidPer}%</td>
               </tr>
             </tbody>

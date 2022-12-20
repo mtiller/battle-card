@@ -13,10 +13,10 @@ export class SavvyPlayer implements Player {
     legal: LegalZoneDecisions
   ): Promise<AllBattleDecisions> {
     return [
-      choose(s.zones[0], legal[0], s.corp === "belgium"),
-      choose(s.zones[1], legal[1], s.corp === "zone1"),
-      choose(s.zones[2], legal[2], s.corp === "zone2"),
-      choose(s.zones[3], legal[3], s.corp === "zone3"),
+      choose(s.zones[0], legal[0], s.corp === "belgium" && s.day == 2),
+      choose(s.zones[1], legal[1], s.corp === "zone1" && s.day == 3),
+      choose(s.zones[2], legal[2], s.corp === "zone2" && s.day == 4),
+      choose(s.zones[3], legal[3], s.corp === "zone3" && s.day == 5),
     ];
   }
   async chooseToAdvance(s: State, legal: Advance[]): Promise<Advance> {
@@ -36,7 +36,7 @@ function choose(
   if (legal.length == 1) return legal[0];
   // If we have two options (we assume they are attack and defend), base the decision
   // on who controls the zone.
-  if (zone.control === "german" && zone.allied > zone.german) {
+  if (critical || (zone.control === "german" && zone.allied > zone.german)) {
     if (legal.includes("attack")) {
       return "attack";
     }
