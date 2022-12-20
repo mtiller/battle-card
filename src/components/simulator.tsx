@@ -39,7 +39,9 @@ export const Simulator = (props: SimulatorProps) => {
       defendTable: defendTable,
     };
 
-    runSimulation(seed, player, init, params, setResults);
+    setTimeout(() => {
+      runSimulation(seed, player, init, params, setResults);
+    }, 200);
   }, [seed, player, setResults, strength, attackTable, defendTable]);
   return (
     <div>

@@ -17,7 +17,23 @@ export interface CRTEditorProps {
 }
 
 export const CRTEditor = (props: CRTEditorProps) => {
-  const AARow = (rprops: { row: number; outcome: CombatOutcome[] }) => {
+  const update = React.useCallback(
+    (adv: "A" | "N" | "G", row: number, outcome: CombatOutcome) => {
+      let col = props.table.noAdvantage;
+      if (adv === "A") col = props.table.alliedAdvantage;
+      if (adv === "G") col = props.table.germanAdvantage;
+      col[row] = outcome;
+      console.log(`Setting ${row} in column ${adv} to `, outcome);
+      console.log("Setting table to ", props.table);
+      props.setTable({ ...props.table });
+    },
+    [props.table, props.setTable]
+  );
+  const Row = (rprops: {
+    row: number;
+    adv: "A" | "N" | "G";
+    outcome: CombatOutcome[];
+  }) => {
     const { row } = rprops;
     return (
       <td>
@@ -26,10 +42,13 @@ export const CRTEditor = (props: CRTEditorProps) => {
             style={{ width: "4.25em" }}
             label="Allies"
             value={`${rprops.outcome[row].alliedLosses}`}
-            // onChange={(ev) => {
-            //   if (ev !== null)
-            //     props.setInitial([+ev, props.initial[1], props.initial[2]]);
-            // }}
+            onChange={(ev) => {
+              if (ev !== null)
+                update(rprops.adv, rprops.row, {
+                  ...rprops.outcome[row],
+                  alliedLosses: +ev,
+                });
+            }}
             data={[
               { value: "0", label: "0" },
               { value: "-1", label: "-1" },
@@ -41,10 +60,13 @@ export const CRTEditor = (props: CRTEditorProps) => {
             style={{ width: "4.25em" }}
             label="German"
             value={`${rprops.outcome[row].germanLosses}`}
-            // onChange={(ev) => {
-            //   if (ev !== null)
-            //     props.setInitial([+ev, props.initial[1], props.initial[2]]);
-            // }}
+            onChange={(ev) => {
+              if (ev !== null)
+                update(rprops.adv, rprops.row, {
+                  ...rprops.outcome[row],
+                  germanLosses: +ev,
+                });
+            }}
             data={[
               { value: "0", label: "0" },
               { value: "-1", label: "-1" },
@@ -53,7 +75,17 @@ export const CRTEditor = (props: CRTEditorProps) => {
             ]}
           />
         </div>
-        <Switch label="Control" value={rprops.outcome[row].germanLosses} />
+        <Switch
+          label="Control"
+          checked={rprops.outcome[row].alliesControl}
+          onChange={(ev) => {
+            if (ev !== null)
+              update(rprops.adv, rprops.row, {
+                ...rprops.outcome[row],
+                alliesControl: ev.currentTarget.checked,
+              });
+          }}
+        />
       </td>
     );
   };
@@ -80,49 +112,49 @@ export const CRTEditor = (props: CRTEditorProps) => {
             <td>
               <IconDice1 />
             </td>
-            <AARow row={0} outcome={props.table.alliedAdvantage} />
-            <AARow row={0} outcome={props.table.noAdvantage} />
-            <AARow row={0} outcome={props.table.germanAdvantage} />
+            <Row row={0} adv="A" outcome={props.table.alliedAdvantage} />
+            <Row row={0} adv="N" outcome={props.table.noAdvantage} />
+            <Row row={0} adv="G" outcome={props.table.germanAdvantage} />
           </tr>
           <tr>
             <td>
               <IconDice2 />
             </td>
-            <AARow row={1} outcome={props.table.alliedAdvantage} />
-            <AARow row={1} outcome={props.table.noAdvantage} />
-            <AARow row={1} outcome={props.table.germanAdvantage} />
+            <Row row={1} adv="A" outcome={props.table.alliedAdvantage} />
+            <Row row={1} adv="N" outcome={props.table.noAdvantage} />
+            <Row row={1} adv="G" outcome={props.table.germanAdvantage} />
           </tr>
           <tr>
             <td>
               <IconDice3 />
             </td>
-            <AARow row={2} outcome={props.table.alliedAdvantage} />
-            <AARow row={2} outcome={props.table.noAdvantage} />
-            <AARow row={2} outcome={props.table.germanAdvantage} />
+            <Row row={2} adv="A" outcome={props.table.alliedAdvantage} />
+            <Row row={2} adv="N" outcome={props.table.noAdvantage} />
+            <Row row={2} adv="G" outcome={props.table.germanAdvantage} />
           </tr>
           <tr>
             <td>
               <IconDice4 />
             </td>
-            <AARow row={3} outcome={props.table.alliedAdvantage} />
-            <AARow row={3} outcome={props.table.noAdvantage} />
-            <AARow row={3} outcome={props.table.germanAdvantage} />
+            <Row row={3} adv="A" outcome={props.table.alliedAdvantage} />
+            <Row row={3} adv="N" outcome={props.table.noAdvantage} />
+            <Row row={3} adv="G" outcome={props.table.germanAdvantage} />
           </tr>
           <tr>
             <td>
               <IconDice5 />
             </td>
-            <AARow row={4} outcome={props.table.alliedAdvantage} />
-            <AARow row={4} outcome={props.table.noAdvantage} />
-            <AARow row={4} outcome={props.table.germanAdvantage} />
+            <Row row={4} adv="A" outcome={props.table.alliedAdvantage} />
+            <Row row={4} adv="N" outcome={props.table.noAdvantage} />
+            <Row row={4} adv="G" outcome={props.table.germanAdvantage} />
           </tr>
           <tr>
             <td>
               <IconDice6 />
             </td>
-            <AARow row={5} outcome={props.table.alliedAdvantage} />
-            <AARow row={5} outcome={props.table.noAdvantage} />
-            <AARow row={5} outcome={props.table.germanAdvantage} />
+            <Row row={5} adv="A" outcome={props.table.alliedAdvantage} />
+            <Row row={5} adv="N" outcome={props.table.noAdvantage} />
+            <Row row={5} adv="G" outcome={props.table.germanAdvantage} />
           </tr>
         </tbody>
       </Table>
