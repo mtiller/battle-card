@@ -6,6 +6,12 @@ import { StrategicPlayer } from "../rules/players";
 import { GameReview } from "./game-review";
 import { Inputs } from "./inputs";
 import { Stats } from "./stats";
+import {
+  attackTable as baselineAttackTable,
+  defendTable as baselineDefendTable,
+  gameParameters,
+  GameParameters,
+} from "../rules/parameters";
 
 export interface SimulatorProps {}
 
@@ -16,6 +22,8 @@ export const Simulator = (props: SimulatorProps) => {
   const [strength, setStrength] = React.useState<[number, number, number]>([
     6, 6, 5,
   ]);
+  const [attackTable, setAttackTable] = React.useState(baselineAttackTable);
+  const [defendTable, setDefendTable] = React.useState(baselineDefendTable);
 
   const stats = useStats(results);
 
@@ -25,8 +33,14 @@ export const Simulator = (props: SimulatorProps) => {
     init.zones[1].allied = strength[1];
     init.zones[3].allied = strength[2];
 
-    runSimulation(seed, player, init, setResults);
-  }, [seed, player, setResults, strength]);
+    const params = {
+      ...gameParameters,
+      attackTable: attackTable,
+      defendTable: defendTable,
+    };
+
+    runSimulation(seed, player, init, params, setResults);
+  }, [seed, player, setResults, strength, attackTable, defendTable]);
   return (
     <div>
       <h1>Simulator</h1>
@@ -38,6 +52,10 @@ export const Simulator = (props: SimulatorProps) => {
           setPlayer={setPlayer}
           initial={strength}
           setInitial={setStrength}
+          attackTable={attackTable}
+          setAttackTable={setAttackTable}
+          defendTable={defendTable}
+          setDefendTable={setDefendTable}
         />
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -57,10 +75,11 @@ async function runSimulation(
   seed: number,
   player: Player,
   init: State,
+  params: GameParameters,
   setResults: (results: Outcome[]) => void
 ) {
   const n = 10000;
 
-  const results = await monteCarlo(n, seed * n, player, init);
+  const results = await monteCarlo(n, seed * n, player, init, params);
   setResults(results);
 }

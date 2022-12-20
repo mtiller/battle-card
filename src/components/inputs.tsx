@@ -1,10 +1,11 @@
-import { Button, NumberInput, Select } from "@mantine/core";
-import { IconDice1, IconSectionSign } from "@tabler/icons";
-import Prando from "prando";
-import { Player, RandomPlayer } from "../rules";
+import React from "react";
+
+import { Button, Modal, NumberInput, Select } from "@mantine/core";
+import { CombatResolutionTable, Player, RandomPlayer } from "../rules";
 import { StrategicPlayer } from "../rules/players";
 import { SavvyPlayer } from "../rules/players/savvy";
 import { InitialStrength } from "./init-strength";
+import { CRTEditor } from "./crt-editor";
 
 export interface InputsProps {
   seed: number;
@@ -13,9 +14,14 @@ export interface InputsProps {
   setPlayer: (p: Player) => void;
   initial: [number, number, number];
   setInitial: (p: [number, number, number]) => void;
+  attackTable: CombatResolutionTable;
+  setAttackTable: (x: CombatResolutionTable) => void;
+  defendTable: CombatResolutionTable;
+  setDefendTable: (x: CombatResolutionTable) => void;
 }
 
 export const Inputs = (props: InputsProps) => {
+  const [opened, setOpened] = React.useState(false);
   return (
     <div
       style={{
@@ -26,6 +32,32 @@ export const Inputs = (props: InputsProps) => {
         justifyContent: "space-between",
       }}
     >
+      <Modal
+        size="auto"
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Combat Resolution Tables"
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <CRTEditor
+            title="Attack"
+            table={props.attackTable}
+            setTable={props.setAttackTable}
+          />
+          <CRTEditor
+            title="Defend"
+            table={props.defendTable}
+            setTable={props.setDefendTable}
+          />
+        </div>
+      </Modal>
+
       <NumberInput
         placeholder="Random number generator seed"
         label="Seed"
@@ -50,7 +82,8 @@ export const Inputs = (props: InputsProps) => {
           { value: "random", label: "Random" },
         ]}
       />
-      <Button disabled={true}>Edit CRTs</Button>
+
+      <Button onClick={() => setOpened(true)}>Edit CRTs</Button>
       <InitialStrength initial={props.initial} setInitial={props.setInitial} />
     </div>
   );
