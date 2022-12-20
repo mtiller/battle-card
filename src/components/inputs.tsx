@@ -1,14 +1,18 @@
 import { Button, NumberInput, Select } from "@mantine/core";
+import { IconDice1, IconSectionSign } from "@tabler/icons";
 import Prando from "prando";
 import { Player, RandomPlayer } from "../rules";
 import { StrategicPlayer } from "../rules/players";
 import { SavvyPlayer } from "../rules/players/savvy";
+import { InitialStrength } from "./init-strength";
 
 export interface InputsProps {
   seed: number;
   setSeed: (x: number) => void;
   player: Player;
   setPlayer: (p: Player) => void;
+  initial: [number, number, number];
+  setInitial: (p: [number, number, number]) => void;
 }
 
 export const Inputs = (props: InputsProps) => {
@@ -47,7 +51,7 @@ export const Inputs = (props: InputsProps) => {
         ]}
       />
       <Button disabled={true}>Edit CRTs</Button>
-      <Button disabled={true}>Edit Initial Strength</Button>
+      <InitialStrength initial={props.initial} setInitial={props.setInitial} />
     </div>
   );
 };

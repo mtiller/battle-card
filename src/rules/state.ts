@@ -14,28 +14,6 @@ export interface State extends CoreState {
   log: LogEvent[];
 }
 
-export type Distribution<T extends string | number | symbol> = Record<
-  T,
-  number
->;
-
-export interface StochasticState {
-  day: number;
-  zone1: StochasticZone;
-  zone2: StochasticZone;
-  zone3: StochasticZone;
-  zone4: StochasticZone;
-  dropped: Distribution<"true" | "false">;
-  lost: Distribution<"true" | "false">;
-  corp: Distribution<CorpLocation>;
-}
-
-export interface StochasticZone {
-  allied: Distribution<0 | 1 | 2 | 3 | 4 | 6>;
-  german: Distribution<1 | 2 | 3 | 4 | 5 | 6>;
-  control: Distribution<"true" | "false">;
-}
-
 export interface Zone {
   allied: number; // 0 represents die removed
   german: number; // 0 represents die removed
