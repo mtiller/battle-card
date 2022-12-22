@@ -10,9 +10,31 @@ export interface CombatResolutionTable {
   germanAdvantage: CombatOutcome[];
 }
 
+export type InitialAirdropLosses = [
+  number,
+  number,
+  number,
+  number,
+  number,
+  number
+];
+
+// The
+export type InitialAirdropLossesByZone = [
+  InitialAirdropLosses,
+  InitialAirdropLosses,
+  InitialAirdropLosses
+];
+
 export const weatherTrack = [6, 5, 4, 3, 2, 1];
 
-export const airdropLosses = [-2, -2, -1, -1, 0, 0];
+export const airdropLossesByZone: InitialAirdropLossesByZone = [
+  [-2, -2, -1, -1, 0, 0],
+  [-2, -2, -1, -1, 0, 0],
+  [-2, -2, -1, -1, 0, 0],
+];
+
+// export const airdropLosses = [-2, -2, -1, -1, 0, 0];
 
 export const attackTable: CombatResolutionTable = {
   alliedAdvantage: [
@@ -70,7 +92,7 @@ export const defendTable: CombatResolutionTable = {
 
 export const gameParameters = {
   weatherTrack,
-  airdropLosses,
+  airdropLossesByZone,
   attackTable,
   defendTable,
 };

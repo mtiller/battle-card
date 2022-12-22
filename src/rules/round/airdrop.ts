@@ -9,9 +9,9 @@ export function performAirdrop(
 ): State {
   const ret = clone(s);
   const losses: [number, number, number] = [
-    chance.nextArrayItem(params.airdropLosses),
-    chance.nextArrayItem(params.airdropLosses),
-    chance.nextArrayItem(params.airdropLosses),
+    chance.nextArrayItem(params.airdropLossesByZone[0]),
+    chance.nextArrayItem(params.airdropLossesByZone[1]),
+    chance.nextArrayItem(params.airdropLossesByZone[2]),
   ];
   let allied1 = ret.zones[0].allied;
   let allied2 = ret.zones[1].allied;
