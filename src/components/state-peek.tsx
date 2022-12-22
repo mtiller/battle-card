@@ -1,7 +1,7 @@
-import { serialize, CoreState, stringifyEvent, Zone } from "../rules";
+import { CoreState, Zone } from "../rules";
 import { Text } from "@mantine/core";
 import { dice } from "./day-timeline";
-import { IconCircle, IconFlag, IconSlashes } from "@tabler/icons";
+import { IconCircle, IconFlag } from "@tabler/icons";
 
 export interface StatePeekProps {
   state: CoreState;

@@ -1,5 +1,4 @@
-import { AppShell, Button, Header, Navbar, Paper, Text } from "@mantine/core";
-import { IconDeviceDesktopAnalytics } from "@tabler/icons";
+import { AppShell, Header, Navbar } from "@mantine/core";
 import { SimulatorExplanation } from "./sim-exp";
 import { Simulator } from "./simulator";
 
@@ -11,9 +10,6 @@ export const Home = (props: HomeProps) => {
       padding="md"
       navbar={
         <Navbar width={{ base: 300 }} height={500} p="xs">
-          {/* <Button leftIcon={<IconDeviceDesktopAnalytics />} variant="white">
-            Simulator
-          </Button> */}
           <SimulatorExplanation />
         </Navbar>
       }

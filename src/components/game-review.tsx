@@ -1,12 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  Group,
-  Modal,
-  SegmentedControl,
-  Slider,
-  Switch,
-} from "@mantine/core";
+import { SegmentedControl, Slider, Switch } from "@mantine/core";
 import React from "react";
 import { Outcome } from "../rules";
 import { GameTimeline } from "./game-timeline";

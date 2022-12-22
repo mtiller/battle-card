@@ -1,6 +1,5 @@
-import { RingProgress, Table, Text } from "@mantine/core";
+import { Table } from "@mantine/core";
 import { Statistics } from "../hooks/stats";
-import { WinRing } from "./win-ring";
 
 export interface StatsProps {
   stats: Statistics;
@@ -16,14 +15,8 @@ const colors = [
   "orange",
   "gray",
 ];
-export const Stats = (props: StatsProps) => {
-  //   const entries = [...props.stats.histo.entries()];
-  //   const sections = entries.map((e, i) => ({
-  //     value: (e[1] * 100) / props.stats.results.length,
-  //     color: colors[i],
-  //     tooltip: `${e[0]} - ${(e[1] * 100) / props.stats.results.length}%`,
-  //   }));
 
+export const Stats = (props: StatsProps) => {
   const per = (x: string) =>
     (
       (100 * (props.stats.histo.get(x) ?? 0)) /
@@ -94,21 +87,6 @@ export const Stats = (props: StatsProps) => {
               </tr>
             </tbody>
           </Table>
-          {/* <RingProgress
-            size={150}
-            thickness={20}
-            label={
-              <div>
-                <Text align="center" size="md">
-                  Timing
-                </Text>
-                <Text align="center" size="xs">
-                  (hover)
-                </Text>
-              </div>
-            }
-            sections={sections}
-          /> */}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { HoverCard, Timeline, Text } from "@mantine/core";
+import { Timeline } from "@mantine/core";
 import {
   IconBuildingFortress,
   IconCloud,

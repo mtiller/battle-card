@@ -2,7 +2,6 @@ import React from "react";
 import { useStats } from "../hooks/stats";
 import { monteCarlo } from "../monte/analysis";
 import { clone, initial, Outcome, Player, State } from "../rules";
-import { StrategicPlayer } from "../rules/players";
 import { GameReview } from "./game-review";
 import { Inputs } from "./inputs";
 import { Stats } from "./stats";
