@@ -1150,10 +1150,22 @@ react@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
 
+recurrent-js@^1.7.3:
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/recurrent-js/-/recurrent-js-1.7.4.tgz#56125579855d93945bbe2af8e51acad04e80e002"
+  integrity sha512-tL7WdWWgMIIOPLY5ym7ZMOzZdf3vuXsI14Dv+a+JiZn6wKO0tKxWH52ld/aYeekPL5BW/reD/fG4FsQDDQB3tw==
+
 regenerator-runtime@^0.13.11:
   version "0.13.11"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
+
+reinforce-js@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/reinforce-js/-/reinforce-js-1.5.1.tgz#6640011de6b02bab8633fc7591eadea2f3b519af"
+  integrity sha512-8Xvi/068ciMjcD/906dgpxXE2KolQRgs7WAX4nYGJDU+kN7i/E8mv1saeov990niown21tP+LI0GQUur5P5W/w==
+  dependencies:
+    recurrent-js "^1.7.3"
 
 resolve-from@^4.0.0:
   version "4.0.0"
