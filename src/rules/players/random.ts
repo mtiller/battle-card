@@ -25,5 +25,12 @@ export class RandomPlayer implements Player {
     return this.rng.nextArrayItem(legal);
   }
 
+  informBattle(s: State): void {
+    return;
+  }
+  informAdvance(s: State): void {
+    return;
+  }
+
   done() {}
 }

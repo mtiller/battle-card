@@ -49,6 +49,7 @@ export async function simulate(
     const roundStart = state;
 
     // Part 1 - Pick attack or defend in all applicable zones (human)
+    const beforeBattle = state;
     const battles = await player.pickBattles(state, legalBattles(state));
     state = resolveBattles(state, battles, params, chance);
     const decision: RoundDecisions = {
@@ -62,6 +63,7 @@ export async function simulate(
       day: state.day,
       state: cloneCore(state),
     });
+    player.informBattle(beforeBattle, state);
 
     // The battle may lead to an Allied loss, so check to make sure the game
     // hasn't been decided.
@@ -73,6 +75,7 @@ export async function simulate(
     // Part 3 - (potential) Allied advance (human)
     const advance = await player.chooseToAdvance(state, legalAdvance(state));
     decision.advance = advance;
+    const beforeAdvance = state;
     decision.postAdvance = state = performAdvance(state, advance);
     state.log.push({
       type: "post_advance",
@@ -80,6 +83,7 @@ export async function simulate(
       advance,
       state: cloneCore(state),
     });
+    player.informAdvance(beforeAdvance, state);
     if (state.outcome != "undecided") break;
 
     // Part 4 - Weather and 1st Airborne reinforcements (chance)
@@ -90,6 +94,7 @@ export async function simulate(
     // Part 5 - Advance turn
     state = advanceTurn(state);
   }
+  player.done(state);
 
   // Report the outcome
   return {

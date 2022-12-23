@@ -1,8 +1,15 @@
 import { DQNEnv, DQNOpt, DQNSolver } from "reinforce-js";
 import { Advance, AllBattleDecisions, LegalZoneDecisions } from "../../moves";
 import { Player } from "../../player";
-import { State } from "../../state";
+import { State, Zone } from "../../state";
 import { flattenState } from "./input";
+
+const winReward = 1.0;
+const lossReward = -2.0;
+const strengthReward = 0.1;
+const controlReward = 0.1;
+
+const corpAdvanceReward = 0.2;
 
 export class DQNPlayer implements Player {
   private adv: DQNSolver;
@@ -69,11 +76,18 @@ export class DQNPlayer implements Player {
       const fs = flattenState(s, i + 1);
       const d = this.zones[i].decide(fs);
       const ind = Math.round((d * moves.length) / 3.0) - 1;
-      // TODO: Add the reward!
-      // TODO: Punish for making an illegal move
+      // TODO: Punish for making an illegal move?!?
       return moves[ind];
     });
     return [decisions[0], decisions[1], decisions[2], decisions[3]];
+  }
+
+  informBattle(before: State, after: State): void {
+    for (let i = 0; i < 4; i++) {
+      this.zones[i].learn(
+        zoneReward(before.zones[i], after.zones[i]) + outcomeReward(after)
+      );
+    }
   }
 
   async chooseToAdvance(s: State, legal: Advance[]): Promise<Advance> {
@@ -83,5 +97,36 @@ export class DQNPlayer implements Player {
     return legal[d];
   }
 
+  informAdvance(before: State, after: State): void {
+    const reward = before.corp !== after.corp ? corpAdvanceReward : 0;
+    this.adv.learn(reward);
+  }
+
   done() {}
+
+  public toJSON(): [any, any, any, any, any] {
+    return [
+      this.adv.toJSON(),
+      this.zones[0].toJSON(),
+      this.zones[1].toJSON(),
+      this.zones[2].toJSON(),
+      this.zones[3].toJSON(),
+    ];
+  }
+}
+
+function zoneReward(before: Zone, after: Zone): number {
+  let r =
+    before.allied -
+    before.german -
+    (after.allied - after.german) * strengthReward;
+  const cb = before.control === "allies" ? 1 : 0;
+  const ca = after.control === "allies" ? 1 : 0;
+  r += (cb - ca) * controlReward;
+  return r;
+}
+
+function outcomeReward(s: State): number {
+  if (s.outcome === "undecided") return 0;
+  return s.outcome === "won" ? winReward : lossReward;
 }

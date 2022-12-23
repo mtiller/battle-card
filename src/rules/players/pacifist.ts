@@ -15,5 +15,11 @@ export class PacifistPlayer implements Player {
   async chooseToAdvance(s: State): Promise<Advance> {
     return "nothing";
   }
+  informBattle(s: State): void {
+    return;
+  }
+  informAdvance(s: State): void {
+    return;
+  }
   done() {}
 }

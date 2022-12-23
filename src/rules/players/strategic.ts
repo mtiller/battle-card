@@ -24,6 +24,14 @@ export class StrategicPlayer implements Player {
     if (legal.includes("unit")) return "unit";
     return "nothing";
   }
+
+  informBattle(s: State): void {
+    return;
+  }
+  informAdvance(s: State): void {
+    return;
+  }
+
   done() {}
 }
 
