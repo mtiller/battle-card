@@ -10,10 +10,14 @@ const strengthReward = 0.1;
 const controlReward = 0.1;
 
 const corpAdvanceReward = 0.2;
+const illegalReward = -0.1;
 
 export class DQNPlayer implements Player {
   private adv: DQNSolver;
   private zones: [DQNSolver, DQNSolver, DQNSolver, DQNSolver];
+
+  private lastBattle: AllBattleDecisions | undefined = undefined;
+  private advanceLegal: boolean = true;
 
   constructor(training: boolean, data?: [any, any, any, any, any]) {
     const width = 400;
@@ -75,30 +79,81 @@ export class DQNPlayer implements Player {
       if (moves.length == 1) return moves[0];
       const fs = flattenState(s, i + 1);
       const d = this.zones[i].decide(fs);
-      const ind = Math.round((d * moves.length) / 3.0) - 1;
-      // TODO: Punish for making an illegal move?!?
-      return moves[ind];
+      if (d == 0) {
+        if (moves.includes("defend")) return "defend";
+        else {
+          console.warn("Chose defend when it was not an option!");
+          return moves[0];
+        }
+      } else if (d == 1) {
+        if (moves.includes("attack")) return "attack";
+        else {
+          console.warn("Chose attack when it was not an option!");
+          return moves[0];
+        }
+      } else {
+        console.warn("Got battle action of " + d);
+        return moves[0];
+      }
     });
-    return [decisions[0], decisions[1], decisions[2], decisions[3]];
+    const ret = [
+      decisions[0],
+      decisions[1],
+      decisions[2],
+      decisions[3],
+    ] as AllBattleDecisions;
+    this.lastBattle = ret;
+    return ret;
   }
 
   informBattle(before: State, after: State): void {
     for (let i = 0; i < 4; i++) {
-      this.zones[i].learn(
-        zoneReward(before.zones[i], after.zones[i]) + outcomeReward(after)
-      );
+      if (this.lastBattle && this.lastBattle[i] !== "na") {
+        this.zones[i].learn(
+          zoneReward(before.zones[i], after.zones[i]) + outcomeReward(after)
+        );
+      }
     }
+    this.lastBattle = undefined;
   }
 
   async chooseToAdvance(s: State, legal: Advance[]): Promise<Advance> {
     const fs = flattenState(s, 0);
     const d = this.adv.decide(fs);
-    // TODO: Figure out possible values for d
+    switch (d) {
+      case 0: {
+        if (legal.includes("nothing")) return "nothing";
+        this.advanceLegal = false;
+        console.warn("Picked nothing, but that wasn't an option");
+        return legal[0];
+      }
+      case 1: {
+        if (legal.includes("unit")) return "unit";
+        this.advanceLegal = false;
+        console.warn("Pick to advance unit, but that wasn't an option");
+        return legal[0];
+      }
+      case 2: {
+        if (legal.includes("corp")) return "corp";
+        this.advanceLegal = false;
+        console.warn("Picked to advance corp, but that wasn't an option");
+        return legal[0];
+      }
+      default: {
+        this.advanceLegal = false;
+        console.warn("Picked d value of " + d + " for advance");
+        return legal[0];
+      }
+    }
+    // TODO: Punish for making an illegal move?!?
     return legal[d];
   }
 
   informAdvance(before: State, after: State): void {
-    const reward = before.corp !== after.corp ? corpAdvanceReward : 0;
+    let reward = before.corp !== after.corp ? corpAdvanceReward : 0;
+    if (!this.advanceLegal) {
+      reward += illegalReward;
+    }
     this.adv.learn(reward);
   }
 
