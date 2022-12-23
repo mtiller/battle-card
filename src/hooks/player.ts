@@ -33,6 +33,12 @@ export function usePlayer(setState: (s: State) => void) {
         advanceMove.activate();
         return advanceMove.promise!;
       },
+      informBattle: () => {
+        return;
+      },
+      informAdvance: () => {
+        return;
+      },
       done: (s: State) => {
         setState(s);
       },
