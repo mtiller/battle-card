@@ -23,8 +23,6 @@ export const CRTEditor = (props: CRTEditorProps) => {
       if (adv === "A") col = props.table.alliedAdvantage;
       if (adv === "G") col = props.table.germanAdvantage;
       col[row] = outcome;
-      console.log(`Setting ${row} in column ${adv} to `, outcome);
-      console.log("Setting table to ", props.table);
       props.setTable({ ...props.table });
     },
     [props.table, props.setTable]
