@@ -9,13 +9,13 @@ export const Home = (props: HomeProps) => {
     <AppShell
       padding="md"
       navbar={
-        <Navbar width={{ base: 300 }} height={500} p="xs">
+        <Navbar width={{ base: 300 }} p="xs">
           <SimulatorExplanation />
         </Navbar>
       }
       header={
         <Header height={60} p="xs">
-          <h1 style={{ margin: 0 }}>A Game Too Far, Market Garden, 1944</h1>
+          <h1 style={{ margin: 0 }}>Battle Card: Market Garden, 1944</h1>
         </Header>
       }
       styles={(theme) => ({
