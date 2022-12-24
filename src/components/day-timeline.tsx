@@ -100,7 +100,13 @@ function getTitle(ev: LogEvent): JSX.Element | string {
 function getContent(ev: LogEvent): JSX.Element | string | null {
   switch (ev.type) {
     case "initial_airdrop":
-      return `Allied losses in zone 1: ${ev.losses[0]}, zone 2: ${ev.losses[1]}, zone 4: ${ev.losses[2]}`;
+      return (
+        <span>
+          Allied losses in zone 1: {dice[ev.rolls[0]]} → {ev.losses[0]}, zone 2:{" "}
+          {dice[ev.rolls[1]]} →{ev.losses[1]}, zone 4: {dice[ev.rolls[2]]} →{" "}
+          {ev.losses[2]}
+        </span>
+      );
     case "post_advance":
     case "post_battle":
     case "post_airdrop":

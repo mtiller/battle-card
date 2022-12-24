@@ -5,6 +5,7 @@ import { CoreState, summary } from "./state";
 export interface InitialAirDropEvent {
   type: "initial_airdrop";
   day: number;
+  rolls: [number, number, number];
   losses: [number, number, number];
 }
 
