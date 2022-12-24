@@ -42,14 +42,14 @@ export class DQNPlayer implements Player {
     opt.setEpsilonDecay(1.0, 0.1, 1e6);
     opt.setEpsilon(0.05);
     opt.setGamma(0.9);
-    opt.setAlpha(0.005);
-    opt.setLossClipping(true);
+    opt.setAlpha(0.1);
+    opt.setLossClipping(false);
     opt.setLossClamp(1.0);
-    opt.setRewardClipping(true);
+    opt.setRewardClipping(false);
     opt.setRewardClamp(1.0);
     opt.setExperienceSize(1e6);
-    opt.setReplayInterval(5);
-    opt.setReplaySteps(5);
+    opt.setReplayInterval(50);
+    opt.setReplaySteps(50);
 
     /*
       Outfit solver with environment complexity and specs.

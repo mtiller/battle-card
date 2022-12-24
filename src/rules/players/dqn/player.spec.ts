@@ -8,8 +8,8 @@ import { DQNPlayer } from "./player";
 
 describe("Train DQN player", () => {
   it("should learn", async () => {
-    const epochs = 90001;
-    const update = 100;
+    const epochs = 901;
+    const update = 300;
     const player = new DQNPlayer(true);
     for (let i = 0; i < epochs; i++) {
       const chance = new Prando(i);
@@ -17,7 +17,7 @@ describe("Train DQN player", () => {
       if (i % update === 0) {
         const student = new DQNPlayer(false, player.toJSON());
         const res = await monteCarlo(
-          10000,
+          1000,
           1,
           student,
           initial,
