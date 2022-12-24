@@ -124,19 +124,16 @@ export class DQNPlayer implements Player {
       case 0: {
         if (legal.includes("nothing")) return "nothing";
         this.advanceLegal = false;
-        console.warn("Picked nothing, but that wasn't an option");
         return legal[0];
       }
       case 1: {
         if (legal.includes("unit")) return "unit";
         this.advanceLegal = false;
-        console.warn("Pick to advance unit, but that wasn't an option");
         return legal[0];
       }
       case 2: {
         if (legal.includes("corp")) return "corp";
         this.advanceLegal = false;
-        console.warn("Picked to advance corp, but that wasn't an option");
         return legal[0];
       }
       default: {

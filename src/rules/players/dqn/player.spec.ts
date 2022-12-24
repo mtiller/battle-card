@@ -8,7 +8,7 @@ import { DQNPlayer } from "./player";
 
 describe("Train DQN player", () => {
   it("should learn", async () => {
-    const epochs = 10000;
+    const epochs = 90001;
     const update = 100;
     const player = new DQNPlayer(true);
     for (let i = 0; i < epochs; i++) {
