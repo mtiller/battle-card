@@ -8,10 +8,15 @@ export function performAirdrop(
   chance: Prando
 ): State {
   const ret = clone(s);
+  const rolls: [number, number, number] = [
+    chance.nextInt(0, 5),
+    chance.nextInt(0, 5),
+    chance.nextInt(0, 5),
+  ];
   const losses: [number, number, number] = [
-    chance.nextArrayItem(params.airdropLossesByZone[0]),
-    chance.nextArrayItem(params.airdropLossesByZone[1]),
-    chance.nextArrayItem(params.airdropLossesByZone[2]),
+    params.airdropLossesByZone[0][rolls[0]],
+    params.airdropLossesByZone[1][rolls[1]],
+    params.airdropLossesByZone[2][rolls[2]],
   ];
   let allied1 = ret.zones[0].allied;
   let allied2 = ret.zones[1].allied;
@@ -34,7 +39,7 @@ export function performAirdrop(
   ret.zones[0].allied = allied1;
   ret.zones[1].allied = allied2;
   ret.zones[3].allied = allied4;
-  ret.log.push({ type: "initial_airdrop", day: ret.day, losses });
+  ret.log.push({ type: "initial_airdrop", day: ret.day, rolls: rolls, losses });
   return ret;
 }
 

@@ -1,11 +1,17 @@
 import React from "react";
 
 import { Button, Modal, NumberInput, Select } from "@mantine/core";
-import { CombatResolutionTable, Player, RandomPlayer } from "../rules";
+import {
+  CombatResolutionTable,
+  InitialAirdropLossesByZone,
+  Player,
+  RandomPlayer,
+} from "../rules";
 import { StrategicPlayer } from "../rules/players";
 import { SavvyPlayer } from "../rules/players/savvy";
 import { InitialStrength } from "./init-strength";
 import { CRTEditor } from "./crt-editor";
+import { InitialLossesEditor } from "./losses-editor";
 
 export interface InputsProps {
   seed: number;
@@ -18,10 +24,13 @@ export interface InputsProps {
   setAttackTable: (x: CombatResolutionTable) => void;
   defendTable: CombatResolutionTable;
   setDefendTable: (x: CombatResolutionTable) => void;
+  lossesByZone: InitialAirdropLossesByZone;
+  setLossesByZone: (x: InitialAirdropLossesByZone) => void;
 }
 
 export const Inputs = (props: InputsProps) => {
-  const [opened, setOpened] = React.useState(false);
+  const [crtOpened, setCrtOpened] = React.useState(false);
+  const [lossesOpened, setLossesOpened] = React.useState(false);
   return (
     <div
       style={{
@@ -32,7 +41,7 @@ export const Inputs = (props: InputsProps) => {
         justifyContent: "space-between",
       }}
     >
-      <Modal size="auto" opened={opened} onClose={() => setOpened(false)}>
+      <Modal size="auto" opened={crtOpened} onClose={() => setCrtOpened(false)}>
         <div
           style={{
             display: "flex",
@@ -49,6 +58,25 @@ export const Inputs = (props: InputsProps) => {
             title="Defend"
             table={props.defendTable}
             setTable={props.setDefendTable}
+          />
+        </div>
+      </Modal>
+
+      <Modal
+        size="auto"
+        opened={lossesOpened}
+        onClose={() => setLossesOpened(false)}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <InitialLossesEditor
+            lossesByZone={props.lossesByZone}
+            setLossesByZone={props.setLossesByZone}
           />
         </div>
       </Modal>
@@ -78,8 +106,9 @@ export const Inputs = (props: InputsProps) => {
         ]}
       />
 
-      <Button onClick={() => setOpened(true)}>Edit CRTs</Button>
+      <Button onClick={() => setCrtOpened(true)}>Edit CRTs</Button>
       <InitialStrength initial={props.initial} setInitial={props.setInitial} />
+      <Button onClick={() => setLossesOpened(true)}>Edit Initial Losses</Button>
     </div>
   );
 };

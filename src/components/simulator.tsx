@@ -6,6 +6,7 @@ import { GameReview } from "./game-review";
 import { Inputs } from "./inputs";
 import { Stats } from "./stats";
 import {
+  airdropLossesByZone as baselineAirdropLossesByZone,
   attackTable as baselineAttackTable,
   defendTable as baselineDefendTable,
   gameParameters,
@@ -24,6 +25,9 @@ export const Simulator = (props: SimulatorProps) => {
   ]);
   const [attackTable, setAttackTable] = React.useState(baselineAttackTable);
   const [defendTable, setDefendTable] = React.useState(baselineDefendTable);
+  const [lossesByZone, setLossesByZone] = React.useState(
+    baselineAirdropLossesByZone
+  );
 
   const stats = useStats(results);
 
@@ -37,14 +41,23 @@ export const Simulator = (props: SimulatorProps) => {
       ...gameParameters,
       attackTable: attackTable,
       defendTable: defendTable,
+      airdropLossesByZone: lossesByZone,
     };
 
     runSimulation(seed, player, init, params, setResults);
-  }, [seed, player, setResults, strength, attackTable, defendTable]);
+  }, [
+    seed,
+    player,
+    setResults,
+    strength,
+    attackTable,
+    defendTable,
+    lossesByZone,
+  ]);
   return (
     <div>
       <h1>Simulator</h1>
-      <div style={{ display: "flex", flexDirection: "column", width: "60vw" }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <Inputs
           seed={seed}
           setSeed={setSeed}
@@ -56,6 +69,8 @@ export const Simulator = (props: SimulatorProps) => {
           setAttackTable={setAttackTable}
           defendTable={defendTable}
           setDefendTable={setDefendTable}
+          lossesByZone={lossesByZone}
+          setLossesByZone={setLossesByZone}
         />
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
