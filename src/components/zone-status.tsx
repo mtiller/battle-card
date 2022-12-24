@@ -10,7 +10,6 @@ export const ZoneStatus = (props: ZoneStatusProps) => {
   return (
     <div
       style={{
-        width: "60vw",
         display: "flex",
         justifyContent: "space-around",
       }}
