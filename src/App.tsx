@@ -1,7 +1,8 @@
 import "./App.css";
 import { MantineProvider } from "@mantine/core";
-import { Home } from "./routes/home";
+import { MarketGarden } from "./routes/market-garden";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Home } from "./routes/home";
 
 const router = createBrowserRouter([
   {
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/market-garden",
-    element: <Home />,
+    element: <MarketGarden />,
   },
 ]);
 
