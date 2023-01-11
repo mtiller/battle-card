@@ -2,7 +2,7 @@ import { Paper, Text } from "@mantine/core";
 
 export const SimulatorExplanation = (props: {}) => {
   return (
-    <Paper shadow="xs" p="md">
+    <div style={{ marginLeft: "1em", marginRight: "1em" }}>
       <Text>
         <p>
           The simulator functions by running 10,000 games using a representative
@@ -21,6 +21,6 @@ export const SimulatorExplanation = (props: {}) => {
           seem necessary).
         </p>
       </Text>
-    </Paper>
+    </div>
   );
 };
