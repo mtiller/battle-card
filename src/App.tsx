@@ -3,6 +3,7 @@ import { MantineProvider } from "@mantine/core";
 import { MarketGarden } from "./routes/market-garden";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./routes/home";
+import { Mortain } from "./routes/mortain";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: "/market-garden",
     element: <MarketGarden />,
+  },
+  {
+    path: "/mortain",
+    element: <Mortain />,
   },
 ]);
 

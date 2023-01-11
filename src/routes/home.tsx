@@ -29,7 +29,12 @@ export const AppCard = (props: AppCardProps) => {
   const navigate = useNavigate();
   return (
     <Card
-      style={{ maxWidth: "30vw" }}
+      style={{
+        maxWidth: "30vw",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
       shadow="sm"
       p="lg"
       radius="md"
@@ -46,21 +51,22 @@ export const AppCard = (props: AppCardProps) => {
         </Badge>
       </Group>
 
-      <Text size="sm" color="dimmed">
-        {props.children}
-      </Text>
-
-      <Button
-        disabled={props.status != "Done"}
-        onClick={() => navigate(props.route)}
-        variant="light"
-        color="blue"
-        fullWidth
-        mt="md"
-        radius="md"
-      >
-        Jump to {props.title}
-      </Button>
+      <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+        <Text style={{ flexGrow: 1 }} size="sm" color="dimmed">
+          {props.children}
+        </Text>
+        <Button
+          disabled={props.status != "Done" && props.status != "Underway"}
+          onClick={() => navigate(props.route)}
+          variant="light"
+          color="blue"
+          fullWidth
+          mt="md"
+          radius="md"
+        >
+          Jump to {props.title}
+        </Button>
+      </div>
     </Card>
   );
 };
@@ -97,22 +103,21 @@ export const Home = (props: {}) => {
         </Grid.Col>
         <Grid.Col span={4}>
           <AppCard
-            img={moroRiver}
-            title="Moro River"
-            status="Pending"
-            route="/moro-river"
+            img={mortainBattle}
+            title="Mortain"
+            status="Underway"
+            route="/mortain"
           >
-            With Fjord Tours you can explore more of the magical fjord
-            landscapes with tours and activities on and around the fjords of
-            Norway
+            In August 1944, a few hundred men defended a hill near Mortain,
+            France, against a massive German counterattack.
           </AppCard>
         </Grid.Col>
         <Grid.Col span={4}>
           <AppCard
-            img={mortainBattle}
-            title="Mortain"
+            img={moroRiver}
+            title="Moro River"
             status="Pending"
-            route="/mortain"
+            route="/moro-river"
           >
             With Fjord Tours you can explore more of the magical fjord
             landscapes with tours and activities on and around the fjords of
