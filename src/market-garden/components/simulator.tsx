@@ -1,7 +1,7 @@
 import React from "react";
 import { useStats } from "../hooks/stats";
 import { monteCarlo } from "../monte/analysis";
-import { clone, initial, Outcome, Player, State } from "../rules";
+import { clone, initial, Outcome, Player, MarketGardenState } from "../rules";
 import { GameReview } from "./game-review";
 import { Inputs } from "./inputs";
 import { Stats } from "./stats";
@@ -91,7 +91,7 @@ export const Simulator = (props: SimulatorProps) => {
 async function runSimulation(
   seed: number,
   player: Player,
-  init: State,
+  init: MarketGardenState,
   params: GameParameters,
   setResults: (results: Outcome[]) => void
 ) {

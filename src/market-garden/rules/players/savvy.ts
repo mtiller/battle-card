@@ -5,11 +5,11 @@ import {
   BattleOptions,
 } from "../moves";
 import { Player } from "../player";
-import { State, Zone } from "../state";
+import { MarketGardenState, Zone } from "../state";
 
 export class SavvyPlayer implements Player {
   async pickBattles(
-    s: State,
+    s: MarketGardenState,
     legal: LegalZoneDecisions
   ): Promise<AllBattleDecisions> {
     return [
@@ -19,7 +19,10 @@ export class SavvyPlayer implements Player {
       choose(s.zones[3], legal[3], s.corp === "zone3" && s.day == 5),
     ];
   }
-  async chooseToAdvance(s: State, legal: Advance[]): Promise<Advance> {
+  async chooseToAdvance(
+    s: MarketGardenState,
+    legal: Advance[]
+  ): Promise<Advance> {
     if (legal.includes("corp")) return "corp";
     if (legal.includes("unit")) return "unit";
     return "nothing";

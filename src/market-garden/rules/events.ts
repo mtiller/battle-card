@@ -1,6 +1,6 @@
 import { Advance } from "./moves";
 import { CombatOutcome } from "./parameters";
-import { CoreState, summary } from "./state";
+import { MGCoreState, summary } from "./state";
 
 export interface InitialAirDropEvent {
   type: "initial_airdrop";
@@ -55,20 +55,20 @@ export interface GermanReinforcementEvent {
 export interface PostAirdropReportEvent {
   type: "post_airdrop";
   day: number;
-  state: CoreState;
+  state: MGCoreState;
 }
 
 export interface PostBattleReportEvent {
   type: "post_battle";
   day: number;
-  state: CoreState;
+  state: MGCoreState;
 }
 
 export interface PostAdvanceReportEvent {
   type: "post_advance";
   day: number;
   advance: Advance;
-  state: CoreState;
+  state: MGCoreState;
 }
 
 export interface CorpMovementEvent {

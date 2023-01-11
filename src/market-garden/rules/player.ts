@@ -1,8 +1,11 @@
 import { Advance, AllBattleDecisions, LegalZoneDecisions } from "./moves";
-import { State } from "./state";
+import { MarketGardenState } from "./state";
 
 export interface Player {
-  pickBattles(s: State, legal: LegalZoneDecisions): Promise<AllBattleDecisions>;
-  chooseToAdvance(s: State, legal: Advance[]): Promise<Advance>;
-  done(s: State): void;
+  pickBattles(
+    s: MarketGardenState,
+    legal: LegalZoneDecisions
+  ): Promise<AllBattleDecisions>;
+  chooseToAdvance(s: MarketGardenState, legal: Advance[]): Promise<Advance>;
+  done(s: MarketGardenState): void;
 }

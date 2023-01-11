@@ -1,6 +1,6 @@
-import { clone, State } from "../state";
+import { clone, MarketGardenState } from "../state";
 
-export function germanReinforcements(s: State): State {
+export function germanReinforcements(s: MarketGardenState): MarketGardenState {
   const ret = clone(s);
 
   // Update zone 3

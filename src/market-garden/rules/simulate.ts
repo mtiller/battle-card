@@ -11,7 +11,7 @@ import {
   resolveBattles,
 } from "./round";
 import { GameParameters } from "./parameters";
-import { cloneCore, State, summary } from "./state";
+import { cloneCore, MarketGardenState, summary } from "./state";
 
 /**
  * Simulate a single game
@@ -24,7 +24,7 @@ import { cloneCore, State, summary } from "./state";
  * @returns Outcome of the game (as a promise because players are assumed to be potentially asynchronous)
  */
 export async function simulate(
-  initial: State,
+  initial: MarketGardenState,
   player: Player,
   params: GameParameters,
   chance: Prando

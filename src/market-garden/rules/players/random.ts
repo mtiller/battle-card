@@ -1,7 +1,7 @@
 import Prando from "prando";
 import { Advance, AllBattleDecisions, LegalZoneDecisions } from "../moves";
 import { Player } from "../player";
-import { State } from "../state";
+import { MarketGardenState } from "../state";
 
 export class RandomPlayer implements Player {
   private rng: Prando;
@@ -10,7 +10,7 @@ export class RandomPlayer implements Player {
   }
 
   async pickBattles(
-    s: State,
+    s: MarketGardenState,
     legal: LegalZoneDecisions
   ): Promise<AllBattleDecisions> {
     return [
@@ -21,7 +21,10 @@ export class RandomPlayer implements Player {
     ];
   }
 
-  async chooseToAdvance(s: State, legal: Advance[]): Promise<Advance> {
+  async chooseToAdvance(
+    s: MarketGardenState,
+    legal: Advance[]
+  ): Promise<Advance> {
     return this.rng.nextArrayItem(legal);
   }
 

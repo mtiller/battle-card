@@ -1,4 +1,4 @@
-import { State } from "./state";
+import { MarketGardenState } from "./state";
 
 export type BattleOptions = "attack" | "defend" | "na";
 export type AllBattleDecisions = [
@@ -19,14 +19,14 @@ export type Advance = "unit" | "corp" | "nothing";
 
 export interface RoundDecisions {
   battles: AllBattleDecisions;
-  roundStart: State;
-  afterBattle: State;
+  roundStart: MarketGardenState;
+  afterBattle: MarketGardenState;
   advance?: Advance;
-  postAdvance?: State;
-  postWeather?: State;
+  postAdvance?: MarketGardenState;
+  postWeather?: MarketGardenState;
 }
 
 export interface Outcome {
   history: RoundDecisions[];
-  final: State;
+  final: MarketGardenState;
 }

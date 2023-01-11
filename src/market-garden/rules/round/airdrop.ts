@@ -1,12 +1,12 @@
 import Prando from "prando";
-import { clone, State } from "../state";
+import { clone, MarketGardenState } from "../state";
 import { GameParameters } from "../parameters";
 
 export function performAirdrop(
-  s: State,
+  s: MarketGardenState,
   params: GameParameters,
   chance: Prando
-): State {
+): MarketGardenState {
   const ret = clone(s);
   const rolls: [number, number, number] = [
     chance.nextInt(0, 5),
@@ -44,10 +44,10 @@ export function performAirdrop(
 }
 
 export function attemptDrop(
-  s: State,
+  s: MarketGardenState,
   params: GameParameters,
   chance: Prando
-): State {
+): MarketGardenState {
   const ret = clone(s);
   const roll = chance.nextInt(1, 6);
   const weather = params.weatherTrack[s.day - 1];

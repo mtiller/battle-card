@@ -5,10 +5,10 @@ import {
   Advance,
 } from "../rules/moves";
 import { Player } from "../rules/player";
-import { initial, State } from "../rules/state";
+import { initial, MarketGardenState } from "../rules/state";
 import { usePromise } from "../../hooks/promise";
 
-export function usePlayer(setState: (s: State) => void) {
+export function usePlayer(setState: (s: MarketGardenState) => void) {
   const [zones, setZones] = React.useState<LegalZoneDecisions | null>(null);
   const [advance, setAdvance] = React.useState<Advance[] | null>(null);
   const battleMove = usePromise<AllBattleDecisions>();
@@ -18,7 +18,7 @@ export function usePlayer(setState: (s: State) => void) {
   const player: Player = React.useMemo(() => {
     return {
       pickBattles: (
-        s: State,
+        s: MarketGardenState,
         legal: LegalZoneDecisions
       ): Promise<AllBattleDecisions> => {
         setState(s);
@@ -27,13 +27,16 @@ export function usePlayer(setState: (s: State) => void) {
         battleMove.activate();
         return battleMove.promise!;
       },
-      chooseToAdvance: (s: State, legal: Advance[]): Promise<Advance> => {
+      chooseToAdvance: (
+        s: MarketGardenState,
+        legal: Advance[]
+      ): Promise<Advance> => {
         setState(s);
         setAdvance(legal);
         advanceMove.activate();
         return advanceMove.promise!;
       },
-      done: (s: State) => {
+      done: (s: MarketGardenState) => {
         setState(s);
       },
     };

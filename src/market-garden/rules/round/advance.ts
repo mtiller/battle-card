@@ -1,7 +1,10 @@
 import { Advance } from "../moves";
-import { clone, CorpLocation, State } from "../state";
+import { clone, CorpLocation, MarketGardenState } from "../state";
 
-export function performAdvance(s: State, advance: Advance): State {
+export function performAdvance(
+  s: MarketGardenState,
+  advance: Advance
+): MarketGardenState {
   const ret = clone(s);
   switch (advance) {
     case "nothing":
@@ -36,7 +39,10 @@ export function performAdvance(s: State, advance: Advance): State {
   return ret;
 }
 
-function advanceUnit(ret: State, corpZone: number): State {
+function advanceUnit(
+  ret: MarketGardenState,
+  corpZone: number
+): MarketGardenState {
   if (ret.zones[corpZone].allied === 0)
     throw new Error("No Allied units to advance in zone 1!");
   ret.zones[corpZone + 1].allied = Math.min(
@@ -47,7 +53,10 @@ function advanceUnit(ret: State, corpZone: number): State {
   return ret;
 }
 
-function advanceCorp(ret: State, to: [number, CorpLocation]): State {
+function advanceCorp(
+  ret: MarketGardenState,
+  to: [number, CorpLocation]
+): MarketGardenState {
   if (ret.zones[to[0]].control !== "allies")
     throw new Error(
       "Attempted to advance into territory not controlled by the Allies"

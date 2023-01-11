@@ -1,14 +1,14 @@
 import { Advance, BattleOptions, LegalZoneDecisions } from "./moves";
-import { State } from "./state";
+import { MarketGardenState } from "./state";
 
-export function legalBattles(s: State): LegalZoneDecisions {
+export function legalBattles(s: MarketGardenState): LegalZoneDecisions {
   const decisions = s.zones.map((z): BattleOptions[] =>
     z.allied && z.german ? ["attack", "defend"] : ["na"]
   );
   return [decisions[0], decisions[1], decisions[2], decisions[3]];
 }
 
-export function legalAdvance(s: State): Advance[] {
+export function legalAdvance(s: MarketGardenState): Advance[] {
   const ret: Advance[] = ["nothing"];
   switch (s.corp) {
     case "belgium": {

@@ -1,14 +1,14 @@
 import Prando from "prando";
 import { AllBattleDecisions } from "../moves";
 import { GameParameters } from "../parameters";
-import { clone, State } from "../state";
+import { clone, MarketGardenState } from "../state";
 
 export function resolveBattles(
-  s: State,
+  s: MarketGardenState,
   battles: AllBattleDecisions,
   params: GameParameters,
   chance: Prando
-): State {
+): MarketGardenState {
   const ret = clone(s);
   for (let i = 0; i < ret.zones.length && ret.outcome === "undecided"; i++) {
     const zone = ret.zones[i];

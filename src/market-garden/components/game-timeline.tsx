@@ -1,10 +1,10 @@
 import { Timeline } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons";
-import { LogEvent, State } from "../rules";
+import { LogEvent, MarketGardenState } from "../rules";
 import { DayTimeline } from "./day-timeline";
 
 export interface GameTimelineProps {
-  final: State;
+  final: MarketGardenState;
 }
 
 export const GameTimeline = (props: GameTimelineProps) => {

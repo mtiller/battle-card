@@ -2,7 +2,7 @@ import { LogEvent } from "./events";
 
 export type CorpLocation = "belgium" | "zone1" | "zone2" | "zone3" | "zone4";
 
-export interface CoreState {
+export interface MGCoreState {
   day: number;
   zones: [Zone, Zone, Zone, Zone];
   dropped: boolean;
@@ -10,7 +10,7 @@ export interface CoreState {
   corp: CorpLocation;
 }
 
-export interface State extends CoreState {
+export interface MarketGardenState extends MGCoreState {
   log: LogEvent[];
 }
 
@@ -20,7 +20,7 @@ export interface Zone {
   control: "allies" | "german";
 }
 
-export const initial: State = {
+export const initial: MarketGardenState = {
   day: 1,
   zones: [
     {
@@ -50,7 +50,7 @@ export const initial: State = {
   log: [],
 };
 
-export function clone(s: State): State {
+export function clone(s: MarketGardenState): MarketGardenState {
   return {
     day: s.day,
     zones: [
@@ -66,7 +66,7 @@ export function clone(s: State): State {
   };
 }
 
-export function cloneCore(s: CoreState): CoreState {
+export function cloneCore(s: MGCoreState): MGCoreState {
   return {
     day: s.day,
     zones: [
@@ -84,7 +84,7 @@ export function cloneCore(s: CoreState): CoreState {
 function serializeZone(z: Zone): string {
   return `${z.allied ?? " "}/${z.german ?? " "}/${z.control[0]}`;
 }
-export function serialize(s: State): string {
+export function serialize(s: MarketGardenState): string {
   return `${s.day}|${serializeZone(s.zones[0])}|${serializeZone(
     s.zones[1]
   )}|${serializeZone(s.zones[2])}|${serializeZone(s.zones[3])}|${
@@ -92,7 +92,7 @@ export function serialize(s: State): string {
   }|${s.outcome[0].toUpperCase()}|${s.corp}`;
 }
 
-export function summary(s: CoreState): string {
+export function summary(s: MGCoreState): string {
   return `C:${s.corp} W:${s.dropped} Z1:${summaryZone(
     s.zones[0]
   )} Z2: ${summaryZone(s.zones[1])} Z3: ${summaryZone(

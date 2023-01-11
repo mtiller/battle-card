@@ -1,6 +1,6 @@
-import { State } from "../state";
+import { MarketGardenState } from "../state";
 
-export function advanceTurn(s: State): State {
+export function advanceTurn(s: MarketGardenState): MarketGardenState {
   const ret = { ...s };
   ret.day++;
   if (ret.day > 6 && ret.outcome == "undecided") {

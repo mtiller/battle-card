@@ -5,14 +5,14 @@ import {
   Outcome,
   Player,
   simulate,
-  State,
+  MarketGardenState,
 } from "../rules";
 
 export async function monteCarlo(
   n: number,
   seed: number,
   player: Player,
-  init: State,
+  init: MarketGardenState,
   params: GameParameters,
   history: boolean = true
 ) {

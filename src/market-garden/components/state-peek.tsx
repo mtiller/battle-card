@@ -1,10 +1,10 @@
-import { CoreState, Zone } from "../rules";
+import { MGCoreState, Zone } from "../rules";
 import { Text } from "@mantine/core";
 import { dice } from "./day-timeline";
 import { IconCircle, IconFlag } from "@tabler/icons";
 
 export interface StatePeekProps {
-  state: CoreState;
+  state: MGCoreState;
 }
 
 export const StatePeek = (props: StatePeekProps) => {
