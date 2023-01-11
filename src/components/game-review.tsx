@@ -1,4 +1,4 @@
-import { SegmentedControl, Slider, Switch } from "@mantine/core";
+import { Loader, SegmentedControl, Slider, Switch } from "@mantine/core";
 import React from "react";
 import { Outcome } from "../rules";
 import { GameTimeline } from "./game-timeline";
@@ -59,7 +59,7 @@ export const GameReview = (props: GameReviewProps) => {
       </div>
 
       {results.length === 0 ? (
-        <p>No simulation results to show yet or all were filtered out.</p>
+        <Loader />
       ) : (
         results[current - 1] && (
           <GameTimeline final={results[current - 1].final} />

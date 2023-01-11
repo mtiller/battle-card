@@ -32,19 +32,21 @@ export const Simulator = (props: SimulatorProps) => {
   const stats = useStats(results);
 
   React.useEffect(() => {
-    const init = clone(initial);
-    init.zones[0].allied = strength[0];
-    init.zones[1].allied = strength[1];
-    init.zones[3].allied = strength[2];
+    setTimeout(() => {
+      const init = clone(initial);
+      init.zones[0].allied = strength[0];
+      init.zones[1].allied = strength[1];
+      init.zones[3].allied = strength[2];
 
-    const params = {
-      ...gameParameters,
-      attackTable: attackTable,
-      defendTable: defendTable,
-      airdropLossesByZone: lossesByZone,
-    };
+      const params = {
+        ...gameParameters,
+        attackTable: attackTable,
+        defendTable: defendTable,
+        airdropLossesByZone: lossesByZone,
+      };
 
-    runSimulation(seed, player, init, params, setResults);
+      runSimulation(seed, player, init, params, setResults);
+    }, 100);
   }, [
     seed,
     player,
