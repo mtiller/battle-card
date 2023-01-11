@@ -96,9 +96,8 @@ export const Home = (props: {}) => {
             status="Done"
             route="/market-garden"
           >
-            With Fjord Tours you can explore more of the magical fjord
-            landscapes with tours and activities on and around the fjords of
-            Norway
+            Operation Market Garden was one of the largest Allied operations of
+            the Second World War.
           </AppCard>
         </Grid.Col>
         <Grid.Col span={4}>
@@ -119,9 +118,8 @@ export const Home = (props: {}) => {
             status="Pending"
             route="/moro-river"
           >
-            With Fjord Tours you can explore more of the magical fjord
-            landscapes with tours and activities on and around the fjords of
-            Norway
+            The Moro was fought in the area of the Moro River and the city of
+            Ortona in Italy.
           </AppCard>
         </Grid.Col>
         <Grid.Col span={4}>
@@ -131,9 +129,9 @@ export const Home = (props: {}) => {
             status="Pending"
             route="/malayan"
           >
-            With Fjord Tours you can explore more of the magical fjord
-            landscapes with tours and activities on and around the fjords of
-            Norway
+            After taking over military bases in Vietnam, Japanese troops under
+            General Yamashita Tomoyuki invaded northern Malaya while Japanese
+            aircraft bombed Singapore.
           </AppCard>
         </Grid.Col>
         <Grid.Col span={4}>
@@ -143,9 +141,8 @@ export const Home = (props: {}) => {
             status="Pending"
             route="/first-alamein"
           >
-            With Fjord Tours you can explore more of the magical fjord
-            landscapes with tours and activities on and around the fjords of
-            Norway
+            The First Battle of El Alamein was a battle of the Western Desert
+            campaign fought in Egypt.
           </AppCard>
         </Grid.Col>
       </Grid>
