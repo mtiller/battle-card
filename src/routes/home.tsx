@@ -1,6 +1,6 @@
 import { AppShell, Header, Navbar } from "@mantine/core";
-import { SimulatorExplanation } from "./sim-exp";
-import { Simulator } from "./simulator";
+import { SimulatorExplanation } from "../components/sim-exp";
+import { Simulator } from "../components/simulator";
 
 export interface HomeProps {}
 

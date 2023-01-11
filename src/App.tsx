@@ -1,11 +1,23 @@
 import "./App.css";
 import { MantineProvider } from "@mantine/core";
-import { Home } from "./components/home";
+import { Home } from "./routes/home";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/market-garden",
+    element: <Home />,
+  },
+]);
 
 export function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Home />
+      <RouterProvider router={router} />
     </MantineProvider>
   );
 }
