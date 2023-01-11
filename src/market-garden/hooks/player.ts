@@ -6,7 +6,7 @@ import {
 } from "../rules/moves";
 import { Player } from "../rules/player";
 import { initial, State } from "../rules/state";
-import { usePromise } from "./promise";
+import { usePromise } from "../../hooks/promise";
 
 export function usePlayer(setState: (s: State) => void) {
   const [zones, setZones] = React.useState<LegalZoneDecisions | null>(null);

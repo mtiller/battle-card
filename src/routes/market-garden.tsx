@@ -1,6 +1,5 @@
 import { AppShell, Header, Navbar } from "@mantine/core";
-import { SimulatorExplanation } from "../components/sim-exp";
-import { Simulator } from "../components/simulator";
+import { SimulatorExplanation, Simulator } from "../market-garden/components";
 
 export const MarketGarden = (props: {}) => {
   return (

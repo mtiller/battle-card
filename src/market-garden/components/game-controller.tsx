@@ -1,5 +1,5 @@
 import React from "react";
-import { useChance } from "../hooks/chance";
+import { useChance } from "../../hooks/chance";
 import { useGameState } from "../hooks/game-state";
 import { usePlayer } from "../hooks/player";
 import { AllBattleDecisions, BattleOptions } from "../rules/moves";
