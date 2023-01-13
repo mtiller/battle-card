@@ -1,7 +1,8 @@
-import { alliesPower, Zone } from "../rules/state";
+import { BattleZone } from "../../generic";
+import { alliesPower } from "../rules/state";
 
 export interface ZoneStatusProps {
-  zone: Zone;
+  zone: BattleZone;
   corp: boolean;
 }
 

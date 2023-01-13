@@ -5,7 +5,7 @@ export type CorpLocation = "belgium" | "zone1" | "zone2" | "zone3" | "zone4";
 
 export interface MGCoreState {
   day: number;
-  zones: [Zone, Zone, Zone, Zone];
+  zones: [BattleZone, BattleZone, BattleZone, BattleZone];
   dropped: boolean;
   outcome: "won" | "lost" | "undecided";
   corp: CorpLocation;
@@ -17,13 +17,6 @@ export interface MarketGardenState extends MGCoreState {
 
 export const axisPower = "axis";
 export const alliesPower = "allies";
-
-export type Zone = BattleZone;
-// export interface Zone {
-//   allies: number; // 0 represents die removed
-//   axis: number; // 0 represents die removed
-//   control: typeof axisPower | typeof alliesPower | null;
-// }
 
 export const initial: MarketGardenState = {
   day: 1,
@@ -86,7 +79,7 @@ export function cloneCore(s: MGCoreState): MGCoreState {
   };
 }
 
-function serializeZone(z: Zone): string {
+function serializeZone(z: BattleZone): string {
   return `${z.allies ?? " "}/${z.axis ?? " "}/${
     z.control == alliesPower ? "a" : "g"
   }`;
@@ -107,7 +100,7 @@ export function summary(s: MGCoreState): string {
   )} Z4: ${summaryZone(s.zones[3])} -> ${s.outcome}`;
 }
 
-function summaryZone(z: Zone): string {
+function summaryZone(z: BattleZone): string {
   return `A:${z.allies}${z.control === alliesPower ? "*" : ""} G:${z.axis}${
     z.control === axisPower ? "*" : ""
   }`;
