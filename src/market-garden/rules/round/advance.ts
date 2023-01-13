@@ -43,13 +43,13 @@ function advanceUnit(
   ret: MarketGardenState,
   corpZone: number
 ): MarketGardenState {
-  if (ret.zones[corpZone].allied === 0)
+  if (ret.zones[corpZone].allies === 0)
     throw new Error("No Allied units to advance in zone 1!");
-  ret.zones[corpZone + 1].allied = Math.min(
+  ret.zones[corpZone + 1].allies = Math.min(
     6,
-    ret.zones[corpZone].allied + ret.zones[corpZone + 1].allied
+    ret.zones[corpZone].allies + ret.zones[corpZone + 1].allies
   );
-  ret.zones[corpZone].allied = 0;
+  ret.zones[corpZone].allies = 0;
   return ret;
 }
 
@@ -63,13 +63,13 @@ function advanceCorp(
     );
   ret.corp = to[1];
   if (ret.corp === "zone1") {
-    ret.zones[0].german = 0;
+    ret.zones[0].axis = 0;
   } else if (ret.corp === "zone2") {
-    ret.zones[1].german = 0;
+    ret.zones[1].axis = 0;
   } else if (ret.corp === "zone3") {
-    ret.zones[2].german = 0;
+    ret.zones[2].axis = 0;
   } else if (ret.corp === "zone4") {
-    ret.zones[3].german = 0;
+    ret.zones[3].axis = 0;
   }
   ret.log.push({ type: "corp_movement", day: ret.day, to: to[0] + 1 });
   if (to[1] === "zone4") {

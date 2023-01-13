@@ -30,21 +30,21 @@ export interface ZonePeekProps {
 }
 
 export const ZonePeek = (props: ZonePeekProps) => {
-  if (props.zone.allied === 0) {
+  if (props.zone.allies === 0) {
     return (
       <p style={{ verticalAlign: "bottom" }}>
         Allies: <IconCircle />{" "}
         {props.zone.control === "allies" ? <IconFlag /> : null}, Germans:{" "}
-        {dice[props.zone.german - 1]}{" "}
+        {dice[props.zone.axis - 1]}{" "}
         {props.zone.control === "german" ? <IconFlag /> : null}
       </p>
     );
   } else {
     return (
       <p style={{ verticalAlign: "bottom" }}>
-        Allies: {dice[props.zone.allied - 1]}{" "}
+        Allies: {dice[props.zone.allies - 1]}{" "}
         {props.zone.control === "allies" ? <IconFlag /> : null}, Germans:{" "}
-        {dice[props.zone.german - 1]}{" "}
+        {dice[props.zone.axis - 1]}{" "}
         {props.zone.control === "german" ? <IconFlag /> : null}
       </p>
     );

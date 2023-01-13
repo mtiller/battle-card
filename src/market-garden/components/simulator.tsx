@@ -34,9 +34,9 @@ export const Simulator = (props: SimulatorProps) => {
   React.useEffect(() => {
     setTimeout(() => {
       const init = clone(initial);
-      init.zones[0].allied = strength[0];
-      init.zones[1].allied = strength[1];
-      init.zones[3].allied = strength[2];
+      init.zones[0].allies = strength[0];
+      init.zones[1].allies = strength[1];
+      init.zones[3].allies = strength[2];
 
       const params = {
         ...gameParameters,

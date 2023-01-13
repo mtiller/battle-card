@@ -15,32 +15,32 @@ export interface MarketGardenState extends MGCoreState {
 }
 
 export interface Zone {
-  allied: number; // 0 represents die removed
-  german: number; // 0 represents die removed
-  control: "allies" | "german";
+  allies: number; // 0 represents die removed
+  axis: number; // 0 represents die removed
+  control: "allies" | "german" | null;
 }
 
 export const initial: MarketGardenState = {
   day: 1,
   zones: [
     {
-      allied: 6,
-      german: 2,
+      allies: 6,
+      axis: 2,
       control: "german",
     },
     {
-      allied: 6,
-      german: 2,
+      allies: 6,
+      axis: 2,
       control: "german",
     },
     {
-      allied: 0,
-      german: 1,
+      allies: 0,
+      axis: 1,
       control: "german",
     },
     {
-      allied: 5,
-      german: 2,
+      allies: 5,
+      axis: 2,
       control: "german",
     },
   ],
@@ -82,7 +82,10 @@ export function cloneCore(s: MGCoreState): MGCoreState {
 }
 
 function serializeZone(z: Zone): string {
-  return `${z.allied ?? " "}/${z.german ?? " "}/${z.control[0]}`;
+  return `${z.allies ?? " "}/${z.axis ?? " "}/${(z.control ?? "none").slice(
+    0,
+    1
+  )}`;
 }
 export function serialize(s: MarketGardenState): string {
   return `${s.day}|${serializeZone(s.zones[0])}|${serializeZone(
@@ -101,7 +104,7 @@ export function summary(s: MGCoreState): string {
 }
 
 function summaryZone(z: Zone): string {
-  return `A:${z.allied}${z.control === "allies" ? "*" : ""} G:${z.german}${
+  return `A:${z.allies}${z.control === "allies" ? "*" : ""} G:${z.axis}${
     z.control === "german" ? "*" : ""
   }`;
 }

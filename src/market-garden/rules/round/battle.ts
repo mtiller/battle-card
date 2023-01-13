@@ -15,12 +15,12 @@ export function resolveBattles(
     const cmd = battles[i];
     switch (cmd) {
       case "na":
-        if (zone.allied > 0 && zone.german > 0)
+        if (zone.allies > 0 && zone.axis > 0)
           throw new Error(`Allied unit in zone ${i + 1} must attack or defend`);
         ret.log.push({ type: "no_battle", day: ret.day, zone: i + 1 });
         continue;
       default:
-        if (zone.allied === 0)
+        if (zone.allies === 0)
           throw new Error(
             "Attempted to attack or defend in a zone with no allied unit"
           );
@@ -30,17 +30,17 @@ export function resolveBattles(
           cmd === "attack" ? params.attackTable : params.defendTable;
         // Pick the appropriate column
         const column =
-          zone.allied > zone.german
+          zone.allies > zone.axis
             ? table.alliedAdvantage
-            : zone.allied === zone.german
+            : zone.allies === zone.axis
             ? table.noAdvantage
             : table.germanAdvantage;
         // Pick a result based on the die rolle
         const result = chance.nextArrayItem(column);
         const roll = column.indexOf(result) + 1;
         // Adjust the stats in that zone
-        zone.allied = Math.max(0, zone.allied + result.alliedLosses);
-        zone.german = Math.max(1, zone.german + result.germanLosses);
+        zone.allies = Math.max(0, zone.allies + result.alliedLosses);
+        zone.axis = Math.max(1, zone.axis + result.germanLosses);
         if (zone.control === "german" && result.alliesControl) {
           zone.control = "allies";
           ret.log.push({
@@ -63,7 +63,7 @@ export function resolveBattles(
             seize: false,
           });
         }
-        if (zone.allied == 0) {
+        if (zone.allies == 0) {
           ret.outcome = "lost";
           ret.log.push({
             type: "result",

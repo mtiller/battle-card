@@ -18,9 +18,9 @@ export function performAirdrop(
     params.airdropLossesByZone[1][rolls[1]],
     params.airdropLossesByZone[2][rolls[2]],
   ];
-  let allied1 = ret.zones[0].allied;
-  let allied2 = ret.zones[1].allied;
-  let allied4 = ret.zones[3].allied;
+  let allied1 = ret.zones[0].allies;
+  let allied2 = ret.zones[1].allies;
+  let allied4 = ret.zones[3].allies;
 
   if (allied1 === 0)
     throw new Error("Invalid initial allied strength in zone 1");
@@ -36,9 +36,9 @@ export function performAirdrop(
   if (allied1 < 1 || allied2 < 1 || allied4 < 1)
     throw new Error("Invalid initial allied strength after airdrop");
 
-  ret.zones[0].allied = allied1;
-  ret.zones[1].allied = allied2;
-  ret.zones[3].allied = allied4;
+  ret.zones[0].allies = allied1;
+  ret.zones[1].allies = allied2;
+  ret.zones[3].allies = allied4;
   ret.log.push({ type: "initial_airdrop", day: ret.day, rolls: rolls, losses });
   return ret;
 }
@@ -53,7 +53,7 @@ export function attemptDrop(
   const weather = params.weatherTrack[s.day - 1];
   ret.log.push({ type: "weather", roll, day: ret.day, needed: weather });
   if (roll >= weather) {
-    ret.zones[3].allied = Math.min(6, ret.zones[3].allied + 1);
+    ret.zones[3].allies = Math.min(6, ret.zones[3].allies + 1);
     ret.dropped = true;
   }
   return ret;

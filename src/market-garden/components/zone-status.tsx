@@ -14,7 +14,7 @@ export const ZoneStatus = (props: ZoneStatusProps) => {
         justifyContent: "space-around",
       }}
     >
-      <div>Allies: {zone.allied}</div>
+      <div>Allies: {zone.allies}</div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div>
           Control:{" "}
@@ -26,7 +26,7 @@ export const ZoneStatus = (props: ZoneStatusProps) => {
         </div>
         {props.corp && <span style={{ color: "blue" }}>30th Corp</span>}
       </div>
-      <div>Germans: {zone.german}</div>
+      <div>Germans: {zone.axis}</div>
     </div>
   );
 };
