@@ -1,3 +1,4 @@
+import { BattleZone } from "../../generic";
 import { LogEvent } from "./events";
 
 export type CorpLocation = "belgium" | "zone1" | "zone2" | "zone3" | "zone4";
@@ -14,14 +15,15 @@ export interface MarketGardenState extends MGCoreState {
   log: LogEvent[];
 }
 
-export const axisPower = "german";
+export const axisPower = "axis";
 export const alliesPower = "allies";
 
-export interface Zone {
-  allies: number; // 0 represents die removed
-  axis: number; // 0 represents die removed
-  control: typeof axisPower | typeof alliesPower | null;
-}
+export type Zone = BattleZone;
+// export interface Zone {
+//   allies: number; // 0 represents die removed
+//   axis: number; // 0 represents die removed
+//   control: typeof axisPower | typeof alliesPower | null;
+// }
 
 export const initial: MarketGardenState = {
   day: 1,
@@ -85,10 +87,9 @@ export function cloneCore(s: MGCoreState): MGCoreState {
 }
 
 function serializeZone(z: Zone): string {
-  return `${z.allies ?? " "}/${z.axis ?? " "}/${(z.control ?? "none").slice(
-    0,
-    1
-  )}`;
+  return `${z.allies ?? " "}/${z.axis ?? " "}/${
+    z.control == alliesPower ? "a" : "g"
+  }`;
 }
 export function serialize(s: MarketGardenState): string {
   return `${s.day}|${serializeZone(s.zones[0])}|${serializeZone(

@@ -1,4 +1,4 @@
-import { assert, expect, test } from "vitest";
+import { expect, test } from "vitest";
 import { initial, serialize } from "./state";
 
 test("Serializing state", () => {

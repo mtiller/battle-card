@@ -1,4 +1,4 @@
-import { Zone } from "../rules/state";
+import { alliesPower, Zone } from "../rules/state";
 
 export interface ZoneStatusProps {
   zone: Zone;
@@ -18,7 +18,7 @@ export const ZoneStatus = (props: ZoneStatusProps) => {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div>
           Control:{" "}
-          {zone.control === "allies" ? (
+          {zone.control === alliesPower ? (
             <span style={{ color: "green" }}>Allies</span>
           ) : (
             <span style={{ color: "red" }}>German</span>

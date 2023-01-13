@@ -1,7 +1,7 @@
 import Prando from "prando";
 import { AllBattleDecisions } from "../moves";
 import { GameParameters } from "../parameters";
-import { axisPower, clone, MarketGardenState } from "../state";
+import { alliesPower, axisPower, clone, MarketGardenState } from "../state";
 
 export function resolveBattles(
   s: MarketGardenState,
@@ -42,14 +42,14 @@ export function resolveBattles(
         zone.allies = Math.max(0, zone.allies + result.alliedLosses);
         zone.axis = Math.max(1, zone.axis + result.germanLosses);
         if (zone.control === axisPower && result.alliesControl) {
-          zone.control = "allies";
+          zone.control = alliesPower;
           ret.log.push({
             type: "battle_result",
             day: ret.day,
             zone: i + 1,
             roll,
             outcome: result,
-            control: "allies",
+            control: alliesPower,
             seize: true,
           });
         } else {

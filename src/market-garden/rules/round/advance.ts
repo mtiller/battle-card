@@ -1,5 +1,5 @@
 import { Advance } from "../moves";
-import { clone, CorpLocation, MarketGardenState } from "../state";
+import { alliesPower, clone, CorpLocation, MarketGardenState } from "../state";
 
 export function performAdvance(
   s: MarketGardenState,
@@ -57,7 +57,7 @@ function advanceCorp(
   ret: MarketGardenState,
   to: [number, CorpLocation]
 ): MarketGardenState {
-  if (ret.zones[to[0]].control !== "allies")
+  if (ret.zones[to[0]].control !== alliesPower)
     throw new Error(
       "Attempted to advance into territory not controlled by the Allies"
     );

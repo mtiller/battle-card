@@ -108,7 +108,11 @@ export function stringifyEvent(e: LogEvent): string {
       if (e.seize) {
         return `day ${e.day}, zone ${e.zone}, roll: ${e.roll}, Allied losses: ${e.outcome.alliedLosses}, German losses: ${e.outcome.germanLosses}, Allies seize control`;
       } else {
-        return `day ${e.day}, zone ${e.zone}, roll: ${e.roll}, Allied losses: ${e.outcome.alliedLosses}, German losses: ${e.outcome.germanLosses}, Control: ${e.control}`;
+        return `day ${e.day}, zone ${e.zone}, roll: ${e.roll}, Allied losses: ${
+          e.outcome.alliedLosses
+        }, German losses: ${e.outcome.germanLosses}, Control: ${
+          e.control == alliesPower ? "allies" : "german"
+        }`;
       }
     case "result":
       return e.why;
