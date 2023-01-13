@@ -14,10 +14,13 @@ export interface MarketGardenState extends MGCoreState {
   log: LogEvent[];
 }
 
+export const axisPower = "german";
+export const alliesPower = "allies";
+
 export interface Zone {
   allies: number; // 0 represents die removed
   axis: number; // 0 represents die removed
-  control: "allies" | "german" | null;
+  control: typeof axisPower | typeof alliesPower | null;
 }
 
 export const initial: MarketGardenState = {
@@ -26,22 +29,22 @@ export const initial: MarketGardenState = {
     {
       allies: 6,
       axis: 2,
-      control: "german",
+      control: axisPower,
     },
     {
       allies: 6,
       axis: 2,
-      control: "german",
+      control: axisPower,
     },
     {
       allies: 0,
       axis: 1,
-      control: "german",
+      control: axisPower,
     },
     {
       allies: 5,
       axis: 2,
-      control: "german",
+      control: axisPower,
     },
   ],
   dropped: false,
@@ -104,7 +107,7 @@ export function summary(s: MGCoreState): string {
 }
 
 function summaryZone(z: Zone): string {
-  return `A:${z.allies}${z.control === "allies" ? "*" : ""} G:${z.axis}${
-    z.control === "german" ? "*" : ""
+  return `A:${z.allies}${z.control === alliesPower ? "*" : ""} G:${z.axis}${
+    z.control === axisPower ? "*" : ""
   }`;
 }

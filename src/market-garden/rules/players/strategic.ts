@@ -5,7 +5,7 @@ import {
   BattleOptions,
 } from "../moves";
 import { Player } from "../player";
-import { MarketGardenState, Zone } from "../state";
+import { axisPower, MarketGardenState, Zone } from "../state";
 
 export class StrategicPlayer implements Player {
   async pickBattles(
@@ -35,7 +35,7 @@ function choose(zone: Zone, legal: BattleOptions[]): BattleOptions {
   if (legal.length == 1) return legal[0];
   // If we have two options (we assume they are attack and defend), base the decision
   // on who controls the zone.
-  if (zone.control === "german") {
+  if (zone.control === axisPower) {
     if (legal.includes("attack")) {
       return "attack";
     }

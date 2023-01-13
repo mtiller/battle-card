@@ -1,6 +1,6 @@
 import { Advance } from "./moves";
 import { CombatOutcome } from "./parameters";
-import { MGCoreState, summary } from "./state";
+import { alliesPower, axisPower, MGCoreState, summary } from "./state";
 
 export interface InitialAirDropEvent {
   type: "initial_airdrop";
@@ -27,7 +27,7 @@ export interface BattleOutcomeEvent {
   day: number;
   zone: number;
   roll: number;
-  control: "allies" | "german";
+  control: typeof axisPower | typeof alliesPower | null;
   seize: boolean;
   outcome: CombatOutcome;
 }

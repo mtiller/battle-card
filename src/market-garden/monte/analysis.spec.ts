@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { gameParameters, initial } from "../rules";
+import { axisPower, gameParameters, initial } from "../rules";
 import { stringifyEvent } from "../rules/events";
 import { StrategicPlayer } from "../rules/players";
 import { monteCarlo } from "./analysis";
@@ -24,7 +24,7 @@ test("Run Monte-Carlo analysis", async () => {
   console.log(`win = ${(won * 100) / n}%, loss = ${(loss * 100) / n}`);
 
   const failControl = results.filter(
-    (r) => r.history[0].afterBattle.zones[0].control === "german"
+    (r) => r.history[0].afterBattle.zones[0].control === axisPower
   );
   const stillWin = failControl.filter((r) => r.final.outcome === "won").length;
   expect(failControl.length).toEqual(1666);

@@ -1,7 +1,7 @@
 import Prando from "prando";
 import { AllBattleDecisions } from "../moves";
 import { GameParameters } from "../parameters";
-import { clone, MarketGardenState } from "../state";
+import { axisPower, clone, MarketGardenState } from "../state";
 
 export function resolveBattles(
   s: MarketGardenState,
@@ -41,7 +41,7 @@ export function resolveBattles(
         // Adjust the stats in that zone
         zone.allies = Math.max(0, zone.allies + result.alliedLosses);
         zone.axis = Math.max(1, zone.axis + result.germanLosses);
-        if (zone.control === "german" && result.alliesControl) {
+        if (zone.control === axisPower && result.alliesControl) {
           zone.control = "allies";
           ret.log.push({
             type: "battle_result",

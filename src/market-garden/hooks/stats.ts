@@ -1,4 +1,4 @@
-import { Outcome } from "../rules";
+import { axisPower, Outcome } from "../rules";
 
 export function useStats(results: Outcome[]) {
   const wins = results.filter((r) => r.final.outcome === "won");
@@ -19,7 +19,7 @@ export function useStats(results: Outcome[]) {
   }));
 
   const alliedSetback = results.filter(
-    (r) => r.history[0].afterBattle.zones[0].control === "german"
+    (r) => r.history[0].afterBattle.zones[0].control === axisPower
   );
   const stillWon = alliedSetback.filter((r) => r.final.outcome === "won");
 

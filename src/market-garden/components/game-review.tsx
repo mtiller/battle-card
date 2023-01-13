@@ -80,7 +80,7 @@ function ofInterest(results: Outcome[], filtering: string, lost: boolean) {
 
   if (lost) {
     ret = ret.filter(
-      (r) => r.history[0].afterBattle.zones[0].control === "german"
+      (r) => r.history[0].afterBattle.zones[0].control === axisPower
     );
   }
   return ret;

@@ -5,7 +5,7 @@ import {
   BattleOptions,
 } from "../moves";
 import { Player } from "../player";
-import { MarketGardenState, Zone } from "../state";
+import { axisPower, MarketGardenState, Zone } from "../state";
 
 export class SavvyPlayer implements Player {
   async pickBattles(
@@ -39,7 +39,7 @@ function choose(
   if (legal.length == 1) return legal[0];
   // If we have two options (we assume they are attack and defend), base the decision
   // on who controls the zone.
-  if (critical || (zone.control === "german" && zone.allies > zone.axis)) {
+  if (critical || (zone.control === axisPower && zone.allies > zone.axis)) {
     if (legal.includes("attack")) {
       return "attack";
     }

@@ -1,4 +1,4 @@
-import { MGCoreState, Zone } from "../rules";
+import { axisPower, MGCoreState, Zone } from "../rules";
 import { Text } from "@mantine/core";
 import { dice } from "./day-timeline";
 import { IconCircle, IconFlag } from "@tabler/icons";
@@ -36,7 +36,7 @@ export const ZonePeek = (props: ZonePeekProps) => {
         Allies: <IconCircle />{" "}
         {props.zone.control === "allies" ? <IconFlag /> : null}, Germans:{" "}
         {dice[props.zone.axis - 1]}{" "}
-        {props.zone.control === "german" ? <IconFlag /> : null}
+        {props.zone.control === axisPower ? <IconFlag /> : null}
       </p>
     );
   } else {
@@ -45,7 +45,7 @@ export const ZonePeek = (props: ZonePeekProps) => {
         Allies: {dice[props.zone.allies - 1]}{" "}
         {props.zone.control === "allies" ? <IconFlag /> : null}, Germans:{" "}
         {dice[props.zone.axis - 1]}{" "}
-        {props.zone.control === "german" ? <IconFlag /> : null}
+        {props.zone.control === axisPower ? <IconFlag /> : null}
       </p>
     );
   }
