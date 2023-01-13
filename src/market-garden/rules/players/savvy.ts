@@ -1,3 +1,4 @@
+import { BattleZone } from "../../../generic";
 import {
   LegalZoneDecisions,
   AllBattleDecisions,
@@ -5,7 +6,7 @@ import {
   BattleOptions,
 } from "../moves";
 import { Player } from "../player";
-import { axisPower, MarketGardenState, Zone } from "../state";
+import { axisPower, MarketGardenState } from "../state";
 
 export class SavvyPlayer implements Player {
   async pickBattles(
@@ -31,7 +32,7 @@ export class SavvyPlayer implements Player {
 }
 
 function choose(
-  zone: Zone,
+  zone: BattleZone,
   legal: BattleOptions[],
   critical: boolean
 ): BattleOptions {

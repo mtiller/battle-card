@@ -1,3 +1,4 @@
+import { BattleZone } from "../../../generic";
 import {
   LegalZoneDecisions,
   AllBattleDecisions,
@@ -5,7 +6,7 @@ import {
   BattleOptions,
 } from "../moves";
 import { Player } from "../player";
-import { axisPower, MarketGardenState, Zone } from "../state";
+import { axisPower, MarketGardenState } from "../state";
 
 export class StrategicPlayer implements Player {
   async pickBattles(
@@ -30,7 +31,7 @@ export class StrategicPlayer implements Player {
   done() {}
 }
 
-function choose(zone: Zone, legal: BattleOptions[]): BattleOptions {
+function choose(zone: BattleZone, legal: BattleOptions[]): BattleOptions {
   // If we only have on choice, choose that.
   if (legal.length == 1) return legal[0];
   // If we have two options (we assume they are attack and defend), base the decision
