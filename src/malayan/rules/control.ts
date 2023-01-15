@@ -1,4 +1,5 @@
 import { opponentControl } from "../../generic";
+import { niceList } from "../../generic/list";
 import { MalayanLog } from "./log";
 import { names } from "./names";
 import { clone, MalayanState } from "./state";
@@ -22,18 +23,10 @@ export function controlRound(s: MalayanState, log: MalayanLog): MalayanState {
     ret.areas[3] = opponentControl;
     areas.push(names.areas[3]);
   }
-  if (areas.length > 0) {
-    if (areas.length == 1) {
-      log.push({ type: "control", who: names.opponent, area: areas[0] });
-    } else {
-      log.push({
-        type: "control",
-        who: names.opponent,
-        area: areas.slice(0, -1).join(", ") + " and " + areas[areas.length - 1],
-      });
-    }
-  } else {
-    log.push({ type: "control", who: names.opponent, area: "nothing" });
-  }
+  log.push({
+    type: "control",
+    who: names.opponent,
+    areas: niceList(areas, "nothing"),
+  });
   return ret;
 }

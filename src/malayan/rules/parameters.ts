@@ -3,6 +3,7 @@ import { MalayanState, undecided } from "./state";
 export interface MalayanParameters {
   initial: MalayanState;
   reinforcements: [number, number, number, number, number, number, number];
+  lastTurn: number;
 }
 
 export const malayanParameters: MalayanParameters = {
@@ -11,17 +12,18 @@ export const malayanParameters: MalayanParameters = {
     outcome: undecided,
     round: "control",
     locations: [
-      { player: 3, oppponent: 6 },
-      { player: 2, oppponent: 5 },
-      { player: 2, oppponent: 0 },
-      { player: 2, oppponent: 0 },
-      { player: 2, oppponent: 0 },
-      { player: 2, oppponent: 0 },
-      { player: 2, oppponent: 0 },
+      { player: 3, opponent: 6 },
+      { player: 2, opponent: 5 },
+      { player: 2, opponent: 0 },
+      { player: 2, opponent: 0 },
+      { player: 2, opponent: 0 },
+      { player: 2, opponent: 0 },
+      { player: 2, opponent: 0 },
     ],
     areas: ["player", "player", "player", "player"],
   },
   reinforcements: [0, 0, 2, 0, 0, 2, 2],
+  lastTurn: 6,
 };
 
 export const truckRoad = [0, 2, 4, 6];

@@ -4,8 +4,9 @@ export interface Location {
   // A value of zero means no unit present
   player: number;
   // A value of zero means no unit present
-  oppponent: number;
+  opponent: number;
 }
+
 /**
  * Used for cases where each Location (place where a battle
  * can take place) is an area as well.

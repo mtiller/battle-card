@@ -8,7 +8,10 @@ describe("Test control action", () => {
   it("should log no control change for initial conditions", () => {
     const log: MalayanLog = [];
     controlRound(malayanParameters.initial, log);
-    expect(log[0].area).toEqual("nothing");
+    expect(log[0].type).toEqual("control");
+    if (log[0].type == "control") {
+      expect(log[0].areas).toEqual("nothing");
+    }
   });
   it("should take control of A1 and A3", () => {
     const cur = clone(malayanParameters.initial);
@@ -18,6 +21,9 @@ describe("Test control action", () => {
     cur.locations[5].player = 0;
     const log: MalayanLog = [];
     controlRound(cur, log);
-    expect(log[0].area).toEqual("A1 and A3");
+    expect(log[0].type == "control");
+    if (log[0].type == "control") {
+      expect(log[0].areas).toEqual("A1 and A3");
+    }
   });
 });
