@@ -3,6 +3,23 @@ import { MalayanLog } from "./log";
 import { MalayanParameters } from "./parameters";
 import { clone, MalayanState } from "./state";
 
+/**
+ * Determine which withdraw options are available to the player on each route.
+ */
+export function withdrawOptions(s: MalayanState) {
+  const eastern: number[] = [];
+  const trunk: number[] = [];
+  for (let i = 0; i < 6; i++) {
+    if (s.locations[i].player) {
+      (i % 2 == 0 ? trunk : eastern).push(i);
+    }
+  }
+  return {
+    eastern,
+    trunk,
+  };
+}
+
 export function withdrawRound(
   s: MalayanState,
   params: MalayanParameters,

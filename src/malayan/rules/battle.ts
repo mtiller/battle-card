@@ -5,6 +5,25 @@ import { MalayanParameters } from "./parameters";
 import { clone, MalayanState } from "./state";
 import { Location, LossRoll } from "../../generic";
 
+/**
+ *
+ * @param s Current state
+ * @returns whether attack/defend is an option in each location
+ */
+export function battleOptions(
+  s: MalayanState
+): [boolean, boolean, boolean, boolean, boolean, boolean, boolean] {
+  return [
+    s.locations[0].player > 0,
+    s.locations[1].player > 0,
+    s.locations[2].player > 0,
+    s.locations[3].player > 0,
+    s.locations[4].player > 0,
+    s.locations[5].player > 0,
+    s.locations[6].player > 0,
+  ];
+}
+
 export function battleRound(
   s: MalayanState,
   r: Prando,
