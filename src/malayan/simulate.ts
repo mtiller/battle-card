@@ -1,15 +1,19 @@
+import Prando from "prando";
 import { Player } from "./player";
 import {
   autoActions,
+  battleRound,
   clone,
   MalayanLog,
   MalayanParameters,
   MalayanState,
   undecided,
+  withdrawRound,
 } from "./rules";
 
 export function simulate(
   s0: MalayanState,
+  r: Prando,
   player: Player,
   params: MalayanParameters
 ): [MalayanLog, MalayanState] {
@@ -24,7 +28,7 @@ export function simulate(
     // where to battle, ask them.
     if (s.round === "battle" && s.outcome === undecided) {
       const action = player.Battle(s, params);
-      s = battleRound(s, params, action, log);
+      s = battleRound(s, r, params, action, log);
     }
 
     // If we are a point where the player needs to decide

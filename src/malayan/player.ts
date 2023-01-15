@@ -1,4 +1,4 @@
-import { MalayanLog, MalayanParameters, MalayanState } from "./rules";
+import { MalayanParameters, MalayanState } from "./rules";
 
 export type BattleDecision = "attack" | "defend" | null;
 export type BattleAction = [

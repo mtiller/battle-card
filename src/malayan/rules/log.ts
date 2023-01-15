@@ -1,3 +1,5 @@
+import { Location, Losses } from "../../generic";
+
 export interface ControlEvent {
   type: "control";
   who: string;
@@ -21,10 +23,21 @@ export interface EndOfTurnEvent {
   turn: number;
 }
 
+export interface BattleEvent {
+  type: "battle";
+  location: number;
+  roll: number;
+  support: boolean;
+  losses: Losses;
+  eliminated: boolean;
+  outcome: Location;
+}
+
 export type LogEvent =
   | ControlEvent
   | AdvanceEvent
   | OutcomeEvent
-  | EndOfTurnEvent;
+  | EndOfTurnEvent
+  | BattleEvent;
 
 export type MalayanLog = LogEvent[];
