@@ -1,6 +1,11 @@
-import { LocationArea } from "../../generic";
 import { LogEvent } from "./events";
 
+// Keep this independent of the generic version for now.
+export interface LocationArea {
+  allies: number;
+  axis: number;
+  control: "allies" | "axis" | null;
+}
 export type CorpLocation = "belgium" | "zone1" | "zone2" | "zone3" | "zone4";
 
 export interface MGCoreState {

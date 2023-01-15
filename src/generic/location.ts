@@ -2,9 +2,9 @@ import { Control } from "./area";
 
 export interface Location {
   // A value of zero means no unit present
-  allies: number;
+  player: number;
   // A value of zero means no unit present
-  axis: number;
+  oppponent: number;
 }
 /**
  * Used for cases where each Location (place where a battle

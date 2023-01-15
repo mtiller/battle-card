@@ -1,8 +1,7 @@
-import { alliesPower, axisPower, MGCoreState } from "../rules";
+import { alliesPower, axisPower, MGCoreState, LocationArea } from "../rules";
 import { Text } from "@mantine/core";
 import { dice } from "./day-timeline";
 import { IconCircle, IconFlag } from "@tabler/icons";
-import { LocationArea } from "../../generic";
 
 export interface StatePeekProps {
   state: MGCoreState;

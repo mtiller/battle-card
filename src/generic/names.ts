@@ -1,6 +1,6 @@
 export interface Naming {
-  allies: string;
-  axis: string;
+  player: string;
+  opponent: string;
   locations: string[];
   areas: string[];
 }

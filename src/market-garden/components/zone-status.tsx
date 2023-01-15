@@ -1,5 +1,4 @@
-import { LocationArea } from "../../generic";
-import { alliesPower } from "../rules/state";
+import { alliesPower, LocationArea } from "../rules/state";
 
 export interface ZoneStatusProps {
   zone: LocationArea;

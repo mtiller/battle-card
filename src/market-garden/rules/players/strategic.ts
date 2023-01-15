@@ -1,4 +1,3 @@
-import { LocationArea } from "../../../generic";
 import {
   LegalZoneDecisions,
   AllBattleDecisions,
@@ -6,7 +5,7 @@ import {
   BattleOptions,
 } from "../moves";
 import { Player } from "../player";
-import { axisPower, MarketGardenState } from "../state";
+import { axisPower, MarketGardenState, LocationArea } from "../state";
 
 export class StrategicPlayer implements Player {
   async pickBattles(

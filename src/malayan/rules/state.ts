@@ -1,25 +1,21 @@
 import { Control, Location } from "../../generic";
 
-export const malayanLocations: [
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
-] = [
-  "Jitra",
-  "Kota Bharu",
-  "Kampar",
-  "Kuantan",
-  "Kuala Lumpur",
-  "Endau",
-  "Kluang",
-];
+export type MalayanRound =
+  | "control"
+  | "advance"
+  | "battle"
+  | "withdraw"
+  | "track";
+
+export type MalayanOutcome = "win" | "loss" | "undecided";
+export const win: MalayanOutcome = "win";
+export const loss: MalayanOutcome = "loss";
+export const undecided: MalayanOutcome = "undecided";
 
 export interface MalayanState {
   turn: number;
+  outcome: MalayanOutcome;
+  round: MalayanRound;
   locations: [
     Location,
     Location,
@@ -30,4 +26,8 @@ export interface MalayanState {
     Location
   ];
   areas: [Control, Control, Control, Control];
+}
+
+export function clone(s: MalayanState): MalayanState {
+  return { ...s, locations: [...s.locations], areas: [...s.areas] };
 }

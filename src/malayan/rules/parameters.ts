@@ -1,23 +1,27 @@
-import { MalayanState } from "./state";
+import { MalayanState, undecided } from "./state";
 
 export interface MalayanParameters {
   initial: MalayanState;
+  reinforcements: [number, number, number, number, number, number, number];
 }
 
 export const malayanParameters: MalayanParameters = {
   initial: {
     turn: 1,
+    outcome: undecided,
+    round: "control",
     locations: [
-      { allies: 3, axis: 6 },
-      { allies: 2, axis: 5 },
-      { allies: 2, axis: 0 },
-      { allies: 2, axis: 0 },
-      { allies: 2, axis: 0 },
-      { allies: 2, axis: 0 },
-      { allies: 2, axis: 0 },
+      { player: 3, oppponent: 6 },
+      { player: 2, oppponent: 5 },
+      { player: 2, oppponent: 0 },
+      { player: 2, oppponent: 0 },
+      { player: 2, oppponent: 0 },
+      { player: 2, oppponent: 0 },
+      { player: 2, oppponent: 0 },
     ],
-    areas: ["allies", "allies", "allies", "allies"],
+    areas: ["player", "player", "player", "player"],
   },
+  reinforcements: [0, 0, 2, 0, 0, 2, 2],
 };
 
 export const truckRoad = [0, 2, 4, 6];
