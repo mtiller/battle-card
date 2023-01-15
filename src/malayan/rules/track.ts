@@ -1,6 +1,6 @@
 import { MalayanLog } from "./log";
 import { MalayanParameters } from "./parameters";
-import { clone, loss, MalayanState } from "./state";
+import { clone, loss, MalayanState, win } from "./state";
 
 export function trackRound(
   s: MalayanState,
@@ -9,13 +9,23 @@ export function trackRound(
 ): MalayanState {
   const ret = clone(s);
   if (ret.turn >= params.lastTurn) {
-    ret.outcome = loss;
-    log.push({
-      type: "outcome",
-      outcome: "loss",
-      why: `${params.names.player} ran out of time.`,
-    });
-    return ret;
+    if (ret.locations[6].player >= 3) {
+      ret.outcome = win;
+      log.push({
+        type: "outcome",
+        outcome: "win",
+        why: `${params.names.player} held on to win.`,
+      });
+      return ret;
+    } else {
+      ret.outcome = loss;
+      log.push({
+        type: "outcome",
+        outcome: "loss",
+        why: `${params.names.player} ran out of time.`,
+      });
+      return ret;
+    }
   }
   log.push({
     type: "turn",

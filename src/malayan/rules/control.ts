@@ -2,7 +2,7 @@ import { opponentControl } from "../../generic";
 import { niceList } from "../../generic/list";
 import { MalayanLog } from "./log";
 import { MalayanParameters } from "./parameters";
-import { clone, MalayanState } from "./state";
+import { clone, loss, MalayanState } from "./state";
 
 export function controlRound(
   s: MalayanState,
@@ -32,5 +32,14 @@ export function controlRound(
     who: params.names.opponent,
     areas: niceList(areas, "nothing"),
   });
+  if (areas[3] == opponentControl) {
+    ret.outcome = loss;
+    // Immediate loss
+    log.push({
+      type: "outcome",
+      outcome: "loss",
+      why: `${params.names.opponent} took control of ${params.names.locations[6]}`,
+    });
+  }
   return ret;
 }

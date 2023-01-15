@@ -33,11 +33,18 @@ export interface BattleEvent {
   outcome: Location;
 }
 
+export interface WithdrawEvent {
+  type: "withdraw";
+  from: string;
+  to: string;
+}
+
 export type LogEvent =
   | ControlEvent
   | AdvanceEvent
   | OutcomeEvent
   | EndOfTurnEvent
-  | BattleEvent;
+  | BattleEvent
+  | WithdrawEvent;
 
 export type MalayanLog = LogEvent[];
