@@ -20,7 +20,13 @@ export function battleRound(
   );
   for (let i = 0; i < s.locations.length; i++) {
     const decision = action[i];
-    if (decision == null) continue;
+    if (decision == null) {
+      if (s.locations[i].player > 0)
+        throw new Error(
+          `must choose attack or defend in ${params.names.locations[i]}`
+        );
+      continue;
+    }
     const column = lossRoll(decision, s.locations[i], params);
     const roll = r.nextInt() % 6;
     const loss = column[roll];
