@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { MalayanLog } from "./log";
-import { malayanParameters } from "./parameters";
+import { malayanBase } from "./parameters";
 import { clone, loss, undecided } from "./state";
 import { trackRound } from "./track";
 
 describe("Test turn track", () => {
   it("should advance turn normally before turn 6", () => {
-    const cur = clone(malayanParameters.initial);
+    const cur = clone(malayanBase.initial);
     const log: MalayanLog = [];
-    const next = trackRound(cur, log);
+    const next = trackRound(cur, malayanBase, log);
     expect(next.turn).toEqual(2);
     expect(next.outcome).toEqual(undecided);
     expect(log[0].type).toEqual("turn");
@@ -17,10 +17,10 @@ describe("Test turn track", () => {
     }
   });
   it("should trigger loss on turn 6", () => {
-    const cur = clone(malayanParameters.initial);
+    const cur = clone(malayanBase.initial);
     cur.turn = 6;
     const log: MalayanLog = [];
-    const next = trackRound(cur, log);
+    const next = trackRound(cur, malayanBase, log);
     expect(next.turn).toEqual(6);
     expect(next.outcome).toEqual(loss);
     expect(log[0].type).toEqual("outcome");

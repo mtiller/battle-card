@@ -1,25 +1,30 @@
 import { advanceRound } from "./advance";
 import { controlRound } from "./control";
 import { MalayanLog } from "./log";
+import { MalayanParameters } from "./parameters";
 import { MalayanState } from "./state";
 import { trackRound } from "./track";
 
-export function autoActions(s: MalayanState, log: MalayanLog): MalayanState {
+export function autoActions(
+  s: MalayanState,
+  params: MalayanParameters,
+  log: MalayanLog
+): MalayanState {
   while (true) {
     if (s.outcome !== "undecided") return s;
     switch (s.round) {
       case "control": {
-        s = controlRound(s, log);
+        s = controlRound(s, params, log);
       }
       case "advance": {
-        s = advanceRound(s, log);
+        s = advanceRound(s, params, log);
       }
       case "battle":
       case "withdraw": {
         return s;
       }
       case "track": {
-        s = trackRound(s, log);
+        s = trackRound(s, params, log);
       }
     }
   }
