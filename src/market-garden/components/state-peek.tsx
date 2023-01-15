@@ -2,7 +2,7 @@ import { alliesPower, axisPower, MGCoreState } from "../rules";
 import { Text } from "@mantine/core";
 import { dice } from "./day-timeline";
 import { IconCircle, IconFlag } from "@tabler/icons";
-import { BattleZone } from "../../generic";
+import { LocationArea } from "../../generic";
 
 export interface StatePeekProps {
   state: MGCoreState;
@@ -27,7 +27,7 @@ export const StatePeek = (props: StatePeekProps) => {
 
 export interface ZonePeekProps {
   num: number;
-  zone: BattleZone;
+  zone: LocationArea;
 }
 
 export const ZonePeek = (props: ZonePeekProps) => {

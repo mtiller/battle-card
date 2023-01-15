@@ -1,4 +1,4 @@
-import { BattleZone } from "../../../generic";
+import { LocationArea } from "../../../generic";
 import {
   LegalZoneDecisions,
   AllBattleDecisions,
@@ -32,7 +32,7 @@ export class SavvyPlayer implements Player {
 }
 
 function choose(
-  zone: BattleZone,
+  zone: LocationArea,
   legal: BattleOptions[],
   critical: boolean
 ): BattleOptions {

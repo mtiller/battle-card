@@ -1,4 +1,4 @@
-import { BattleZone } from "../../../generic";
+import { LocationArea } from "../../../generic";
 import {
   LegalZoneDecisions,
   AllBattleDecisions,
@@ -31,7 +31,7 @@ export class StrategicPlayer implements Player {
   done() {}
 }
 
-function choose(zone: BattleZone, legal: BattleOptions[]): BattleOptions {
+function choose(zone: LocationArea, legal: BattleOptions[]): BattleOptions {
   // If we only have on choice, choose that.
   if (legal.length == 1) return legal[0];
   // If we have two options (we assume they are attack and defend), base the decision

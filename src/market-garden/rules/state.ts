@@ -1,11 +1,11 @@
-import { BattleZone } from "../../generic";
+import { LocationArea } from "../../generic";
 import { LogEvent } from "./events";
 
 export type CorpLocation = "belgium" | "zone1" | "zone2" | "zone3" | "zone4";
 
 export interface MGCoreState {
   day: number;
-  zones: [BattleZone, BattleZone, BattleZone, BattleZone];
+  zones: [LocationArea, LocationArea, LocationArea, LocationArea];
   dropped: boolean;
   outcome: "won" | "lost" | "undecided";
   corp: CorpLocation;
@@ -79,7 +79,7 @@ export function cloneCore(s: MGCoreState): MGCoreState {
   };
 }
 
-function serializeZone(z: BattleZone): string {
+function serializeZone(z: LocationArea): string {
   return `${z.allies ?? " "}/${z.axis ?? " "}/${
     z.control == alliesPower ? "a" : "g"
   }`;
@@ -100,7 +100,7 @@ export function summary(s: MGCoreState): string {
   )} Z4: ${summaryZone(s.zones[3])} -> ${s.outcome}`;
 }
 
-function summaryZone(z: BattleZone): string {
+function summaryZone(z: LocationArea): string {
   return `A:${z.allies}${z.control === alliesPower ? "*" : ""} G:${z.axis}${
     z.control === axisPower ? "*" : ""
   }`;
