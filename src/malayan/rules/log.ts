@@ -2,18 +2,21 @@ import { Location, Losses } from "../../generic";
 
 export interface ControlEvent {
   type: "control";
+  turn: number;
   who: string;
   areas: string;
 }
 
 export interface AdvanceEvent {
   type: "advance";
+  turn: number;
   who: string;
   areas: string;
 }
 
 export interface OutcomeEvent {
   type: "outcome";
+  turn: number;
   outcome: "win" | "loss";
   why: string;
 }
@@ -25,6 +28,7 @@ export interface EndOfTurnEvent {
 
 export interface BattleEvent {
   type: "battle";
+  turn: number;
   location: number;
   roll: number;
   support: boolean;
@@ -35,6 +39,7 @@ export interface BattleEvent {
 
 export interface WithdrawEvent {
   type: "withdraw";
+  turn: number;
   from: string;
   to: string;
 }

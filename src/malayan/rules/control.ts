@@ -29,6 +29,7 @@ export function controlRound(
   }
   log.push({
     type: "control",
+    turn: ret.turn,
     who: params.names.opponent,
     areas: niceList(areas, "nothing"),
   });
@@ -37,6 +38,7 @@ export function controlRound(
     // Immediate loss
     log.push({
       type: "outcome",
+      turn: ret.turn,
       outcome: "loss",
       why: `${params.names.opponent} took control of ${params.names.locations[6]}`,
     });

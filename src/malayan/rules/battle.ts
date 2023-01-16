@@ -60,6 +60,7 @@ export function battleRound(
     );
     log.push({
       type: "battle",
+      turn: ret.turn,
       location: i,
       roll: roll,
       support: airsupport,

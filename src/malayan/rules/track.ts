@@ -13,6 +13,7 @@ export function trackRound(
       ret.outcome = win;
       log.push({
         type: "outcome",
+        turn: ret.turn,
         outcome: "win",
         why: `${params.names.player} held on to win.`,
       });
@@ -21,6 +22,7 @@ export function trackRound(
       ret.outcome = loss;
       log.push({
         type: "outcome",
+        turn: ret.turn,
         outcome: "loss",
         why: `${params.names.player} ran out of time.`,
       });

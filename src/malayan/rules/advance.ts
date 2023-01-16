@@ -32,6 +32,7 @@ export function advanceRound(
 
   log.push({
     type: "advance",
+    turn: ret.turn,
     who: params.names.opponent,
     areas: niceList([...areas], "nowhere"),
   });

@@ -38,6 +38,7 @@ export function withdrawRound(
     ret.locations[nloc].player = Math.max(6, at + next);
     log.push({
       type: "withdraw",
+      turn: ret.turn,
       from: params.names.locations[action.eastern],
       to: params.names.locations[nloc],
     });
@@ -49,6 +50,7 @@ export function withdrawRound(
     ret.locations[nloc].player = Math.max(6, at + next);
     log.push({
       type: "withdraw",
+      turn: ret.turn,
       from: params.names.locations[action.trunk],
       to: params.names.locations[nloc],
     });
