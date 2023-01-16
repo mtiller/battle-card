@@ -15,7 +15,7 @@ export const MalayanPlayer = (props: {}) => {
           <Dice />
           <MalayanMap />
         </div>
-        <div style={{ padding: 10, height: "75vh" }}>
+        <div style={{ overflowY: "scroll", padding: 10, height: "75vh" }}>
           <pre>{JSON.stringify(log, null, 4)}</pre>
         </div>
       </div>

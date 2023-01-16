@@ -13,14 +13,17 @@ import { Location, LossRoll } from "../../generic";
 export function battleOptions(
   s: MalayanState
 ): [boolean, boolean, boolean, boolean, boolean, boolean, boolean] {
+  const battle = (i: number) =>
+    s.locations[i].opponent > 0 && s.locations[i].player > 0;
+
   return [
-    s.locations[0].player > 0,
-    s.locations[1].player > 0,
-    s.locations[2].player > 0,
-    s.locations[3].player > 0,
-    s.locations[4].player > 0,
-    s.locations[5].player > 0,
-    s.locations[6].player > 0,
+    battle(0),
+    battle(1),
+    battle(2),
+    battle(3),
+    battle(4),
+    battle(5),
+    battle(6),
   ];
 }
 
@@ -40,9 +43,9 @@ export function battleRound(
   for (let i = 0; i < s.locations.length; i++) {
     const decision = action[i];
     if (decision == null) {
-      if (s.locations[i].player > 0)
+      if (s.locations[i].player > 0 && s.locations[i].opponent > 0)
         throw new Error(
-          `must choose attack or defend in ${params.names.locations[i]}`
+          `must choose attack or defend in ${params.names.locations[i]}, chose ${decision} (${s.locations[i].player}, ${s.locations[i].opponent})`
         );
       continue;
     }
@@ -52,16 +55,17 @@ export function battleRound(
     if (airsupport) loss.player++;
     ret.locations[i].player = Math.max(
       0,
-      ret.locations[i].player - loss.player
+      ret.locations[i].player + loss.player
     );
     ret.locations[i].opponent = Math.max(
       0,
-      ret.locations[i].opponent - loss.opponent
+      ret.locations[i].opponent + loss.opponent
     );
     log.push({
       type: "battle",
       turn: ret.turn,
       location: i,
+      where: params.names.locations[i],
       roll: roll,
       support: airsupport,
       losses: {
