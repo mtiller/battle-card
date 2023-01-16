@@ -36,5 +36,6 @@ export function advanceRound(
     areas: niceList([...areas], "nowhere"),
   });
 
+  ret.round = "battle";
   return ret;
 }

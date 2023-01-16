@@ -4,7 +4,7 @@ import { MarketGarden } from "./routes/market-garden";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./routes/home";
 import { Mortain } from "./routes/mortain";
-import { Malayan } from "./routes/malayan";
+import { PlayMalayan } from "./routes/malayan";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/malayan",
-    element: <Malayan />,
+    element: <PlayMalayan />,
   },
   {
     path: "/mortain",

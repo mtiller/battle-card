@@ -41,5 +41,6 @@ export function controlRound(
       why: `${params.names.opponent} took control of ${params.names.locations[6]}`,
     });
   }
+  ret.round = "advance";
   return ret;
 }

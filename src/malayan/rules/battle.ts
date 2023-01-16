@@ -71,6 +71,7 @@ export function battleRound(
       outcome: ret.locations[i],
     });
   }
+  ret.round = "withdraw";
   return ret;
 }
 

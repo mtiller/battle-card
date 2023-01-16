@@ -32,5 +32,6 @@ export function trackRound(
     turn: ret.turn,
   });
   ret.turn++;
+  ret.round = "control";
   return ret;
 }

@@ -53,5 +53,6 @@ export function withdrawRound(
       to: params.names.locations[nloc],
     });
   }
+  ret.round = "track";
   return ret;
 }

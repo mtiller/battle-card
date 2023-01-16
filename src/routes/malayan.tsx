@@ -1,6 +1,9 @@
 import { AppShell, Header, Navbar } from "@mantine/core";
+import { MalayanMap } from "../malayan/components/map";
+import { MalayanPlayer } from "../malayan/components/player";
+import { MalayanProvider } from "../malayan/contexts/play";
 
-export const Malayan = (props: {}) => {
+export const PlayMalayan = (props: {}) => {
   return (
     <AppShell
       padding="md"
@@ -23,7 +26,9 @@ export const Malayan = (props: {}) => {
         },
       })}
     >
-      Simulator
+      <MalayanProvider>
+        <MalayanPlayer />
+      </MalayanProvider>
     </AppShell>
   );
 };

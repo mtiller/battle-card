@@ -14,6 +14,7 @@ import Prando from "prando";
 export interface MalayanGameData {
   state: MalayanState;
   setBattle?: (x: BattleAction) => void;
+  setWithdraw?: (x: WithdrawAction) => void;
   log: MalayanLog;
 }
 
@@ -61,6 +62,11 @@ export const MalayanProvider = (props: MalayanProviderProps) => {
         return undefined;
       }
     }, [state, params, log]);
+
+  React.useEffect(() => {
+    const next = autoActions(state, params, log);
+    setState(next);
+  }, []);
 
   return (
     <MalayanGameContext.Provider
