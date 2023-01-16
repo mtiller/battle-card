@@ -73,6 +73,7 @@ export const MalayanProvider = (props: MalayanProviderProps) => {
       value={{
         state,
         setBattle,
+        setWithdraw,
         log,
       }}
     >

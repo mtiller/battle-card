@@ -4,6 +4,7 @@ import { MalayanGameContext } from "../contexts/play";
 import { BattleDecisions } from "./battle";
 import { Dice } from "./dice";
 import { MalayanMap, MapOverlay } from "./map";
+import { WithdrawDecisions } from "./withdraw";
 
 export const MalayanPlayer = (props: {}) => {
   const { state, log } = React.useContext(MalayanGameContext);
@@ -12,6 +13,7 @@ export const MalayanPlayer = (props: {}) => {
       <div style={{ display: "flex" }}>
         <div style={{ position: "relative" }}>
           <BattleDecisions />
+          <WithdrawDecisions />
           <Dice />
           <MalayanMap />
         </div>
