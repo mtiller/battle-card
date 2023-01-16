@@ -39,6 +39,18 @@ export const Home = (props: {}) => {
         </Grid.Col>
         <Grid.Col span={4}>
           <AppCard
+            img={malayanCampaign}
+            title="Malayan Campaign: 1941"
+            status="Underway"
+            route="/malayan"
+          >
+            After taking over military bases in Vietnam, Japanese troops under
+            General Yamashita Tomoyuki invaded northern Malaya while Japanese
+            aircraft bombed Singapore.
+          </AppCard>
+        </Grid.Col>
+        <Grid.Col span={4}>
+          <AppCard
             img={mortainBattle}
             title="Mortain"
             status="Underway"
@@ -57,18 +69,6 @@ export const Home = (props: {}) => {
           >
             The Moro was fought in the area of the Moro River and the city of
             Ortona in Italy.
-          </AppCard>
-        </Grid.Col>
-        <Grid.Col span={4}>
-          <AppCard
-            img={malayanCampaign}
-            title="Malayan Campaign: 1941"
-            status="Pending"
-            route="/malayan"
-          >
-            After taking over military bases in Vietnam, Japanese troops under
-            General Yamashita Tomoyuki invaded northern Malaya while Japanese
-            aircraft bombed Singapore.
           </AppCard>
         </Grid.Col>
         <Grid.Col span={4}>
