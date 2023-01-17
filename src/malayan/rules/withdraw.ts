@@ -35,7 +35,8 @@ export function withdrawRound(
       );
     const nloc = action.eastern == 5 ? 6 : action.eastern + 2;
     const next = ret.locations[nloc].player;
-    ret.locations[nloc].player = Math.max(6, at + next);
+    ret.locations[nloc].player = Math.min(6, at + next);
+    ret.locations[at].player = 0;
     log.push({
       type: "withdraw",
       turn: ret.turn,
@@ -47,7 +48,8 @@ export function withdrawRound(
     const at = ret.locations[action.trunk].player;
     const nloc = action.trunk + 2;
     const next = ret.locations[nloc].player;
-    ret.locations[nloc].player = Math.max(6, at + next);
+    ret.locations[nloc].player = Math.min(6, at + next);
+    ret.locations[at].player = 0;
     log.push({
       type: "withdraw",
       turn: ret.turn,

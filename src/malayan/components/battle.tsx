@@ -22,92 +22,91 @@ export const BattleDecisions = (props: {}) => {
   const decisions = locs.map((l, i) =>
     !where[i] ? null : l == true ? "attack" : l == false ? "defend" : null
   ) as BattleAction;
+  if (setBattle == null) return null;
   return (
     <MapOverlay>
-      {setBattle && (
-        <div>
-          {where[0] && (
-            <AttackDefend
-              ax={8}
-              ay={12.5}
-              dx={2.75}
-              dy={15}
-              attack={loc1}
-              setAttack={setLoc1}
-            />
-          )}
-          {where[1] && (
-            <AttackDefend
-              ax={28}
-              ay={13.5}
-              dx={28}
-              dy={16.5}
-              attack={loc2}
-              setAttack={setLoc2}
-            />
-          )}
-          {where[2] && (
-            <AttackDefend
-              ax={11}
-              ay={31.5}
-              dx={7.75}
-              dy={35.5}
-              attack={loc3}
-              setAttack={setLoc3}
-            />
-          )}
-          {where[3] && (
-            <AttackDefend
-              ax={34.4}
-              ay={35}
-              dx={38}
-              dy={39}
-              attack={loc4}
-              setAttack={setLoc4}
-            />
-          )}
-          {where[4] && (
-            <AttackDefend
-              ax={15}
-              ay={43}
-              dx={12}
-              dy={48}
-              attack={loc5}
-              setAttack={setLoc5}
-            />
-          )}
-          {where[5] && (
-            <AttackDefend
-              ax={34.4}
-              ay={45}
-              dx={38}
-              dy={50}
-              attack={loc6}
-              setAttack={setLoc6}
-            />
-          )}
-          {where[6] && (
-            <AttackDefend
-              ax={27}
-              ay={58.5}
-              dx={30.5}
-              dy={63}
-              attack={loc7}
-              setAttack={setLoc7}
-            />
-          )}
-          <Button
-            disabled={!done}
-            style={{ zIndex: 99, top: "70vh", left: "40vh" }}
-            onClick={() => {
-              console.log("decisions: ", decisions);
-              setBattle(decisions);
-            }}
-          >
-            Battle
-          </Button>
-        </div>
-      )}
+      <div>
+        {where[0] && (
+          <AttackDefend
+            ax={8}
+            ay={12.5}
+            dx={2.75}
+            dy={15}
+            attack={loc1}
+            setAttack={setLoc1}
+          />
+        )}
+        {where[1] && (
+          <AttackDefend
+            ax={28}
+            ay={13.5}
+            dx={28}
+            dy={16.5}
+            attack={loc2}
+            setAttack={setLoc2}
+          />
+        )}
+        {where[2] && (
+          <AttackDefend
+            ax={11}
+            ay={31.5}
+            dx={7.75}
+            dy={35.5}
+            attack={loc3}
+            setAttack={setLoc3}
+          />
+        )}
+        {where[3] && (
+          <AttackDefend
+            ax={34.4}
+            ay={35}
+            dx={38}
+            dy={39}
+            attack={loc4}
+            setAttack={setLoc4}
+          />
+        )}
+        {where[4] && (
+          <AttackDefend
+            ax={15}
+            ay={43}
+            dx={12}
+            dy={48}
+            attack={loc5}
+            setAttack={setLoc5}
+          />
+        )}
+        {where[5] && (
+          <AttackDefend
+            ax={34.4}
+            ay={45}
+            dx={38}
+            dy={50}
+            attack={loc6}
+            setAttack={setLoc6}
+          />
+        )}
+        {where[6] && (
+          <AttackDefend
+            ax={27}
+            ay={58.5}
+            dx={30.5}
+            dy={63}
+            attack={loc7}
+            setAttack={setLoc7}
+          />
+        )}
+        <Button
+          disabled={!done}
+          style={{ zIndex: 99, top: "70vh", left: "40vh" }}
+          onClick={() => {
+            console.log("decisions: ", decisions);
+            setBattle(decisions);
+          }}
+        >
+          Battle
+        </Button>
+      </div>
     </MapOverlay>
   );
 };
