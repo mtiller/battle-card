@@ -31,7 +31,7 @@ export const MalayanProvider = (props: MalayanProviderProps) => {
   const [params, setParams] = React.useState<MalayanParameters>(malayanBase);
   const init = autoActions(params.initial, params, log);
   const [state, setRawState] = React.useState<MalayanState>(init);
-  const prando = new Prando();
+  const prando = new Prando(0);
 
   React.useEffect(() => setLog(log));
 
