@@ -29,5 +29,11 @@ export interface MalayanState {
 }
 
 export function clone(s: MalayanState): MalayanState {
-  return { ...s, locations: [...s.locations], areas: [...s.areas] };
+  return {
+    turn: s.turn,
+    outcome: s.outcome,
+    round: s.round,
+    locations: [...s.locations],
+    areas: [...s.areas],
+  };
 }

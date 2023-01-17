@@ -15,9 +15,11 @@ export function autoActions(
     switch (s.round) {
       case "control": {
         s = controlRound(s, params, log);
+        break;
       }
       case "advance": {
         s = advanceRound(s, params, log);
+        break;
       }
       case "battle":
       case "withdraw": {
@@ -25,6 +27,7 @@ export function autoActions(
       }
       case "track": {
         s = trackRound(s, params, log);
+        break;
       }
     }
   }

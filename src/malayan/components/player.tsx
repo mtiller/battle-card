@@ -22,6 +22,7 @@ export const MalayanPlayer = (props: {}) => {
         </div>
         <div style={{ overflowY: "scroll", padding: 10, height: "75vh" }}>
           <Log />
+          <code>{JSON.stringify(log, null, 4)}</code>
         </div>
       </div>
       Round: {state.round}
