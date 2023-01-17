@@ -1,6 +1,5 @@
-import { filterProps } from "@mantine/core";
 import React from "react";
-import map from "../../../public/malayan.png";
+import map from "./malayan.png";
 
 export const MalayanMap = (props: {}) => {
   return <img style={{ height: "75vh" }} src={map} />;

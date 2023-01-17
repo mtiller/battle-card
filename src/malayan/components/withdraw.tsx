@@ -34,10 +34,11 @@ export const WithdrawDecisions = (props: {}) => {
     setEastern(null);
     setTrunk(null);
   }, [state.turn]);
-  const opts = withdrawOptions(state);
-  console.log("opts = ", opts);
 
   if (setWithdraw == null) return null;
+
+  const opts = withdrawOptions(state);
+  console.log("opts = ", opts);
   return (
     <MapOverlay>
       {opts.trunk.includes(0) && (

@@ -27,12 +27,16 @@ export interface MalayanProviderProps {
 }
 
 export const MalayanProvider = (props: MalayanProviderProps) => {
-  const [params, setParams] = React.useState<MalayanParameters>(malayanBase);
-  const [state, setRawState] = React.useState<MalayanState>(params.initial);
   const [log, setLog] = React.useState<MalayanLog>([]);
+  const [params, setParams] = React.useState<MalayanParameters>(malayanBase);
+  const init = autoActions(params.initial, params, log);
+  const [state, setRawState] = React.useState<MalayanState>(init);
   const prando = new Prando();
 
+  React.useEffect(() => setLog(log));
+
   const setState = (x: MalayanState) => {
+    console.log("Running any autoActions after setting state to ", x.round);
     const next = autoActions(x, params, log);
     setLog(log);
     setRawState(next);
@@ -62,11 +66,6 @@ export const MalayanProvider = (props: MalayanProviderProps) => {
         return undefined;
       }
     }, [state, params, log]);
-
-  React.useEffect(() => {
-    const next = autoActions(state, params, log);
-    setState(next);
-  }, []);
 
   return (
     <MalayanGameContext.Provider
