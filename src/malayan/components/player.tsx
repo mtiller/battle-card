@@ -2,6 +2,7 @@ import { IconDice6 } from "@tabler/icons";
 import React from "react";
 import { MalayanGameContext } from "../contexts/play";
 import { BattleDecisions } from "./battle";
+import { ShowControl } from "./control";
 import { Dice } from "./dice";
 import { Log } from "./log";
 import { MalayanMap, MapOverlay } from "./map";
@@ -16,6 +17,7 @@ export const MalayanPlayer = (props: {}) => {
           <BattleDecisions />
           <WithdrawDecisions />
           <Dice />
+          <ShowControl />
           <MalayanMap />
         </div>
         <div style={{ overflowY: "scroll", padding: 10, height: "75vh" }}>
