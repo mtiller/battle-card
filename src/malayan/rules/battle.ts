@@ -67,6 +67,7 @@ export function battleRound(
       location: i,
       where: params.names.locations[i],
       roll: roll,
+      action: decision,
       support: airsupport,
       losses: {
         player: ret.locations[i].player - s.locations[i].player,

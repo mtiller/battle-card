@@ -30,6 +30,7 @@ export interface BattleEvent {
   type: "battle";
   turn: number;
   location: number;
+  action: "attack" | "defend";
   where: string;
   roll: number;
   support: boolean;
