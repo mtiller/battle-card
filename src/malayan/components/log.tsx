@@ -1,9 +1,14 @@
 import { Timeline } from "@mantine/core";
 import {
+  IconAlarm,
   IconArrowRight,
   IconClock,
+  IconHandStop,
   IconMap,
+  IconPennant,
+  IconPennantOff,
   IconPlayerStop,
+  IconRun,
   IconSword,
   IconTank,
   IconTruck,
@@ -52,14 +57,21 @@ export function render(l: LogEvent): RenderComponents {
   switch (l.type) {
     case "control": {
       return {
-        bullet: <IconMap />,
+        bullet: `🇯🇵`,
         title: `${l.who} take control of ${l.areas}`,
         content: null,
       };
     }
     case "advance": {
+      if (l.areas == "nowhere") {
+        return {
+          bullet: <IconHandStop />,
+          title: `${l.who} cannot advance`,
+          content: null,
+        };
+      }
       return {
-        bullet: <IconTank />,
+        bullet: <IconRun />,
         title: `${l.who} advance to ${l.areas}`,
         content: null,
       };
@@ -84,14 +96,14 @@ export function render(l: LogEvent): RenderComponents {
     }
     case "outcome": {
       return {
-        bullet: <IconPlayerStop />,
+        bullet: l.outcome == "win" ? <IconPennant /> : <IconPennantOff />,
         title: `Game ends in a ${l.outcome} because ${l.why}`,
         content: null,
       };
     }
     case "turn": {
       return {
-        bullet: <IconArrowRight />,
+        bullet: <IconAlarm />,
         title: `End of turn ${l.turn}`,
         content: null,
       };

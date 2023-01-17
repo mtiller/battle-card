@@ -30,6 +30,10 @@ export const WithdrawDecisions = (props: {}) => {
   const [trunk, setTrunk] = React.useState<0 | 2 | 4 | null>(null);
   const decisions: WithdrawAction = { trunk, eastern };
 
+  React.useEffect(() => {
+    setEastern(null);
+    setTrunk(null);
+  }, [state.turn]);
   const opts = withdrawOptions(state);
   console.log("opts = ", opts);
 
@@ -44,36 +48,46 @@ export const WithdrawDecisions = (props: {}) => {
           onClick={() => setTrunk(trunk == 0 ? null : 0)}
         />
       )}
-      <WithdrawChoice
-        x={31}
-        y={28}
-        active={eastern == 1}
-        onClick={() => setEastern(eastern == 1 ? null : 1)}
-      />
-      <WithdrawChoice
-        x={16}
-        y={41}
-        active={trunk == 2}
-        onClick={() => setTrunk(trunk == 2 ? null : 2)}
-      />
-      <WithdrawChoice
-        x={33}
-        y={44.5}
-        active={eastern == 3}
-        onClick={() => setEastern(eastern == 3 ? null : 3)}
-      />
-      <WithdrawChoice
-        x={24}
-        y={54}
-        active={trunk == 4}
-        onClick={() => setTrunk(trunk == 4 ? null : 4)}
-      />
-      <WithdrawChoice
-        x={32.5}
-        y={54}
-        active={eastern == 5}
-        onClick={() => setEastern(eastern == 5 ? null : 5)}
-      />
+      {opts.eastern.includes(1) && (
+        <WithdrawChoice
+          x={31}
+          y={28}
+          active={eastern == 1}
+          onClick={() => setEastern(eastern == 1 ? null : 1)}
+        />
+      )}
+      {opts.trunk.includes(2) && (
+        <WithdrawChoice
+          x={16}
+          y={41}
+          active={trunk == 2}
+          onClick={() => setTrunk(trunk == 2 ? null : 2)}
+        />
+      )}
+      {opts.eastern.includes(3) && (
+        <WithdrawChoice
+          x={33}
+          y={44.5}
+          active={eastern == 3}
+          onClick={() => setEastern(eastern == 3 ? null : 3)}
+        />
+      )}
+      {opts.trunk.includes(4) && (
+        <WithdrawChoice
+          x={24}
+          y={54}
+          active={trunk == 4}
+          onClick={() => setTrunk(trunk == 4 ? null : 4)}
+        />
+      )}
+      {opts.eastern.includes(5) && (
+        <WithdrawChoice
+          x={32.5}
+          y={54}
+          active={eastern == 5}
+          onClick={() => setEastern(eastern == 5 ? null : 5)}
+        />
+      )}
       <Button
         style={{ zIndex: 99, top: "70vh", left: "40vh" }}
         onClick={() => {

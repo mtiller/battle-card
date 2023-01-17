@@ -18,6 +18,16 @@ export const BattleDecisions = (props: {}) => {
   const where = battleOptions(state);
   const locs = [loc1, loc2, loc3, loc4, loc5, loc6, loc7];
 
+  React.useEffect(() => {
+    setLoc1(null);
+    setLoc2(null);
+    setLoc3(null);
+    setLoc4(null);
+    setLoc5(null);
+    setLoc6(null);
+    setLoc7(null);
+  }, [state.turn]);
+
   const done = locs.every((l, i) => l != null || !where[i]);
   const decisions = locs.map((l, i) =>
     !where[i] ? null : l == true ? "attack" : l == false ? "defend" : null

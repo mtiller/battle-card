@@ -24,6 +24,7 @@ export function advanceRound(
     // TODO: reinforcement might depend on whether Kluang is in the areas set?!?
     // or otherwise previous reinforced?
     s.locations[6].opponent += Math.min(
+      6,
       s.locations[6].opponent + params.reinforcements[6]
     );
     s.locations[5].opponent = 0;
