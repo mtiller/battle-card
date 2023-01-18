@@ -37,7 +37,7 @@ export function battleRound(
   const ret = clone(s);
   if (s.round !== "battle")
     throw new Error(`called battleRound during ${s.round} roiund`);
-  const airsupport = params.airfields.some(
+  const airsupport = params.airfields.every(
     (loc) => s.locations[loc].player === 0
   );
   for (let i = 0; i < s.locations.length; i++) {
