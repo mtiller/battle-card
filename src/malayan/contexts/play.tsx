@@ -10,6 +10,7 @@ import {
   withdrawRound,
 } from "../rules";
 import Prando from "prando";
+import { legalAdvance } from "../../market-garden/rules";
 
 export interface MalayanGameData {
   state: MalayanState;
@@ -29,11 +30,16 @@ export interface MalayanProviderProps {
 export const MalayanProvider = (props: MalayanProviderProps) => {
   const [log, setLog] = React.useState<MalayanLog>([]);
   const [params, setParams] = React.useState<MalayanParameters>(malayanBase);
-  const init = autoActions(params.initial, params, log);
-  const [state, setRawState] = React.useState<MalayanState>(init);
+  const [state, setRawState] = React.useState<MalayanState>(params.initial);
   const prando = new Prando(0);
 
-  React.useEffect(() => setLog(log));
+  // Perform first round of auto actions
+  React.useEffect(() => {
+    if (log.length > 0) return;
+    const init = autoActions(params.initial, params, log);
+    setRawState(init);
+    setLog(log);
+  }, []);
 
   const setState = (x: MalayanState) => {
     console.log("Running any autoActions after setting state to ", x.round);

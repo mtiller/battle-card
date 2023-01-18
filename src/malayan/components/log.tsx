@@ -1,16 +1,12 @@
 import { Timeline } from "@mantine/core";
 import {
   IconAlarm,
-  IconArrowRight,
   IconClock,
   IconHandStop,
-  IconMap,
   IconPennant,
   IconPennantOff,
-  IconPlayerStop,
   IconRun,
   IconSword,
-  IconTank,
   IconTruck,
 } from "@tabler/icons";
 import React from "react";
@@ -58,7 +54,7 @@ export function render(l: LogEvent): RenderComponents {
     case "control": {
       return {
         bullet: `🇯🇵`,
-        title: `${l.who} take control of ${l.areas}`,
+        title: `${l.who} take control of ${l.areas} on turn ${l.turn}`,
         content: null,
       };
     }
@@ -66,13 +62,13 @@ export function render(l: LogEvent): RenderComponents {
       if (l.areas == "nowhere") {
         return {
           bullet: <IconHandStop />,
-          title: `${l.who} cannot advance`,
+          title: `${l.who} cannot advance on turn ${l.turn}`,
           content: null,
         };
       }
       return {
         bullet: <IconRun />,
-        title: `${l.who} advance to ${l.areas}`,
+        title: `${l.who} advance to ${l.areas} on turn ${l.turn}`,
         content: null,
       };
     }
@@ -80,9 +76,17 @@ export function render(l: LogEvent): RenderComponents {
       return {
         bullet: <IconSword />,
         title: `Battle in ${l.where}`,
-        content: `Player chooses to ${l.action} and rolls ${
+        content: `Pre-battle strengths: ${l.before.player} for player, ${
+          l.before.opponent
+        } for opponent.  Player chooses to ${l.action} and rolls ${
           l.roll + 1
-        } (air support: ${l.support}).  Post-battle strengths: ${
+        }.  Japanese forces ${
+          l.support ? "have" : "lack"
+        } air support.  Losses are ${
+          l.losses.player
+        } for the Commonwealth and ${
+          l.losses.opponent
+        } for the Japanese.  Post-battle strengths: ${
           l.outcome.player
         } for player, ${l.outcome.opponent} for opponent.`,
       };

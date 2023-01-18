@@ -10,6 +10,7 @@ export function autoActions(
   params: MalayanParameters,
   log: MalayanLog
 ): MalayanState {
+  console.log("s.round = ", s.round);
   while (true) {
     if (s.outcome !== "undecided") return s;
     switch (s.round) {

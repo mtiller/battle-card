@@ -107,8 +107,14 @@ export const BattleDecisions = (props: {}) => {
           />
         )}
         <Button
+          size="xs"
           disabled={!done}
-          style={{ zIndex: 99, top: "70vh", left: "40vh" }}
+          style={{
+            zIndex: 99,
+            position: "absolute",
+            bottom: "5px",
+            right: "5px",
+          }}
           onClick={() => {
             console.log("decisions: ", decisions);
             setBattle(decisions);

@@ -90,7 +90,13 @@ export const WithdrawDecisions = (props: {}) => {
         />
       )}
       <Button
-        style={{ zIndex: 99, top: "70vh", left: "40vh" }}
+        size="xs"
+        style={{
+          zIndex: 99,
+          position: "absolute",
+          bottom: "5px",
+          right: "5px",
+        }}
         onClick={() => {
           console.log("decisions: ", decisions);
           if (setWithdraw) setWithdraw(decisions);

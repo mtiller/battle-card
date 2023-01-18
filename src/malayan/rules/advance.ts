@@ -11,21 +11,33 @@ export function advanceRound(
   const ret = clone(s);
   const areas = new Set<string>();
   for (let i = 0; i < 5; i++) {
+    /** If there are no allied forces, but there are Japanese forces */
     if (s.locations[i].player == 0 && s.locations[i].opponent > 0) {
+      /**
+       * Advance to the next location, collecting the reinforcement bonus
+       * If no units are currently present there (this avoids a double bonus in Kluang).
+       */
+      const reinforcements =
+        s.locations[i + 2].opponent > 0 ? 0 : params.reinforcements[i + 2];
       s.locations[i + 2].opponent += Math.min(
         6,
-        s.locations[i].opponent + params.reinforcements[i + 2]
+        s.locations[i].opponent + reinforcements
       );
       s.locations[i].opponent = 0;
       areas.add(params.names.locations[i + 2]);
     }
   }
   if (s.locations[5].player == 0 && s.locations[5].opponent > 0) {
-    // TODO: reinforcement might depend on whether Kluang is in the areas set?!?
-    // or otherwise previous reinforced?
+    /**
+     * Advance to the next location, collecting the reinforcement bonus
+     * If no units are currently present there (this avoids a double bonus in Kluang).
+     */
+    const reinforcements =
+      s.locations[6].opponent > 0 ? 0 : params.reinforcements[6];
+
     s.locations[6].opponent += Math.min(
       6,
-      s.locations[6].opponent + params.reinforcements[6]
+      s.locations[6].opponent + reinforcements
     );
     s.locations[5].opponent = 0;
     areas.add(params.names.locations[6]);

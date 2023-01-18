@@ -6,7 +6,6 @@ export const japaneseFlag = "🇯🇵";
 export const commonwealthFlag = "🇬🇧";
 export const ShowControl = (props: {}) => {
   const { state } = React.useContext(MalayanGameContext);
-  console.log("state.areas = ", state.areas);
 
   const flag = (area: number, x: number, y: number) => {
     return (

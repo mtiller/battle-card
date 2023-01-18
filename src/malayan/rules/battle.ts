@@ -52,13 +52,14 @@ export function battleRound(
     const column = lossRoll(decision, s.locations[i], params);
     const roll = r.nextInt() % 6;
     const loss = column[roll];
-    if (airsupport) loss.player++;
+    if (airsupport) loss.player--;
+    const before = { ...ret.locations[i] };
     ret.locations[i].player = Math.max(
       0,
       ret.locations[i].player + loss.player
     );
     ret.locations[i].opponent = Math.max(
-      0,
+      1,
       ret.locations[i].opponent + loss.opponent
     );
     log.push({
@@ -69,11 +70,9 @@ export function battleRound(
       roll: roll,
       action: decision,
       support: airsupport,
-      losses: {
-        player: ret.locations[i].player - s.locations[i].player,
-        opponent: ret.locations[i].opponent - s.locations[i].opponent,
-      },
+      losses: loss,
       eliminated: ret.locations[i].player == 0,
+      before: before,
       outcome: ret.locations[i],
     });
   }

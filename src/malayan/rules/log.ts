@@ -36,6 +36,7 @@ export interface BattleEvent {
   support: boolean;
   losses: Losses;
   eliminated: boolean;
+  before: Location;
   outcome: Location;
 }
 
