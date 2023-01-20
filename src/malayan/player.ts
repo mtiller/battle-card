@@ -1,4 +1,9 @@
-import { MalayanParameters, MalayanState } from "./rules";
+import {
+  battleOptions,
+  MalayanParameters,
+  MalayanState,
+  withdrawOptions,
+} from "./rules";
 
 export type BattleDecision = "attack" | "defend" | null;
 export type BattleAction = [
@@ -18,6 +23,69 @@ export interface WithdrawAction {
 }
 
 export interface Player {
-  Battle(s: MalayanState, params: MalayanParameters): BattleAction;
-  Withdraw(s: MalayanState, params: MalayanParameters): WithdrawAction;
+  battle(s: MalayanState, params: MalayanParameters): BattleAction;
+  withdraw(s: MalayanState, params: MalayanParameters): WithdrawAction;
+}
+
+export class DefensivePlayer implements Player {
+  battle(s: MalayanState, params: MalayanParameters): BattleAction {
+    const options = battleOptions(s);
+    return options.map((x) => (x ? "defend" : null)) as BattleAction;
+  }
+  withdraw(s: MalayanState, params: MalayanParameters): WithdrawAction {
+    const options = withdrawOptions(s);
+    const emin = options.eastern.reduce((v, p) => (p < v ? p : v), -1);
+    const tmin = options.trunk.reduce((v, p) => (p < v ? p : v), -1);
+    return {
+      eastern: emin == -1 ? null : emin == 5 ? null : emin,
+      trunk: tmin == -1 ? null : tmin,
+    };
+  }
+}
+
+export class Seed0Player implements Player {
+  battle(s: MalayanState, params: MalayanParameters): BattleAction {
+    switch (s.turn) {
+      case 1: {
+        return ["defend", "defend", null, null, null, null, null];
+      }
+      case 2: {
+        return [null, null, "defend", "defend", null, null, null];
+      }
+      case 3: {
+        return [null, null, "defend", "defend", null, null, null];
+      }
+      case 4: {
+        return [null, null, null, null, "defend", "defend", null];
+      }
+      case 5: {
+        return [null, null, null, null, "defend", "defend", null];
+      }
+      default: {
+        return [null, null, null, null, null, "defend", "defend"];
+      }
+    }
+  }
+  withdraw(s: MalayanState, params: MalayanParameters): WithdrawAction {
+    switch (s.turn) {
+      case 1: {
+        return { eastern: 1, trunk: 0 };
+      }
+      case 2: {
+        return { eastern: null, trunk: null };
+      }
+      case 3: {
+        return { eastern: 3, trunk: 2 };
+      }
+      case 4: {
+        return { eastern: null, trunk: null };
+      }
+      case 5: {
+        return { eastern: null, trunk: 4 };
+      }
+      default: {
+        return { eastern: null, trunk: null };
+      }
+    }
+  }
 }

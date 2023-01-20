@@ -31,7 +31,9 @@ export function withdrawRound(
     const at = ret.locations[action.eastern].player;
     if (at == 0)
       throw new Error(
-        `cannot withdraw, no unit in ${params.names.locations[action.eastern]}`
+        `cannot withdraw, no unit in ${
+          params.names.locations[action.eastern]
+        } on turn ${s.turn}`
       );
     const nloc = action.eastern == 5 ? 6 : action.eastern + 2;
     const next = ret.locations[nloc].player;

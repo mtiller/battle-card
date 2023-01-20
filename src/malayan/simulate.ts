@@ -27,14 +27,14 @@ export function simulate(
     // If we are at a point where the player needs to decide
     // where to battle, ask them.
     if (s.round === "battle" && s.outcome === undecided) {
-      const action = player.Battle(s, params);
+      const action = player.battle(s, params);
       s = battleRound(s, r, params, action, log);
     }
 
     // If we are a point where the player needs to decide
     // where to withdraw, ask them.
     if (s.round === "withdraw" && s.outcome === undecided) {
-      const action = player.Withdraw(s, params);
+      const action = player.withdraw(s, params);
       s = withdrawRound(s, params, action, log);
     }
   }

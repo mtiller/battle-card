@@ -31,7 +31,10 @@ export const MalayanProvider = (props: MalayanProviderProps) => {
   const [log, setLog] = React.useState<MalayanLog>([]);
   const [params, setParams] = React.useState<MalayanParameters>(malayanBase);
   const [state, setRawState] = React.useState<MalayanState>(params.initial);
-  const prando = new Prando(0);
+  const prando: Prando = React.useMemo(() => {
+    console.log("Randomizer seeded");
+    return new Prando(4);
+  }, []);
 
   // Perform first round of auto actions
   React.useEffect(() => {

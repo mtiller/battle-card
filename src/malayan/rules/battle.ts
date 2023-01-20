@@ -45,7 +45,11 @@ export function battleRound(
     if (decision == null) {
       if (s.locations[i].player > 0 && s.locations[i].opponent > 0)
         throw new Error(
-          `must choose attack or defend in ${params.names.locations[i]}, chose ${decision} (${s.locations[i].player}, ${s.locations[i].opponent})`
+          `on turn ${s.turn + 1} must choose attack or defend in ${
+            params.names.locations[i]
+          }, chose ${decision} (${s.locations[i].player}, ${
+            s.locations[i].opponent
+          })`
         );
       continue;
     }
