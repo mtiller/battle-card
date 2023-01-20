@@ -10,11 +10,14 @@ import {
   IconTruck,
 } from "@tabler/icons";
 import React from "react";
-import { MalayanGameContext } from "../contexts/play";
-import { LogEvent } from "../rules";
+import { LogEvent } from "../generic/log";
 
-export const Log = (props: {}) => {
-  const { log } = React.useContext(MalayanGameContext);
+export interface LogProps {
+  log: LogEvent[];
+}
+
+export const Log = (props: LogProps) => {
+  const { log } = props;
   const turns = [...new Set(log.map((x) => x.turn))];
   return (
     <div>

@@ -4,8 +4,8 @@ import { MalayanGameContext } from "../contexts/play";
 import { BattleDecisions } from "./battle";
 import { ShowControl } from "./control";
 import { Dice } from "./dice";
-import { Log } from "./log";
-import { MalayanMap, MapOverlay } from "./map";
+import { Log } from "../../components/log";
+import { MalayanMap } from "./map";
 import { WithdrawDecisions } from "./withdraw";
 
 export const MalayanPlayer = (props: {}) => {
@@ -21,7 +21,7 @@ export const MalayanPlayer = (props: {}) => {
           <MalayanMap />
         </div>
         <div style={{ overflowY: "scroll", padding: 10, height: "75vh" }}>
-          <Log />
+          <Log log={log} />
         </div>
       </div>
       Round: {state.round}
