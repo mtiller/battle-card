@@ -30,16 +30,25 @@ export interface Player {
 export class DefensivePlayer implements Player {
   battle(s: MalayanState, params: MalayanParameters): BattleAction {
     const options = battleOptions(s);
-    return options.map((x) => (x ? "defend" : null)) as BattleAction;
+    const ret = options.map((x) => (x ? "defend" : null)) as BattleAction;
+    console.log(`turn ${s.turn}, battle: `, ret);
+    return ret;
   }
   withdraw(s: MalayanState, params: MalayanParameters): WithdrawAction {
+    if (s.turn == 2 || s.turn == 4) {
+      const ret = { eastern: null, trunk: null };
+      console.log(`turn ${s.turn}, withdraw: `, ret);
+      return ret;
+    }
     const options = withdrawOptions(s);
-    const emin = options.eastern.reduce((v, p) => (p < v ? p : v), -1);
-    const tmin = options.trunk.reduce((v, p) => (p < v ? p : v), -1);
-    return {
-      eastern: emin == -1 ? null : emin == 5 ? null : emin,
-      trunk: tmin == -1 ? null : tmin,
+    const emin = options.eastern.reduce((v, p) => (p < v ? p : v), 10);
+    const tmin = options.trunk.reduce((v, p) => (p < v ? p : v), 10);
+    const ret = {
+      eastern: emin == 10 ? null : emin == 5 ? null : emin,
+      trunk: tmin == 10 ? null : tmin,
     };
+    console.log(`turn ${s.turn}, withdraw: `, ret);
+    return ret;
   }
 }
 

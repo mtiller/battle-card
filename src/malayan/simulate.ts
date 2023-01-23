@@ -38,6 +38,7 @@ export function simulate(
       s = withdrawRound(s, params, action, log);
     }
   }
+  console.log("outcome: ", s.outcome);
   // Return the resulting log and final state
   return [log, s];
 }

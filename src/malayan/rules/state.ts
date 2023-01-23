@@ -12,19 +12,20 @@ export const win: MalayanOutcome = "win";
 export const loss: MalayanOutcome = "loss";
 export const undecided: MalayanOutcome = "undecided";
 
+export type MalayanLocations = [
+  Location,
+  Location,
+  Location,
+  Location,
+  Location,
+  Location,
+  Location
+];
 export interface MalayanState {
   turn: number;
   outcome: MalayanOutcome;
   round: MalayanRound;
-  locations: [
-    Location,
-    Location,
-    Location,
-    Location,
-    Location,
-    Location,
-    Location
-  ];
+  locations: MalayanLocations;
   areas: [Control, Control, Control, Control];
 }
 
@@ -33,7 +34,15 @@ export function clone(s: MalayanState): MalayanState {
     turn: s.turn,
     outcome: s.outcome,
     round: s.round,
-    locations: [...s.locations],
+    locations: [
+      { ...s.locations[0] },
+      { ...s.locations[1] },
+      { ...s.locations[2] },
+      { ...s.locations[3] },
+      { ...s.locations[4] },
+      { ...s.locations[5] },
+      { ...s.locations[6] },
+    ],
     areas: [...s.areas],
   };
 }

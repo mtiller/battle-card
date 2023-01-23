@@ -19,11 +19,11 @@ export function advanceRound(
        */
       const reinforcements =
         s.locations[i + 2].opponent > 0 ? 0 : params.reinforcements[i + 2];
-      s.locations[i + 2].opponent = Math.min(
+      ret.locations[i + 2].opponent = Math.min(
         6,
         s.locations[i + 2].opponent + s.locations[i].opponent + reinforcements
       );
-      s.locations[i].opponent = 0;
+      ret.locations[i].opponent = 0;
       areas.add(params.names.locations[i + 2]);
     }
   }
@@ -35,11 +35,11 @@ export function advanceRound(
     const reinforcements =
       s.locations[6].opponent > 0 ? 0 : params.reinforcements[6];
 
-    s.locations[6].opponent = Math.min(
+    ret.locations[6].opponent = Math.min(
       6,
       s.locations[6].opponent + s.locations[5].opponent + reinforcements
     );
-    s.locations[5].opponent = 0;
+    ret.locations[5].opponent = 0;
     areas.add(params.names.locations[6]);
   }
 

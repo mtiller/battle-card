@@ -39,7 +39,7 @@ export const malayanBase: MalayanParameters = {
     ],
     areas: ["A1", "A2", "A3", "A4"],
   },
-  initial: {
+  initial: Object.freeze({
     turn: 1,
     outcome: undecided,
     round: "control",
@@ -53,7 +53,7 @@ export const malayanBase: MalayanParameters = {
       { player: 2, opponent: 0 },
     ],
     areas: ["player", "player", "player", "player"],
-  },
+  }) as any,
   reinforcements: [0, 0, 2, 0, 0, 2, 2],
   airfields: [3, 5],
   lastTurn: 6,
