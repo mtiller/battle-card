@@ -19,6 +19,7 @@ export type MalayanLocations = [
   Location,
   Location,
   Location,
+  Location,
   Location
 ];
 export interface MalayanState {
@@ -42,6 +43,7 @@ export function clone(s: MalayanState): MalayanState {
       { ...s.locations[4] },
       { ...s.locations[5] },
       { ...s.locations[6] },
+      { ...s.locations[7] },
     ],
     areas: [...s.areas],
   };
