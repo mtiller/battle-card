@@ -62,6 +62,8 @@ export const Dice = (props: {}) => {
 
       {die(state.locations[6].opponent, 25.25, 62.25, true)}
       {die(state.locations[6].player, 31, 58, false)}
+
+      {die(state.singapore, 38, 65, false)}
     </MapOverlay>
   );
 };

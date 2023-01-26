@@ -27,6 +27,7 @@ export interface MalayanState {
   round: MalayanRound;
   locations: MalayanLocations;
   areas: [Control, Control, Control, Control];
+  singapore: number;
 }
 
 export function clone(s: MalayanState): MalayanState {
@@ -44,5 +45,6 @@ export function clone(s: MalayanState): MalayanState {
       { ...s.locations[6] },
     ],
     areas: [...s.areas],
+    singapore: s.singapore,
   };
 }

@@ -20,6 +20,7 @@ export type WithdrawDecision = number | null;
 export interface WithdrawAction {
   trunk: WithdrawDecision;
   eastern: WithdrawDecision;
+  singapore: boolean;
 }
 
 export interface Player {
@@ -36,7 +37,7 @@ export class DefensivePlayer implements Player {
   }
   withdraw(s: MalayanState, params: MalayanParameters): WithdrawAction {
     if (s.turn == 2 || s.turn == 4) {
-      const ret = { eastern: null, trunk: null };
+      const ret = { eastern: null, trunk: null, singapore: false };
       console.log(`turn ${s.turn}, withdraw: `, ret);
       return ret;
     }
@@ -46,6 +47,7 @@ export class DefensivePlayer implements Player {
     const ret = {
       eastern: emin == 10 ? null : emin == 5 ? null : emin,
       trunk: tmin == 10 ? null : tmin,
+      singapore: false,
     };
     console.log(`turn ${s.turn}, withdraw: `, ret);
     return ret;
@@ -78,22 +80,22 @@ export class Seed0Player implements Player {
   withdraw(s: MalayanState, params: MalayanParameters): WithdrawAction {
     switch (s.turn) {
       case 1: {
-        return { eastern: 1, trunk: 0 };
+        return { eastern: 1, trunk: 0, singapore: false };
       }
       case 2: {
-        return { eastern: null, trunk: null };
+        return { eastern: null, trunk: null, singapore: false };
       }
       case 3: {
-        return { eastern: 3, trunk: 2 };
+        return { eastern: 3, trunk: 2, singapore: false };
       }
       case 4: {
-        return { eastern: null, trunk: null };
+        return { eastern: null, trunk: null, singapore: false };
       }
       case 5: {
-        return { eastern: null, trunk: 4 };
+        return { eastern: null, trunk: 4, singapore: false };
       }
       default: {
-        return { eastern: null, trunk: null };
+        return { eastern: null, trunk: null, singapore: false };
       }
     }
   }

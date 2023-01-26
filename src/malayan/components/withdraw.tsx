@@ -28,11 +28,13 @@ export const WithdrawDecisions = (props: {}) => {
   const { state, setWithdraw } = React.useContext(MalayanGameContext);
   const [eastern, setEastern] = React.useState<1 | 3 | 5 | null>(null);
   const [trunk, setTrunk] = React.useState<0 | 2 | 4 | null>(null);
-  const decisions: WithdrawAction = { trunk, eastern };
+  const [singapore, setSingapore] = React.useState<boolean>(false);
+  const decisions: WithdrawAction = { trunk, eastern, singapore };
 
   React.useEffect(() => {
     setEastern(null);
     setTrunk(null);
+    setSingapore(false);
   }, [state.turn]);
 
   if (setWithdraw == null) return null;
@@ -87,6 +89,14 @@ export const WithdrawDecisions = (props: {}) => {
           y={54}
           active={eastern == 5}
           onClick={() => setEastern(eastern == 5 ? null : 5)}
+        />
+      )}
+      {opts.singapore && (
+        <WithdrawChoice
+          x={35}
+          y={62}
+          active={singapore}
+          onClick={() => setSingapore(!singapore)}
         />
       )}
       <Button

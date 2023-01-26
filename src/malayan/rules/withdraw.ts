@@ -14,9 +14,12 @@ export function withdrawOptions(s: MalayanState) {
       (i % 2 == 0 ? trunk : eastern).push(i);
     }
   }
+  const singapore: boolean =
+    s.locations[6].player > 0; /* && (eastern.length==0 || trunk.length==0) */
   return {
     eastern,
     trunk,
+    singapore,
   };
 }
 
@@ -27,6 +30,22 @@ export function withdrawRound(
   log: MalayanLog
 ): MalayanState {
   const ret = clone(s);
+  if (action.singapore) {
+    const at = ret.locations[6].player;
+    if (at == 0)
+      throw new Error(
+        `cannot withdraw, no unit in ${params.names.locations[6]} on turn ${s.turn}`
+      );
+    const next = ret.singapore;
+    ret.singapore = Math.min(6, at + next);
+    ret.locations[6].player = 0;
+    log.push({
+      type: "withdraw",
+      turn: ret.turn,
+      from: params.names.locations[6],
+      to: "Singapore",
+    });
+  }
   if (action.eastern != null) {
     const at = ret.locations[action.eastern].player;
     if (at == 0)
