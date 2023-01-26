@@ -9,7 +9,7 @@ export function trackRound(
 ): MalayanState {
   const ret = clone(s);
   if (ret.turn >= params.lastTurn) {
-    if (ret.singapore >= 3) {
+    if (ret.singapore >= 3 && ret.areas[3] == "player") {
       ret.outcome = win;
       log.push({
         type: "outcome",
